@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tymofii Pidlisnyi — Product Manager & Creative Founder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0F0E0D;
+            --bg-secondary: #1A1715;
+            --text: #F5F3F0;
+            --text-muted: #9B9692;
+            --border: #262320;
+            --accent-cyan: #5DADE2;
+            --accent-yellow: #F4D03F;
+        }
+
+        [data-theme="bright"] {
+            --bg: #FDFCFA;
+            --bg-secondary: #F9F7F4;
+            --text: #2B2622;
+            --text-muted: #6B6662;
+            --border: #E8E4DF;
+            --accent-cyan: #3498DB;
+            --accent-yellow: #F39C12;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+        }
+
+        /* Animated Grain Canvas */
+        #grain-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.08;
+            z-index: 1;
+        }
+
+        /* Moving Background Gradient */
+        .moving-gradient {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, 
+                rgba(93, 173, 226, 0.1) 0%, 
+                transparent 25%,
+                transparent 75%,
+                rgba(244, 208, 63, 0.1) 100%);
+            animation: gradient-rotate 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gradient-rotate {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        /* Floating Orbs */
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: float 15s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-cyan);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-yellow);
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-yellow));
+            top: 60%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translate(0, 0) scale(1);
+            }
+            33% { 
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% { 
+                transform: translate(-30px, 30px) scale(0.9);
+            }
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1001;
+            width: 60px;
+            height: 30px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            cursor: pointer;
+            padding: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-cyan);
+        }
+
+        .theme-toggle-slider {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        [data-theme="bright"] .theme-toggle-slider {
+            transform: translateX(30px);
+            background: var(--accent-yellow);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 50%;
+            right: 2.5rem;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 1.5rem;
+            text-align: right;
+        }
+
+        .nav-item a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-item a:hover {
+            color: var(--text);
+        }
+
+        .nav-item a::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            width: 20px;
+            height: 1px;
+            background: var(--accent-cyan);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-item a:hover::before {
+            opacity: 1;
+        }
+
+        /* Logo */
+        .logo {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            font-size: 1.2rem;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            line-height: 1.3;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Text Effects */
+        .text-glow {
+            text-shadow: 
+                0 0 20px rgba(93, 173, 226, 0.3),
+                0 0 40px rgba(93, 173, 226, 0.2),
+                0 0 80px rgba(93, 173, 226, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Section */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-header-top {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header-line {
+            width: 3.5rem;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--text-muted), transparent);
+        }
+
+        .section-numeral {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .section-title {
+            font-size: 0.95rem;
+            letter-spacing: 0.3em;
+            color: var(--text-muted);
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        /* Hero */
+        .hero-text {
+            font-size: clamp(3rem, 7vw, 7.5rem);
+            line-height: 1;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fade-in-up 1s ease forwards;
+        }
+
+        .hero-text:nth-child(2) { animation-delay: 0.2s; }
+        .hero-text:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes fade-in-up {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+        }
+
+        .hero-intro {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            color: var(--text-muted);
+            max-width: 900px;
+            margin: 3rem auto;
+            opacity: 0;
+            animation: fade-in-up 1s ease 0.6s forwards;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-yellow));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 10px 40px rgba(93, 173, 226, 0.1),
+                0 0 0 1px var(--accent-cyan);
+        }
+
+        .project-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: var(--border);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .project-tag.active {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            color: var(--bg);
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .project-metrics {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 500;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin-top: 3rem;
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-yellow));
+            opacity: 0.5;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fade-in-left 0.8s ease forwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fade-in-left {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.4rem;
+            top: 0;
+            width: 14px;
+            height: 14px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            border: 3px solid var(--bg);
+            box-shadow: 0 0 20px rgba(93, 173, 226, 0.5);
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-company a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .timeline-company a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .timeline-company-note {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .timeline-role {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            max-width: 800px;
+        }
+
+        /* LAB Section */
+        .lab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .lab-card {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--border) 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lab-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .lab-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+        }
+
+        .lab-card:hover::after {
+            opacity: 0.1;
+        }
+
+        .lab-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .lab-status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .lab-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        .lab-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Now Card */
+        .now-card {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--border) 100%);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 3rem;
+        }
+
+        .now-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .now-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .now-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .now-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .now-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Contact */
+        .contact-cta {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 400;
+            margin: 2rem 0;
+            letter-spacing: 0.02em;
+        }
+
+        .contact-intro {
+            color: var(--text-muted);
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            padding: 1rem 2.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-cyan);
+        }
+
+        .contact-link:hover::before {
+            width: 200%;
+            height: 200%;
+            opacity: 0.1;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav {
+                display: none;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .hero-text {
+                font-size: clamp(2.5rem, 10vw, 5rem);
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .lab-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Utilities */
+        .text-center { text-align: center; }
+        .italic { font-style: italic; }
+        .max-w-2xl { max-width: 42rem; margin: 0 auto; }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+
+        .mouse {
+            width: 26px;
+            height: 40px;
+            border: 2px solid var(--text-muted);
+            border-radius: 13px;
+            position: relative;
+        }
+
+        .scroller {
+            width: 4px;
+            height: 8px;
+            background: var(--accent-cyan);
+            border-radius: 2px;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll-animation 2s infinite;
+        }
+
+        @keyframes scroll-animation {
+            0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+            50% { transform: translateX(-50%) translateY(10px); opacity: 0.5; }
+            100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        /* Decorative Elements */
+        .decorative-circle {
+            position: absolute;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .circle-1 {
+            width: 400px;
+            height: 400px;
+            top: 10%;
+            right: -200px;
+            opacity: 0.3;
+        }
+
+        .circle-2 {
+            width: 600px;
+            height: 600px;
+            bottom: 10%;
+            left: -300px;
+            opacity: 0.2;
+            animation-direction: reverse;
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <!-- Moving Background Elements -->
+    <div class="moving-gradient"></div>
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+    <div class="floating-orb orb-3"></div>
+    
+    <!-- Decorative Circles -->
+    <div class="decorative-circle circle-1"></div>
+    <div class="decorative-circle circle-2"></div>
+
+    <!-- Animated Grain Canvas -->
+    <canvas id="grain-canvas"></canvas>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <div class="theme-toggle-slider">
+            <span id="theme-icon">🌙</span>
+        </div>
+    </div>
+
+    <!-- Logo -->
+    <a href="/" class="logo">
+        <span>TYMOFII</span>
+        <span>PIDLISNYI</span>
+    </a>
+
+    <!-- Navigation -->
+    <nav>
+        <ul class="nav-links">
+            <li class="nav-item"><a href="#about">ABOUT</a></li>
+            <li class="nav-item"><a href="#projects">PROJECTS</a></li>
+            <li class="nav-item"><a href="#work">WORK</a></li>
+            <li class="nav-item"><a href="#lab">LAB</a></li>
+            <li class="nav-item"><a href="#ideas">IDEAS</a></li>
+            <li class="nav-item"><a href="#services">SERVICES</a></li>
+            <li class="nav-item"><a href="#contact">CONNECT</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="text-center">
+                <h1 class="hero-text text-glow">BUILDING THINGS</h1>
+                <h1 class="hero-text text-glow">THAT FEEL <span class="italic gradient-text">IMPOSSIBLE</span></h1>
+                <h1 class="hero-text text-glow">UNTIL THEY <span class="italic gradient-text">EXIST</span></h1>
+                
+                <p class="hero-intro">
+                    I'm Tymofii "Tima" Pidlisnyi — a creative founder who moves between worlds. Film director turned Product Manager. 
+                    I build products that amplify human creativity rather than replace it. Currently scaling Evatar.ai, 
+                    an agentic GenAI platform that runs social media on autopilot. Cross-functional PM with 5+ years building zero-to-one products in AI, SaaS and e-commerce.
+                </p>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="scroller"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-header-top">
+                    <div class="section-header-line"></div>
+                    <h2 class="section-numeral">I</h2>
+                    <div class="section-header-line"></div>
+                </div>
+                <h3 class="section-title">PROJECTS</h3>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <span class="project-tag active">Active</span>
+                    <h3>Evatar.ai</h3>
+                    <p>AI agents that run your social media on autopilot. Powered by Eva — Creative Voice-to-Content Assistant.</p>
+                    <a href="https://evatar.ai" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">evatar.ai →</a>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-tag active">Active Tool</span>
+                    <h3>Prompt Director</h3>
+                    <p>Platform for generating structured, multi-layered AI prompts for creative and product workflows.</p>
+                    <a href="https://prompt-director.rork.app" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">prompt-director.rork.app →</a>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-tag">Past Project</span>
+                    <h3>ofNature</h3>
+                    <p>Eco CPG brand pioneering acetate-cellulose disposables adopted by McDonald's. Sustainable innovation at scale.</p>
+                    <a href="https://www.crunchbase.com/organization/ofnature" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View on Crunchbase →</a>
+                    <a href="https://drive.google.com/file/d/1UlAwwlZZhV4cDYYZlr-KDF7ZEA_aLR9h/view?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">View deck →</a>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-tag">Past Project</span>
+                    <h3>Amplifier Agency</h3>
+                    <p>Event and entertainment agency producing conferences and live shows.</p>
+                    <a href="https://www.facebook.com/groups/381833041885102" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View Community →</a>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-tag">Past Concept</span>
+                    <h3>aeoess</h3>
+                    <p>World's first IoT breathing wearable nose device for personalized breathing analytics.</p>
+                    <a href="https://drive.google.com/file/d/1-W51qctnlSj5Gip0buViqGd34MMEebFF/view?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View deck →</a>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-tag">Past Concept</span>
+                    <h3>SheetHappens</h3>
+                    <p>The world's first "lucky" toilet paper — a playful CPG experiment that never launched publicly.</p>
+                    <a href="https://drive.google.com/file/d/1NkGotUE1WqTJasttrYie-16JVEk0Icqh/view?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View deck →</a>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-tag">Past Concept</span>
+                    <h3>Pick-a-Poo</h3>
+                    <p>A rival CPG brand to SheetHappens — designed to capture the market from two sides.</p>
+                    <a href="https://drive.google.com/file/d/1YZ2_cISw6GqqB-LvaFSbbMFasG-P27wW/view?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View deck →</a>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-tag">Collection</span>
+                    <h3>Creative Projects</h3>
+                    <p>Film direction, multimedia installations, and creative experiments that blend art with technology.</p>
+                    <a href="https://docs.google.com/document/d/1ps-sqbx0Fc-1NZnV7S40ODrPGAxilEhAiDhA98dPBT4/edit?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View portfolio →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Timeline -->
+    <section id="work" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-header-top">
+                    <div class="section-header-line"></div>
+                    <h2 class="section-numeral">II</h2>
+                    <div class="section-header-line"></div>
+                </div>
+                <h3 class="section-title">WORK BACKGROUND</h3>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">MAY 2024 — PRESENT</div>
+                    <div class="timeline-company"><a href="https://evatar.ai" target="_blank">Evatar.ai</a></div>
+                    <div class="timeline-role">Founder & CEO • Los Angeles, CA</div>
+                    <p class="timeline-description">Launched agentic GenAI platform from idea to live beta. Acquired 121 users, 400K+ weekly views. Led 8-person team, shipped MVP in 16 weeks.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">NOV 2020 — MAR 2024</div>
+                    <div class="timeline-company"><a href="https://elegatto.com" target="_blank">Elegatto</a></div>
+                    <div class="timeline-role">Head of Strategy & Operations • Los Angeles, CA</div>
+                    <p class="timeline-description">Scaled DTC jewelry brand to $3M ARR. Tripled revenue in 24 months. Secured $300K Meta campaign (2.8x ROAS).</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">DEC 2020 — MAR 2022</div>
+                    <div class="timeline-company"><a href="https://www.crunchbase.com/organization/ofnature" target="_blank">ofNature</a></div>
+                    <div class="timeline-role">Co-Founder & CEO • Los Angeles, CA</div>
+                    <p class="timeline-description">Launched eco CPG brand with products adopted by McDonald's. Raised $150K pre-seed, built Ukraine manufacturing.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">MAY 2024 — AUG 2025</div>
+                    <div class="timeline-company"><a href="https://myperopero.com" target="_blank">Pero Pero</a></div>
+                    <div class="timeline-role">COO • Los Angeles, CA</div>
+                    <p class="timeline-description">Built brand and store from scratch; developed products, multi-channel sales, and full operational infrastructure. Pet care brand created for Stella Maxwell and Barbara Palvin.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">JUN 2021 — JUL 2022</div>
+                    <div class="timeline-company"><a href="https://authoritytech.io" target="_blank">AuthorityTech</a></div>
+                    <div class="timeline-role">Sales Operations Manager • Remote</div>
+                    <p class="timeline-description">Scaled client acquisition by 700% and revenue from $100K to $2M. Built full-cycle sales and marketing operations, automated lead generation for tech startups.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">FEB 2020 — MAR 2024</div>
+                    <div class="timeline-company"><a href="https://njfworldwide.com" target="_blank">NJF Worldwide</a></div>
+                    <div class="timeline-role">Capture Strategist • New York, NY</div>
+                    <p class="timeline-description">Expanded presence in government contracting sector. Led outbound marketing and stakeholder engagement, helped secure a $159M contract with New York State for COVID-19 test kits.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">SEP 2018 — NOV 2020</div>
+                    <div class="timeline-company"><a href="https://www.haystraws.com" target="_blank">HAY! Straws</a></div>
+                    <div class="timeline-role">Head of Growth & Partnerships • San Francisco, CA</div>
+                    <p class="timeline-description">Secured 2,000+ B2B accounts including Hilton, Hyatt, Marriott. Generated $4M+ in sales.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">NOV 2016 — SEP 2018</div>
+                    <div class="timeline-company">
+                        <a href="https://www.allsetnow.com" target="_blank">Allset</a>
+                        <span class="timeline-company-note">(Acquired by SoundHound AI)</span>
+                    </div>
+                    <div class="timeline-role">VP of Sales • New York, NY</div>
+                    <p class="timeline-description">Promoted to VP in 8 months. Scaled from 300 to 3,400+ locations. Enabled $5M Series A.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2012 — 2014</div>
+                    <div class="timeline-company"><a href="https://legrem.com.ua" target="_blank">Legrem Law Firm</a></div>
+                    <div class="timeline-role">Strategic Communications & PR Associate • Kyiv, Ukraine</div>
+                    <p class="timeline-description">Mediated business disputes, managed communications during corporate transitions and bank seizures.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2008 — 2013</div>
+                    <div class="timeline-company"><a href="https://www.facebook.com/groups/381833041885102" target="_blank">Amplifier Entertainment Agency</a></div>
+                    <div class="timeline-role">Founder & Event Organizer • Kyiv, Ukraine</div>
+                    <p class="timeline-description">Organized UNICEF, USAID, and ICRC conferences and major entertainment events.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2006 — 2007</div>
+                    <div class="timeline-company"><a href="https://m1.tv" target="_blank">M1 TV Music Channel</a></div>
+                    <div class="timeline-role">Assistant Director (Internship) • Kyiv, Ukraine</div>
+                    <p class="timeline-description">Assisted in directing music videos and live productions — first storytelling experience.</p>
+                </div>
+
+                <div class="timeline-item" style="border-left: 2px solid var(--accent-yellow); padding-left: 2rem; margin-top: 3rem;">
+                    <div class="timeline-date">2006 — 2010</div>
+                    <div class="timeline-company">Education</div>
+                    <div class="timeline-role">B.A. in Film Directing</div>
+                    <p class="timeline-description">Kyiv National I. K. Karpenko-Kary Theatre, Cinema and Television University</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LAB Section -->
+    <section id="lab" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-header-top">
+                    <div class="section-header-line"></div>
+                    <h2 class="section-numeral">III</h2>
+                    <div class="section-header-line"></div>
+                </div>
+                <h3 class="section-title">LAB / EXPERIMENTS</h3>
+            </div>
+
+            <div class="lab-grid">
+                <div class="lab-card">
+                    <div class="lab-status">Active</div>
+                    <h4><a href="https://prompt-director.rork.app" target="_blank" style="color: var(--text); text-decoration: none;">Prompt Director</a></h4>
+                    <p>React Native app that helps create cinematic video prompts through conversational AI interviews.</p>
+                </div>
+
+                <div class="lab-card">
+                    <div class="lab-status">Active</div>
+                    <h4><a href="https://memoir-vault.rork.app" target="_blank" style="color: var(--text); text-decoration: none;">Memoir App</a></h4>
+                    <p>A storytelling app helping older adults record and share their life stories through voice or video.</p>
+                </div>
+
+                <div class="lab-card">
+                    <div class="lab-status">Research</div>
+                    <h4>ACI — Artificial Creative Intelligence</h4>
+                    <p>Framework for AI that amplifies rather than replaces human creativity. Drawing from film directing experience.</p>
+                </div>
+
+                <div class="lab-card">
+                    <div class="lab-status">Prototype</div>
+                    <h4>Multimodal Integration</h4>
+                    <p>Testing Reka.AI and other services for richer, more expressive AI interactions.</p>
+                </div>
+
+                <div class="lab-card">
+                    <div class="lab-status">Exploration</div>
+                    <h4>Autonomous Workflows</h4>
+                    <p>Building AI agents that handle complete workflows end-to-end without human intervention.</p>
+                </div>
+
+                <div class="lab-card">
+                    <div class="lab-status">Concept</div>
+                    <h4>AI Film Direction</h4>
+                    <p>Long-term vision: AI systems that could help direct feature films while preserving artistic vision.</p>
+                </div>
+
+                <div class="lab-card">
+                    <div class="lab-status">Testing</div>
+                    <h4>Social Media Automation</h4>
+                    <p>Pushing boundaries of what AI agents can do autonomously in social media management.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Ideas Lab Section -->
+    <section id="ideas" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-header-top">
+                    <div class="section-header-line"></div>
+                    <h2 class="section-numeral">IV</h2>
+                    <div class="section-header-line"></div>
+                </div>
+                <h3 class="section-title">NEW IDEAS LAB</h3>
+            </div>
+
+            <div class="max-w-2xl text-center" style="margin: 3rem auto;">
+                <p style="font-size: 1.2rem; color: var(--text-muted); line-height: 1.8;">
+                    This is where I drop fresh startup ideas in raw form — open for anyone to explore, remix, or build. 
+                    If something sparks your curiosity, run with it.
+                </p>
+            </div>
+
+            <div class="ideas-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <!-- Ideas will be added here in future updates -->
+                <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 16px;">
+                    <span style="font-size: 3rem;">💡</span>
+                    <p style="color: var(--text-muted); margin-top: 1rem;">New ideas dropping soon...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section (formerly NOW) -->
+    <section id="services" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-header-top">
+                    <div class="section-header-line"></div>
+                    <h2 class="section-numeral">V</h2>
+                    <div class="section-header-line"></div>
+                </div>
+                <h3 class="section-title">WHAT I OFFER</h3>
+            </div>
+
+            <div class="now-card">
+                <div class="now-item">
+                    <div class="now-icon">⚡</div>
+                    <div>
+                        <h4>Fundraising & Collaboration</h4>
+                        <p>Constantly learning, experimenting, and building connections with investors and creators. If you're into AI startups or creative tech — let's chat.</p>
+                    </div>
+                </div>
+
+                <div class="now-item">
+                    <div class="now-icon">🧩</div>
+                    <div>
+                        <h4>AI Agents & Automation</h4>
+                        <p>Building custom AI agents for any industry — from customer engagement to workflow automation. I also design and run complete marketing systems: inbound, outbound, and retention automation, including full infrastructure setup.</p>
+                    </div>
+                </div>
+
+                <div class="now-item">
+                    <div class="now-icon">💡</div>
+                    <div>
+                        <h4>Strategy, Ideation & Product Development</h4>
+                        <p>Helping founders brainstorm and solve product challenges. From feature ideation and creative problem-solving to prototyping and supplier connections — I help bring ideas to life and turn them into market-ready products.</p>
+                    </div>
+                </div>
+
+                <div class="now-item">
+                    <div class="now-icon">🗞️</div>
+                    <div>
+                        <h4>PR & Media Strategy</h4>
+                        <p>Helping brands gain visibility and credibility through powerful storytelling and earned media. I can help get you featured in top publications such as Forbes, Business Insider, TechCrunch, Wired, TIME, Able News, and Fast Company — turning your story into meaningful press coverage.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-header-top">
+                    <div class="section-header-line"></div>
+                    <h2 class="section-numeral">VI</h2>
+                    <div class="section-header-line"></div>
+                </div>
+                <h3 class="section-title">CONNECT</h3>
+            </div>
+
+            <div class="max-w-2xl text-center">
+                <h2 class="contact-cta text-glow">
+                    Let's build something <span class="italic gradient-text">unseen</span>.
+                </h2>
+                
+                <p class="contact-intro">
+                    Open to conversations about AI, startups, product development, or creative projects that push boundaries.
+                </p>
+
+                <div class="contact-links">
+                    <a href="mailto:tima@aeoess.com" class="contact-link">EMAIL</a>
+                    <a href="https://linkedin.com/in/tymofii-pidlisnyi" class="contact-link" target="_blank">LINKEDIN</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Animated Grain Effect
+        const canvas = document.getElementById('grain-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function noise() {
+            const w = ctx.canvas.width;
+            const h = ctx.canvas.height;
+            const iData = ctx.createImageData(w, h);
+            const buffer32 = new Uint32Array(iData.data.buffer);
+            
+            for (let i = 0; i < buffer32.length; i++) {
+                if (Math.random() < 0.02) {
+                    buffer32[i] = 0x88ffffff;
+                }
+            }
+            
+            ctx.putImageData(iData, 0, 0);
+        }
+
+        function animate() {
+            noise();
+            requestAnimationFrame(animate);
+        }
+
+        resize();
+        window.addEventListener('resize', resize);
+        animate();
+
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.setAttribute('data-theme', 'bright');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'bright');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        window.addEventListener('load', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.body.setAttribute('data-theme', savedTheme);
+            document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Hide scroll indicator on scroll
+        let scrollIndicator = document.querySelector('.scroll-indicator');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100 && scrollIndicator) {
+                scrollIndicator.style.opacity = '0';
+                scrollIndicator.style.pointerEvents = 'none';
+            } else if (scrollIndicator) {
+                scrollIndicator.style.opacity = '1';
+                scrollIndicator.style.pointerEvents = 'auto';
+            }
+        });
+
+        // Add parallax effect to hero text
+        const heroTexts = document.querySelectorAll('.hero-text');
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            heroTexts.forEach((text, index) => {
+                const speed = 0.5 + (index * 0.1);
+                text.style.transform = `translateY(${scrolled * speed}px)`;
+                text.style.opacity = Math.max(0, 1 - (scrolled / 500));
+            });
+        });
+    </script>
+</body>
+</html>

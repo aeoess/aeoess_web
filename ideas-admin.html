@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideas Lab - Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0F0E0D;
+            --bg-secondary: #1A1715;
+            --text: #F5F3F0;
+            --text-muted: #9B9692;
+            --border: #262320;
+            --accent-cyan: #5DADE2;
+            --accent-yellow: #F4D03F;
+            --success: #27AE60;
+            --danger: #E74C3C;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Login Screen */
+        .login-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg);
+            z-index: 1000;
+        }
+
+        .login-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3rem;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-box h1 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .login-box input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            border: none;
+            border-radius: 8px;
+            color: var(--bg);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .login-box button:hover {
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            color: var(--danger);
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Main Content */
+        .hidden {
+            display: none !important;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            color: var(--text);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            color: var(--bg);
+            border: none;
+            font-weight: 600;
+        }
+
+        .btn-success {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            border-color: var(--danger);
+        }
+
+        /* Form */
+        .idea-form {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Ideas Grid */
+        .ideas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .idea-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .idea-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .idea-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .idea-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .idea-actions button {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* Export Section */
+        .export-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .export-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-cyan);
+        }
+
+        .export-section pre {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            max-height: 400px;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .copy-notification {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: var(--success);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s;
+            pointer-events: none;
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-box">
+            <h1>🔐 Ideas Lab</h1>
+            <input type="password" id="passwordInput" placeholder="Enter password" />
+            <button onclick="checkPassword()">Login</button>
+            <div id="errorMessage" class="error-message"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent" class="container hidden">
+        <header>
+            <h1>💡 Ideas Lab Admin</h1>
+            <button class="btn" onclick="logout()">Logout</button>
+        </header>
+
+        <!-- Add Idea Form -->
+        <div class="idea-form">
+            <h2 style="margin-bottom: 1.5rem; color: var(--text);">Add New Idea</h2>
+            <div class="form-group">
+                <label>Idea Name</label>
+                <input type="text" id="ideaName" placeholder="e.g., AI Meeting Summarizer" />
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="ideaDescription" placeholder="Brief description of your startup idea..."></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="addIdea()">Add Idea</button>
+        </div>
+
+        <!-- Ideas List -->
+        <div>
+            <h2 style="margin-bottom: 2rem; color: var(--text);">Your Ideas</h2>
+            <div id="ideasGrid" class="ideas-grid">
+                <!-- Ideas will be populated here -->
+            </div>
+        </div>
+
+        <!-- Export Section -->
+        <div class="export-section">
+            <h2>📋 Export HTML</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                Copy this HTML and paste it into your main index.html file to replace the ideas placeholder.
+            </p>
+            <button class="btn btn-success" onclick="copyExportCode()">Copy to Clipboard</button>
+            <pre id="exportCode"><!-- Generated HTML will appear here --></pre>
+        </div>
+    </div>
+
+    <!-- Copy Notification -->
+    <div id="copyNotification" class="copy-notification">
+        ✓ Copied to clipboard!
+    </div>
+
+    <script>
+        // Password (you can change this)
+        const PASSWORD = "tima2024";
+
+        // Check if already logged in
+        if (sessionStorage.getItem('loggedIn') === 'true') {
+            showMainContent();
+        }
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            const errorDiv = document.getElementById('errorMessage');
+            
+            if (input === PASSWORD) {
+                sessionStorage.setItem('loggedIn', 'true');
+                showMainContent();
+            } else {
+                errorDiv.textContent = 'Incorrect password';
+                setTimeout(() => errorDiv.textContent = '', 3000);
+            }
+        }
+
+        function showMainContent() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('mainContent').classList.remove('hidden');
+            loadIdeas();
+        }
+
+        function logout() {
+            sessionStorage.removeItem('loggedIn');
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('mainContent').classList.add('hidden');
+            document.getElementById('passwordInput').value = '';
+        }
+
+        // Enter key to login
+        document.getElementById('passwordInput')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // Ideas management
+        let ideas = JSON.parse(localStorage.getItem('ideas') || '[]');
+
+        function loadIdeas() {
+            const grid = document.getElementById('ideasGrid');
+            
+            if (ideas.length === 0) {
+                grid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1; text-align: center;">No ideas yet. Add your first idea above!</p>';
+            } else {
+                grid.innerHTML = ideas.map((idea, index) => `
+                    <div class="idea-card">
+                        <h3>${escapeHtml(idea.name)}</h3>
+                        <p>${escapeHtml(idea.description)}</p>
+                        <div class="idea-actions">
+                            <button class="btn btn-danger" onclick="deleteIdea(${index})">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            updateExportCode();
+        }
+
+        function addIdea() {
+            const name = document.getElementById('ideaName').value.trim();
+            const description = document.getElementById('ideaDescription').value.trim();
+            
+            if (!name || !description) {
+                alert('Please fill in both fields');
+                return;
+            }
+            
+            ideas.push({ name, description });
+            localStorage.setItem('ideas', JSON.stringify(ideas));
+            
+            // Clear form
+            document.getElementById('ideaName').value = '';
+            document.getElementById('ideaDescription').value = '';
+            
+            loadIdeas();
+        }
+
+        function deleteIdea(index) {
+            if (confirm('Are you sure you want to delete this idea?')) {
+                ideas.splice(index, 1);
+                localStorage.setItem('ideas', JSON.stringify(ideas));
+                loadIdeas();
+            }
+        }
+
+        function updateExportCode() {
+            let html = '';
+            
+            if (ideas.length === 0) {
+                html = `                <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 16px;">
+                    <span style="font-size: 3rem;">💡</span>
+                    <p style="color: var(--text-muted); margin-top: 1rem;">New ideas dropping soon...</p>
+                </div>`;
+            } else {
+                html = ideas.map(idea => `                <div class="project-card">
+                    <span class="project-tag">Idea</span>
+                    <h3>${escapeHtml(idea.name)}</h3>
+                    <p>${escapeHtml(idea.description)}</p>
+                </div>`).join('\n\n');
+            }
+            
+            document.getElementById('exportCode').textContent = html;
+        }
+
+        function copyExportCode() {
+            const code = document.getElementById('exportCode').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const notification = document.getElementById('copyNotification');
+                notification.classList.add('show');
+                setTimeout(() => notification.classList.remove('show'), 2000);
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
