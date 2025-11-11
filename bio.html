@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Tima — Full Biography</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0F0E0D;
+            --bg-secondary: #1A1715;
+            --text: #F5F3F0;
+            --text-muted: #8B9199;
+            --border: #262320;
+            --accent-cyan: #5DADE2;
+            --accent-yellow: #F4D03F;
+        }
+
+        [data-theme="bright"] {
+            --bg: #FDFCFA;
+            --bg-secondary: #F9F7F4;
+            --text: #2B2622;
+            --text-muted: #6B7280;
+            --border: #E8E4DF;
+            --accent-cyan: #3498DB;
+            --accent-yellow: #B8E6D5;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        p {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text-muted);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin: 3rem 0 1.5rem 0;
+            color: var(--text);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin: 2rem 0 1rem 0;
+            color: var(--accent-cyan);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+
+        .highlight {
+            color: var(--accent-cyan);
+            font-weight: 500;
+        }
+
+        .quote {
+            border-left: 3px solid var(--accent-cyan);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1001;
+            width: 60px;
+            height: 30px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            cursor: pointer;
+            padding: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-cyan);
+        }
+
+        .theme-toggle-slider {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        [data-theme="bright"] .theme-toggle-slider {
+            transform: translateX(30px);
+            background: var(--accent-yellow);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <div class="theme-toggle-slider">
+            <span id="theme-icon">🌙</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        
+        <h1>The Story Behind the Work</h1>
+        
+        <p>Hi, I'm <span class="highlight">Tymofii "Tima" Pidlisnyi</span> — though most people just call me Tima. I might look cocky in photos, but I promise I'm just a sweetheart who happened to grow up surrounded by brilliant nerds, and it shaped everything about how I see the world.</p>
+
+        <h2>Where It All Started</h2>
+        
+        <p>I was born and raised in <span class="highlight">Kyiv, Ukraine</span>, a city where resilience isn't just a buzzword — it's a way of life. I grew up in a world where innovation had to happen despite obstacles, not because everything was perfect. That scrappy, figure-it-out mentality became part of my DNA.</p>
+
+        <p>My first love was <span class="highlight">film directing</span>. I studied at Kyiv National I. K. Karpenko-Kary Theatre, Cinema and Television University, where I learned to tell stories visually, emotionally, and authentically. Film taught me something critical: <span class="highlight">how to see the invisible structure beneath what appears on the surface</span>. Every frame is a design decision. Every cut is a psychological choice. That lens never left me, even when I moved into tech and product.</p>
+
+        <h2>The Shift to Entrepreneurship</h2>
+        
+        <p>While still in Ukraine, I founded <span class="highlight">Amplifier Entertainment Agency</span>, organizing conferences for organizations like UNICEF, USAID, and the ICRC, plus major entertainment events. It was my first taste of building something from scratch, of bringing people together around a vision.</p>
+
+        <p>I also worked at <span class="highlight">Legrem Law Firm</span> as a Strategic Communications & PR Associate, where I mediated business disputes and managed corporate communications during high-stakes transitions — including bank seizures. It was intense, political, and taught me how to navigate chaos with clarity.</p>
+
+        <h2>Moving to America</h2>
+        
+        <p>In 2016, I moved to the United States with $300 in my pocket and zero connections. I landed in New York City and joined <span class="highlight">Allset</span>, a food-tech startup, as a commission-only sales rep. Within 8 months, I was promoted to <span class="highlight">VP of Sales</span>. I helped scale the platform from 300 to 3,400+ locations and enabled a $5M Series A. It was the first time I realized: I don't just build things — I scale them.</p>
+
+        <p class="quote">"Success isn't about having advantages. It's about refusing to let their absence stop you."</p>
+
+        <h2>Building, Failing, Learning, Repeating</h2>
+        
+        <p>After Allset (which was later acquired by SoundHound AI), I joined <span class="highlight">HAY! Straws</span> as Head of Growth & Partnerships. I secured 2,000+ B2B accounts — Hilton, Hyatt, Marriott — and generated $4M+ in sales. Sustainability wasn't just a trend for me; it was personal.</p>
+
+        <p>That led me to co-found <span class="highlight">ofNature</span>, an eco CPG brand that created biodegradable acetate-cellulose disposables. We raised $150K pre-seed, built manufacturing in Ukraine, and landed a deal with McDonald's. It was a perfect storm of product innovation, supply chain mastery, and mission-driven branding. And then, like many startups, we hit a wall. We couldn't scale fast enough. But I learned more from that failure than I ever could have from a smooth exit.</p>
+
+        <h3>Other Ventures Along the Way</h3>
+        
+        <p>I worked at <span class="highlight">NJF Worldwide</span> as a Capture Strategist, helping secure a $159M government contract for COVID-19 test kits. I scaled <span class="highlight">AuthorityTech</span> from $100K to $2M in revenue and grew client acquisition by 700%. I took <span class="highlight">Elegatto</span>, a DTC jewelry brand, from $100K to $3M ARR and secured a $300K Meta campaign with a 2.8x ROAS.</p>
+
+        <p>Most recently, I built <span class="highlight">Pero Pero</span>, a pet care brand for supermodels Stella Maxwell and Barbara Palvin, from scratch — products, branding, e-commerce, supply chain, the whole thing.</p>
+
+        <h2>Now: Evatar.ai and Beyond</h2>
+        
+        <p>In May 2024, I launched <span class="highlight">Evatar.ai</span>, an agentic GenAI platform that runs social media on autopilot. In 16 weeks, we shipped an MVP, acquired 121 users, and hit 400K+ weekly impressions. I led an 8-person team and built something I genuinely believe can change how creators and brands think about content.</p>
+
+        <p>I also build side projects like <span class="highlight">Prompt Director</span>, a React Native app that helps users create cinematic AI video prompts through conversational interviews. I'm obsessed with finding ways to make AI feel more human, more creative, more useful.</p>
+
+        <h2>What Drives Me</h2>
+        
+        <p>I'm not building products to chase trends or make a quick exit. I'm building because <span class="highlight">I believe technology should amplify human creativity, not replace it</span>. I believe the best products come from people who care deeply about craft, context, and authenticity.</p>
+
+        <p>I've been called intense. I've been called relentless. And yeah, sometimes I look cocky in photos. But underneath it all, I'm just someone who grew up around brilliant, weird, passionate people who taught me that the world gets better when you build things that didn't exist before.</p>
+
+        <p class="quote">"Life's too short to build boring stuff or pretend to be someone you're not. Let's make something real."</p>
+
+        <h2>What's Next</h2>
+        
+        <p>I'm currently focused on scaling Evatar.ai, exploring AI agent frameworks, and staying obsessed with the intersection of creativity and technology. I'm also always open to conversations with founders, investors, and creators who want to build things that matter.</p>
+
+        <p>If you've read this far, you probably get it. Let's connect.</p>
+
+        <a href="index.html#contact" class="back-link">→ Get in Touch</a>
+    </div>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.setAttribute('data-theme', 'bright');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'bright');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        window.addEventListener('load', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.body.setAttribute('data-theme', savedTheme);
+            document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+        });
+    </script>
+</body>
+</html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tymofii Pidlisnyi — Product Manager & Creative Founder</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,7 +16,7 @@
             --bg: #0F0E0D;
             --bg-secondary: #1A1715;
             --text: #F5F3F0;
-            --text-muted: #9B9692;
+            --text-muted: #8B9199;
             --border: #262320;
             --accent-cyan: #5DADE2;
             --accent-yellow: #F4D03F;
@@ -26,10 +26,10 @@
             --bg: #FDFCFA;
             --bg-secondary: #F9F7F4;
             --text: #2B2622;
-            --text-muted: #6B6662;
+            --text-muted: #6B7280;
             --border: #E8E4DF;
             --accent-cyan: #3498DB;
-            --accent-yellow: #F39C12;
+            --accent-yellow: #B8E6D5; /* Pale mint instead of yellow */
         }
 
         html {
@@ -45,7 +45,11 @@
             overflow-x: hidden;
         }
 
-        /* Animated Grain Canvas */
+        p, .timeline-description, .project-card p, .lab-card p {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text-muted);
+        }
+
         #grain-canvas {
             position: fixed;
             top: 0;
@@ -57,7 +61,6 @@
             z-index: 1;
         }
 
-        /* Moving Background Gradient */
         .moving-gradient {
             position: fixed;
             top: -50%;
@@ -80,7 +83,6 @@
             100% { transform: rotate(360deg) scale(1); }
         }
 
-        /* Floating Orbs */
         .floating-orb {
             position: fixed;
             border-radius: 50%;
@@ -130,7 +132,91 @@
             }
         }
 
-        /* Theme Toggle */
+        .cookie-banner {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 2000;
+            display: none;
+            max-width: 400px;
+        }
+
+        .cookie-banner.show {
+            display: block;
+            animation: slideInRight 0.5s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .cookie-banner-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: left;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .cookie-banner-content h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #000;
+            letter-spacing: 0.05em;
+        }
+
+        .cookie-banner-content p {
+            color: #000;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .cookie-banner-content a {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        .cookie-banner-buttons {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-start;
+        }
+
+        .cookie-btn {
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            border: none;
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 400;
+            min-width: 100px;
+        }
+
+        .cookie-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .cookie-btn.accept {
+            background: #000;
+        }
+
+        .cookie-btn.decline {
+            background: #6B7280;
+        }
+
         .theme-toggle {
             position: fixed;
             top: 2rem;
@@ -175,13 +261,18 @@
             z-index: 2;
         }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 50%;
             right: 2.5rem;
             transform: translateY(-50%);
             z-index: 1000;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        nav.hidden {
+            transform: translateY(-50%) translateX(150px);
+            opacity: 0;
         }
 
         .nav-links {
@@ -222,12 +313,32 @@
             opacity: 1;
         }
 
-        /* Logo */
-        .logo {
+        .logo-container {
             position: fixed;
             top: 2rem;
             left: 2rem;
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .profile-photo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            object-fit: cover;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .profile-photo:hover {
+            border-color: var(--accent-cyan);
+            transform: scale(1.1);
+        }
+
+        .logo {
             font-size: 1.2rem;
             letter-spacing: 0.2em;
             text-decoration: none;
@@ -238,7 +349,79 @@
             flex-direction: column;
         }
 
-        /* Text Effects */
+        .profile-overlay {
+            position: fixed;
+            top: 4rem;
+            left: 2rem;
+            width: 700px;
+            height: 600px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+            display: flex;
+            overflow: hidden;
+        }
+
+        .profile-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+        }
+
+        .profile-overlay-content {
+            flex: 1;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .profile-overlay-photo {
+            width: 350px;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-left: 3px solid var(--accent-cyan);
+            box-shadow: -10px 0 30px rgba(93, 173, 226, 0.3);
+        }
+
+        .profile-overlay-name h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .profile-overlay-name p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+        }
+
+        .profile-overlay-bio {
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.75;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .profile-overlay-bio p {
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .profile-overlay-bio p:last-child {
+            margin-bottom: 0;
+        }
+
         .text-glow {
             text-shadow: 
                 0 0 20px rgba(93, 173, 226, 0.3),
@@ -253,7 +436,6 @@
             background-clip: text;
         }
 
-        /* Section */
         .section {
             min-height: 100vh;
             display: flex;
@@ -263,7 +445,6 @@
             position: relative;
         }
 
-        /* Section Header */
         .section-header {
             text-align: center;
             margin-bottom: 4rem;
@@ -298,7 +479,6 @@
             text-transform: uppercase;
         }
 
-        /* Hero */
         .hero-text {
             font-size: clamp(3rem, 7vw, 7.5rem);
             line-height: 1;
@@ -331,7 +511,6 @@
             animation: fade-in-up 1s ease 0.6s forwards;
         }
 
-        /* Projects Grid */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -401,31 +580,6 @@
             line-height: 1.6;
         }
 
-        .project-metrics {
-            display: flex;
-            gap: 2rem;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .metric-value {
-            font-size: 1.8rem;
-            font-weight: 500;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .metric-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* Timeline */
         .timeline {
             margin-top: 3rem;
             position: relative;
@@ -487,10 +641,25 @@
             margin-bottom: 0.5rem;
         }
 
+        .timeline-company-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .company-logo {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            background: white;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
         .timeline-company {
             font-size: 1.3rem;
             font-weight: 500;
-            margin-bottom: 0.3rem;
         }
 
         .timeline-company a {
@@ -513,16 +682,39 @@
         .timeline-role {
             font-size: 1rem;
             color: var(--text-muted);
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
         }
 
         .timeline-description {
             color: var(--text-muted);
             font-size: 0.95rem;
-            max-width: 800px;
+            max-width: 900px;
+            line-height: 1.7;
+            margin-bottom: 1rem;
         }
 
-        /* LAB Section */
+        .timeline-bullets {
+            list-style: none;
+            margin-top: 1rem;
+            max-width: 900px;
+        }
+
+        .timeline-bullets li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .timeline-bullets li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+        }
+
         .lab-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -593,13 +785,388 @@
             font-weight: 500;
         }
 
+        .lab-card h4 a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .lab-card h4 a:hover {
+            color: var(--accent-cyan);
+        }
+
         .lab-card p {
             color: var(--text-muted);
             font-size: 0.9rem;
             line-height: 1.5;
         }
 
-        /* Now Card */
+        .ideas-single-box {
+            width: 55%;
+            height: 45vh;
+            margin: 3rem auto;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .ideas-single-box:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 40px rgba(93, 173, 226, 0.15);
+        }
+
+        .ideas-scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .ideas-scroll-indicator.hidden {
+            opacity: 0;
+        }
+
+        .ideas-scrollable {
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 1.5rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-cyan) transparent;
+        }
+
+        .ideas-scrollable::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .ideas-scrollable::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .ideas-scrollable::-webkit-scrollbar-thumb {
+            background: var(--accent-cyan);
+            border-radius: 3px;
+        }
+
+        .ideas-scrollable::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-yellow);
+        }
+
+        .idea-item {
+            margin-bottom: 3rem;
+        }
+
+        .idea-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .idea-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .idea-item h3 {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .upvote-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.5rem 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 50px;
+        }
+
+        .upvote-btn:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        .upvote-btn.voted {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            border-color: var(--accent-cyan);
+        }
+
+        .upvote-btn.voted .upvote-icon {
+            color: var(--bg);
+        }
+
+        .upvote-btn.voted .upvote-count {
+            color: var(--bg);
+            font-weight: 600;
+        }
+
+        .upvote-icon {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .upvote-count {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .idea-tagline {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .idea-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .idea-separator {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 2.5rem 0;
+        }
+
+        .comments-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 3rem auto;
+            padding: 1rem 2.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            color: var(--text);
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .comments-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+        }
+
+        .comments-button:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-cyan);
+        }
+
+        .comments-button:hover::before {
+            width: 200%;
+            height: 200%;
+            opacity: 0.1;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 80vh;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h3 {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            border-color: var(--accent-cyan);
+            transform: rotate(90deg);
+        }
+
+        .comments-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 2rem;
+            padding-right: 1rem;
+        }
+
+        .comments-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .comments-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .comments-list::-webkit-scrollbar-thumb {
+            background: var(--accent-cyan);
+            border-radius: 3px;
+        }
+
+        .comment-item {
+            padding: 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        .comment-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .comment-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .comment-form {
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            border: none;
+            border-radius: 8px;
+            color: var(--bg);
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(93, 173, 226, 0.3);
+        }
+
         .now-card {
             background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--border) 100%);
             border: 1px solid var(--border);
@@ -638,7 +1205,6 @@
             font-size: 0.95rem;
         }
 
-        /* Contact */
         .contact-cta {
             font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 400;
@@ -699,7 +1265,6 @@
             opacity: 0.1;
         }
 
-        /* Responsive */
         @media (max-width: 1024px) {
             nav {
                 display: none;
@@ -724,14 +1289,43 @@
             .lab-grid {
                 grid-template-columns: 1fr;
             }
+
+            .ideas-single-box {
+                width: 90%;
+                height: 60vh;
+            }
+
+            .profile-overlay {
+                width: 90%;
+                max-width: 600px;
+                height: auto;
+                max-height: 85vh;
+                flex-direction: column;
+            }
+
+            .profile-overlay-photo {
+                width: 100%;
+                height: 250px;
+                border-left: none;
+                border-bottom: 3px solid var(--accent-cyan);
+            }
+
+            .profile-overlay-content {
+                max-height: 60vh;
+                overflow-y: auto;
+            }
+
+            .cookie-banner {
+                right: 1rem;
+                bottom: 1rem;
+                max-width: 90%;
+            }
         }
 
-        /* Utilities */
         .text-center { text-align: center; }
         .italic { font-style: italic; }
         .max-w-2xl { max-width: 42rem; margin: 0 auto; }
 
-        /* Scroll Indicator */
         .scroll-indicator {
             position: fixed;
             bottom: 2rem;
@@ -766,7 +1360,6 @@
             100% { transform: translateX(-50%) translateY(0); opacity: 1; }
         }
 
-        /* Decorative Elements */
         .decorative-circle {
             position: absolute;
             border: 1px solid var(--border);
@@ -799,38 +1392,69 @@
     </style>
 </head>
 <body data-theme="dark">
-    <!-- Moving Background Elements -->
     <div class="moving-gradient"></div>
     <div class="floating-orb orb-1"></div>
     <div class="floating-orb orb-2"></div>
     <div class="floating-orb orb-3"></div>
     
-    <!-- Decorative Circles -->
     <div class="decorative-circle circle-1"></div>
     <div class="decorative-circle circle-2"></div>
 
-    <!-- Animated Grain Canvas -->
     <canvas id="grain-canvas"></canvas>
 
-    <!-- Theme Toggle -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-banner-content">
+            <h2>COOKIE USE</h2>
+            <p>
+                This website uses cookies to allow us to better understand how our site is used. By continuing to use this site, you consent to the Terms of Service and Privacy Policy.
+            </p>
+            <div class="cookie-banner-buttons">
+                <button class="cookie-btn accept" onclick="acceptCookies()">Accept</button>
+                <button class="cookie-btn decline" onclick="rejectCookies()">Decline</button>
+            </div>
+        </div>
+    </div>
+
     <div class="theme-toggle" onclick="toggleTheme()">
         <div class="theme-toggle-slider">
             <span id="theme-icon">🌙</span>
         </div>
     </div>
 
-    <!-- Logo -->
-    <a href="/" class="logo">
-        <span>TYMOFII</span>
-        <span>PIDLISNYI</span>
-    </a>
+    <div class="logo-container">
+        <img src="my_photo.jpg" alt="Tima" class="profile-photo" id="profilePhoto">
+        <a href="/" class="logo">
+            <span>TYMOFII</span>
+            <span>PIDLISNYI</span>
+        </a>
+    </div>
 
-    <!-- Navigation -->
-    <nav>
+    <div class="profile-overlay" id="profileOverlay">
+        <div class="profile-overlay-content">
+            <div class="profile-overlay-name">
+                <h3>Tima Pidlisnyi</h3>
+                <p>Founder & PM</p>
+            </div>
+            <div class="profile-overlay-bio">
+                <p>Hi, I'm Tima. I might look confident, but I'm not cocky — I'm sensitive, deeply empathetic, and often misread. (Ironic, since I shaved my curls at 22 just to be taken seriously.)</p>
+                
+                <p>I'm a polymath — neurodivergent, fascinated by everything from quantum physics to alternative history and esoteric philosophy to how imagination shapes reality. My brain constantly takes things apart and puts them back together.</p>
+                
+                <p>For my first 30 years, I was a dreamer who lived through stories, feelings, and imagination — film directing, creative projects, the scene. Then at 33, something switched. I became obsessed with execution. I taught myself product, operations, systems, and sales — everything needed to turn ideas into something real.</p>
+                
+                <p>Since then, I've learned more than I ever imagined possible — and burned down more times than most would survive: betrayal, war destroying my business, political imprisonment. But every time, I rise again — like a phoenix with a restless mind and an unshakable belief in human imagination.</p>
+                
+                <p>My life's been quite the adventure — some parts might shock you. <a href="bio.html" style="color: var(--accent-cyan); text-decoration: none; font-weight: 500;">Read the full story →</a></p>
+            </div>
+        </div>
+        <img src="my_photo.jpg" alt="Tima" class="profile-overlay-photo">
+    </div>
+
+    <nav id="mainNav">
         <ul class="nav-links">
             <li class="nav-item"><a href="#about">ABOUT</a></li>
             <li class="nav-item"><a href="#projects">PROJECTS</a></li>
-            <li class="nav-item"><a href="#work">WORK</a></li>
+            <li class="nav-item"><a href="mywork/index.html">WORK</a></li>
             <li class="nav-item"><a href="#lab">LAB</a></li>
             <li class="nav-item"><a href="#ideas">IDEAS</a></li>
             <li class="nav-item"><a href="#services">SERVICES</a></li>
@@ -838,7 +1462,6 @@
         </ul>
     </nav>
 
-    <!-- Hero Section -->
     <section id="about" class="section">
         <div class="container">
             <div class="text-center">
@@ -854,7 +1477,6 @@
             </div>
         </div>
 
-        <!-- Scroll Indicator -->
         <div class="scroll-indicator">
             <div class="mouse">
                 <div class="scroller"></div>
@@ -862,7 +1484,6 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects" class="section">
         <div class="container">
             <div class="section-header">
@@ -880,6 +1501,7 @@
                     <h3>Evatar.ai</h3>
                     <p>AI agents that run your social media on autopilot. Powered by Eva — Creative Voice-to-Content Assistant.</p>
                     <a href="https://evatar.ai" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">evatar.ai →</a>
+                    <a href="mywork/evatar.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn more →</a>
                 </div>
 
                 <div class="project-card">
@@ -887,6 +1509,7 @@
                     <h3>Prompt Director</h3>
                     <p>Platform for generating structured, multi-layered AI prompts for creative and product workflows.</p>
                     <a href="https://prompt-director.rork.app" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">prompt-director.rork.app →</a>
+                    <a href="mywork/prompt-director.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn more →</a>
                 </div>
 
                 <div class="project-card">
@@ -894,7 +1517,7 @@
                     <h3>ofNature</h3>
                     <p>Eco CPG brand pioneering acetate-cellulose disposables adopted by McDonald's. Sustainable innovation at scale.</p>
                     <a href="https://www.crunchbase.com/organization/ofnature" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View on Crunchbase →</a>
-                    <a href="https://drive.google.com/file/d/1UlAwwlZZhV4cDYYZlr-KDF7ZEA_aLR9h/view?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">View deck →</a>
+                    <a href="mywork/ofnature.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn more →</a>
                 </div>
 
                 <div class="project-card">
@@ -902,6 +1525,7 @@
                     <h3>Amplifier Agency</h3>
                     <p>Event and entertainment agency producing conferences and live shows.</p>
                     <a href="https://www.facebook.com/groups/381833041885102" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View Community →</a>
+                    <a href="mywork/amplifier-agency.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn more →</a>
                 </div>
 
                 <div class="project-card">
@@ -909,6 +1533,7 @@
                     <h3>aeoess</h3>
                     <p>World's first IoT breathing wearable nose device for personalized breathing analytics.</p>
                     <a href="https://drive.google.com/file/d/1-W51qctnlSj5Gip0buViqGd34MMEebFF/view?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View deck →</a>
+                    <a href="mywork/aeoess.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn more →</a>
                 </div>
 
                 <div class="project-card">
@@ -916,6 +1541,7 @@
                     <h3>SheetHappens</h3>
                     <p>The world's first "lucky" toilet paper — a playful CPG experiment that never launched publicly.</p>
                     <a href="https://drive.google.com/file/d/1NkGotUE1WqTJasttrYie-16JVEk0Icqh/view?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View deck →</a>
+                    <a href="mywork/sheethappens.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn more →</a>
                 </div>
 
                 <div class="project-card">
@@ -923,6 +1549,7 @@
                     <h3>Pick-a-Poo</h3>
                     <p>A rival CPG brand to SheetHappens — designed to capture the market from two sides.</p>
                     <a href="https://drive.google.com/file/d/1YZ2_cISw6GqqB-LvaFSbbMFasG-P27wW/view?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View deck →</a>
+                    <a href="mywork/pickapoo.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn more →</a>
                 </div>
 
                 <div class="project-card">
@@ -930,12 +1557,12 @@
                     <h3>Creative Projects</h3>
                     <p>Film direction, multimedia installations, and creative experiments that blend art with technology.</p>
                     <a href="https://docs.google.com/document/d/1ps-sqbx0Fc-1NZnV7S40ODrPGAxilEhAiDhA98dPBT4/edit?usp=sharing" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 1rem; display: inline-block;">View portfolio →</a>
+                    <a href="mywork/creative-projects.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Learn more →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Work Timeline -->
     <section id="work" class="section">
         <div class="container">
             <div class="section-header">
@@ -950,95 +1577,155 @@
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-date">MAY 2024 — PRESENT</div>
-                    <div class="timeline-company"><a href="https://evatar.ai" target="_blank">Evatar.ai</a></div>
+                    <div class="timeline-company-wrapper">
+                        <img src="evatar_logo.PNG" alt="Evatar" class="company-logo">
+                        <div class="timeline-company"><a href="mywork/evatar.html">Evatar.ai</a></div>
+                    </div>
                     <div class="timeline-role">Founder & CEO • Los Angeles, CA</div>
-                    <p class="timeline-description">Launched agentic GenAI platform from idea to live beta. Acquired 121 users, 400K+ weekly views. Led 8-person team, shipped MVP in 16 weeks.</p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">NOV 2020 — MAR 2024</div>
-                    <div class="timeline-company"><a href="https://elegatto.com" target="_blank">Elegatto</a></div>
-                    <div class="timeline-role">Head of Strategy & Operations • Los Angeles, CA</div>
-                    <p class="timeline-description">Scaled DTC jewelry brand to $3M ARR. Tripled revenue in 24 months. Secured $300K Meta campaign (2.8x ROAS).</p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">DEC 2020 — MAR 2022</div>
-                    <div class="timeline-company"><a href="https://www.crunchbase.com/organization/ofnature" target="_blank">ofNature</a></div>
-                    <div class="timeline-role">Co-Founder & CEO • Los Angeles, CA</div>
-                    <p class="timeline-description">Launched eco CPG brand with products adopted by McDonald's. Raised $150K pre-seed, built Ukraine manufacturing.</p>
+                    <p class="timeline-description">
+                        Launched agentic GenAI platform from idea to live beta. Acquired 121 users, 400K+ weekly views. Led 8-person team, shipped MVP in 16 weeks.
+                    </p>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-date">MAY 2024 — AUG 2025</div>
-                    <div class="timeline-company"><a href="https://myperopero.com" target="_blank">Pero Pero</a></div>
+                    <div class="timeline-company-wrapper">
+                        <img src="peropero_logo.png" alt="Pero Pero" class="company-logo">
+                        <div class="timeline-company"><a href="mywork/peropero.html">Pero Pero</a></div>
+                    </div>
                     <div class="timeline-role">COO • Los Angeles, CA</div>
-                    <p class="timeline-description">Built brand and store from scratch; developed products, multi-channel sales, and full operational infrastructure. Pet care brand created for Stella Maxwell and Barbara Palvin.</p>
+                    <p class="timeline-description">
+                        Built brand and store from scratch; developed products, multi-channel sales, and full operational infrastructure. Pet care brand created for Stella Maxwell and Barbara Palvin.
+                    </p>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-date">JUN 2021 — JUL 2022</div>
-                    <div class="timeline-company"><a href="https://authoritytech.io" target="_blank">AuthorityTech</a></div>
+                    <div class="timeline-company-wrapper">
+                        <div class="company-logo" style="background: #4a90e2;"></div>
+                        <div class="timeline-company"><a href="mywork/authoritytech.html">AuthorityTech</a></div>
+                    </div>
                     <div class="timeline-role">Sales Operations Manager • Remote</div>
-                    <p class="timeline-description">Scaled client acquisition by 700% and revenue from $100K to $2M. Built full-cycle sales and marketing operations, automated lead generation for tech startups.</p>
+                    <p class="timeline-description">
+                        Scaled client acquisition by 700% and revenue from $100K to $2M. Built full-cycle sales and marketing operations, automated lead generation for tech startups.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">DEC 2020 — MAR 2022</div>
+                    <div class="timeline-company-wrapper">
+                        <img src="OFNATURE_LOGO.PNG" alt="ofNature" class="company-logo">
+                        <div class="timeline-company"><a href="mywork/ofnature.html">ofNature</a></div>
+                    </div>
+                    <div class="timeline-role">Co-Founder & CEO • Los Angeles, CA</div>
+                    <p class="timeline-description">
+                        Launched eco CPG brand with products adopted by McDonald's. Raised $150K pre-seed, built Ukraine manufacturing.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">NOV 2020 — MAR 2024</div>
+                    <div class="timeline-company-wrapper">
+                        <div class="company-logo" style="background: #1a1a1a;"></div>
+                        <div class="timeline-company"><a href="mywork/elegatto.html">Elegatto</a></div>
+                    </div>
+                    <div class="timeline-role">Head of Strategy & Operations • Los Angeles, CA</div>
+                    <p class="timeline-description">
+                        Scaled DTC jewelry brand to $3M ARR. Tripled revenue in 24 months. Secured $300K Meta campaign (2.8x ROAS).
+                    </p>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-date">FEB 2020 — MAR 2024</div>
-                    <div class="timeline-company"><a href="https://njfworldwide.com" target="_blank">NJF Worldwide</a></div>
+                    <div class="timeline-company-wrapper">
+                        <div class="company-logo" style="background: #2c3e50;"></div>
+                        <div class="timeline-company"><a href="mywork/njf.html">NJF Worldwide</a></div>
+                    </div>
                     <div class="timeline-role">Capture Strategist • New York, NY</div>
-                    <p class="timeline-description">Expanded presence in government contracting sector. Led outbound marketing and stakeholder engagement, helped secure a $159M contract with New York State for COVID-19 test kits.</p>
+                    <p class="timeline-description">
+                        Expanded presence in government contracting sector. Led outbound marketing and stakeholder engagement, helped secure a $159M contract with New York State for COVID-19 test kits.
+                    </p>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-date">SEP 2018 — NOV 2020</div>
-                    <div class="timeline-company"><a href="https://www.haystraws.com" target="_blank">HAY! Straws</a></div>
+                    <div class="timeline-company-wrapper">
+                        <div class="company-logo" style="background: #27ae60;"></div>
+                        <div class="timeline-company"><a href="mywork/hayi.html">HAY! Straws</a></div>
+                    </div>
                     <div class="timeline-role">Head of Growth & Partnerships • San Francisco, CA</div>
-                    <p class="timeline-description">Secured 2,000+ B2B accounts including Hilton, Hyatt, Marriott. Generated $4M+ in sales.</p>
+                    <p class="timeline-description">
+                        Secured 2,000+ B2B accounts including Hilton, Hyatt, Marriott. Generated $4M+ in sales.
+                    </p>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-date">NOV 2016 — SEP 2018</div>
-                    <div class="timeline-company">
-                        <a href="https://www.allsetnow.com" target="_blank">Allset</a>
-                        <span class="timeline-company-note">(Acquired by SoundHound AI)</span>
+                    <div class="timeline-company-wrapper">
+                        <div class="company-logo" style="background: #ff6b6b;"></div>
+                        <div class="timeline-company"><a href="mywork/allset.html">Allset</a> <span class="timeline-company-note">(Acquired by SoundHound AI)</span></div>
                     </div>
                     <div class="timeline-role">VP of Sales • New York, NY</div>
-                    <p class="timeline-description">Promoted to VP in 8 months. Scaled from 300 to 3,400+ locations. Enabled $5M Series A.</p>
+                    <p class="timeline-description">
+                        Promoted to VP in 8 months. Scaled from 300 to 3,400+ locations. Enabled $5M Series A.
+                    </p>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-date">2012 — 2014</div>
-                    <div class="timeline-company"><a href="https://legrem.com.ua" target="_blank">Legrem Law Firm</a></div>
+                    <div class="timeline-company-wrapper">
+                        <div class="company-logo" style="background: #8e44ad;"></div>
+                        <div class="timeline-company"><a href="mywork/legrem.html">Legrem Law Firm</a></div>
+                    </div>
                     <div class="timeline-role">Strategic Communications & PR Associate • Kyiv, Ukraine</div>
-                    <p class="timeline-description">Mediated business disputes, managed communications during corporate transitions and bank seizures.</p>
+                    <p class="timeline-description">
+                        Mediated business disputes, managed communications during corporate transitions and bank seizures.
+                    </p>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-date">2008 — 2013</div>
-                    <div class="timeline-company"><a href="https://www.facebook.com/groups/381833041885102" target="_blank">Amplifier Entertainment Agency</a></div>
+                    <div class="timeline-company-wrapper">
+                        <div class="company-logo" style="background: #e67e22;"></div>
+                        <div class="timeline-company"><a href="mywork/amplifier-agency.html">Amplifier Entertainment Agency</a></div>
+                    </div>
                     <div class="timeline-role">Founder & Event Organizer • Kyiv, Ukraine</div>
-                    <p class="timeline-description">Organized UNICEF, USAID, and ICRC conferences and major entertainment events.</p>
+                    <p class="timeline-description">
+                        Organized UNICEF, USAID, and ICRC conferences and major entertainment events.
+                    </p>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-date">2006 — 2007</div>
-                    <div class="timeline-company"><a href="https://m1.tv" target="_blank">M1 TV Music Channel</a></div>
+                    <div class="timeline-company-wrapper">
+                        <div class="company-logo" style="background: #16a085;"></div>
+                        <div class="timeline-company"><a href="mywork/m1tv.html">M1 TV Music Channel</a></div>
+                    </div>
                     <div class="timeline-role">Assistant Director (Internship) • Kyiv, Ukraine</div>
-                    <p class="timeline-description">Assisted in directing music videos and live productions — first storytelling experience.</p>
+                    <p class="timeline-description">
+                        Assisted in directing music videos and live productions — first storytelling experience.
+                    </p>
                 </div>
 
-                <div class="timeline-item" style="border-left: 2px solid var(--accent-yellow); padding-left: 2rem; margin-top: 3rem;">
+                <div class="timeline-item">
                     <div class="timeline-date">2006 — 2010</div>
-                    <div class="timeline-company">Education</div>
+                    <div class="timeline-company-wrapper">
+                        <div class="company-logo" style="background: #34495e;"></div>
+                        <div class="timeline-company">Education</div>
+                    </div>
                     <div class="timeline-role">B.A. in Film Directing</div>
-                    <p class="timeline-description">Kyiv National I. K. Karpenko-Kary Theatre, Cinema and Television University</p>
+                    <p class="timeline-description">
+                        Kyiv National I. K. Karpenko-Kary Theatre, Cinema and Television University
+                    </p>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="mywork/index.html" class="contact-link">View Complete Work History →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- LAB Section -->
     <section id="lab" class="section">
         <div class="container">
             <div class="section-header">
@@ -1053,13 +1740,13 @@
             <div class="lab-grid">
                 <div class="lab-card">
                     <div class="lab-status">Active</div>
-                    <h4><a href="https://prompt-director.rork.app" target="_blank" style="color: var(--text); text-decoration: none;">Prompt Director</a></h4>
+                    <h4><a href="https://prompt-director.rork.app" target="_blank">Prompt Director</a></h4>
                     <p>React Native app that helps create cinematic video prompts through conversational AI interviews.</p>
                 </div>
 
                 <div class="lab-card">
                     <div class="lab-status">Active</div>
-                    <h4><a href="https://memoir-vault.rork.app" target="_blank" style="color: var(--text); text-decoration: none;">Memoir App</a></h4>
+                    <h4><a href="https://memoir-vault.rork.app" target="_blank">Memoir App</a></h4>
                     <p>A storytelling app helping older adults record and share their life stories through voice or video.</p>
                 </div>
 
@@ -1096,7 +1783,6 @@
         </div>
     </section>
 
-    <!-- New Ideas Lab Section -->
     <section id="ideas" class="section">
         <div class="container">
             <div class="section-header">
@@ -1108,71 +1794,143 @@
                 <h3 class="section-title">NEW IDEAS LAB</h3>
             </div>
 
-            <div class="max-w-2xl text-center" style="margin: 3rem auto;">
+            <div class="max-w-2xl text-center" style="margin: 2rem auto;">
                 <p style="font-size: 1.2rem; color: var(--text-muted); line-height: 1.8;">
                     This is where I drop fresh startup ideas in raw form — open for anyone to explore, remix, or build. 
                     If something sparks your curiosity, run with it.
                 </p>
             </div>
 
-            <div class="ideas-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem;">
-                           <div class="project-card">
-                    <span class="project-tag">Idea</span>
-                    <h3>Quests — Craigslist meets GTA</h3>
-                    <p>A geo-based social marketplace that turns the real world into a playable map.
-Every listing — whether it’s buying, selling, offering a service, or posting a local job — appears as a “quest” pinned on the map.
-To accept it, you actually have to go there in person, just like entering a mission zone in a game like GTA.
+            <div class="ideas-single-box">
+                <div class="ideas-scrollable" id="ideasScrollable">
+                    <div class="idea-item">
+                        <div class="idea-header">
+                            <h3>Quests</h3>
+                            <div class="upvote-btn" data-idea="quests" onclick="toggleUpvote('quests')">
+                                <span class="upvote-icon">▲</span>
+                                <span class="upvote-count" id="upvote-quests">0</span>
+                            </div>
+                        </div>
+                        <p class="idea-tagline">Your neighborhood becomes an open-world game economy</p>
+                        
+                        <p><strong>The Concept:</strong> A geo-based social marketplace that turns the real world into a playable map. Every listing — whether buying, selling, offering a service, or posting a local job — appears as a "quest" pinned on an interactive map.</p>
+                        
+                        <p><strong>How It Works:</strong> To accept a quest, you physically go there — just like entering a mission zone in GTA. Complete it, and you earn XP, tokens, and reputation points. Level up to unlock new roles like "Local Mod" or "Trader."</p>
+                        
+                        <p><strong>The Vision:</strong> Quests isn't just transactions — it's exploration, discovery, and gamified social exchange. Your city becomes an open-world economy where every real-world action earns digital rewards.</p>
+                        
+                        <p><strong>Why It Matters:</strong> Builds community trust through authentic, location-based interactions. Makes local commerce feel like adventure.</p>
+                    </div>
 
-Once completed, you earn XP, tokens, and reputation points, which unlock new roles such as “Local Mod” or “Trader.”
-The system builds community trust while keeping interactions authentic and location-based.
+                    <div class="idea-separator"></div>
 
-Quests isn’t just about transactions — it’s about exploration, discovery, and gamified social exchange.
-Your neighborhood becomes an open-world economy where every real-world action has digital rewards.</p>
+                    <div class="idea-item">
+                        <div class="idea-header">
+                            <h3>OnlyFriends</h3>
+                            <div class="upvote-btn" data-idea="onlyfriends" onclick="toggleUpvote('onlyfriends')">
+                                <span class="upvote-icon">▲</span>
+                                <span class="upvote-count" id="upvote-onlyfriends">0</span>
+                            </div>
+                        </div>
+                        <p class="idea-tagline">Book time with someone — just to talk, vent, or feel heard</p>
+                        
+                        <p><strong>The Problem:</strong> Loneliness is an epidemic. People need human connection, but therapy is expensive and dating apps are exhausting.</p>
+                        
+                        <p><strong>The Solution:</strong> A platform where you can book time with someone you follow — not for therapy, not for dating, just for genuine human conversation.</p>
+                        
+                        <p><strong>Who Can Join:</strong> Anyone. You don't need credentials or a massive following. Offer your time, empathy, or experience. Others book short one-on-one calls when they need someone to listen.</p>
+                        
+                        <p><strong>The Magic:</strong> It starts transactional, but doesn't have to stay that way. Sometimes a 15-minute call becomes the beginning of real friendship.</p>
+                        
+                        <p><strong>Bottom Line:</strong> Human connection, made simple, accessible, and real.</p>
+                    </div>
+
+                    <div class="idea-separator"></div>
+
+                    <div class="idea-item">
+                        <div class="idea-header">
+                            <h3>Gravity Seat</h3>
+                            <div class="upvote-btn" data-idea="gravityseat" onclick="toggleUpvote('gravityseat')">
+                                <span class="upvote-icon">▲</span>
+                                <span class="upvote-count" id="upvote-gravityseat">0</span>
+                            </div>
+                        </div>
+                        <p class="idea-tagline">A small tilt, a big difference in digestive health</p>
+                        
+                        <p><strong>The Innovation:</strong> A diagonally tilted toilet seat designed to use gravity and posture for better digestive health. You lean back slightly, gravity assists, reducing strain on your spine and pelvic floor.</p>
+                        
+                        <p><strong>The Science:</strong> Traditional toilet seats force an unnatural squatting position. Gravity Seat's angle creates easier, more natural elimination and improved gut function.</p>
+                        
+                        <p><strong>The Market:</strong> 1 in 3 adults struggles with digestive or pelvic floor issues caused by poor toilet posture. The fix? Change the seat angle.</p>
+                        
+                        <p><strong>The Product:</strong> Minimal, ergonomic redesign of something universal. Merges design and wellness into a quiet everyday innovation.</p>
+                        
+                        <p><strong>Why It Works:</strong> Because sometimes the biggest health improvements come from the smallest design changes.</p>
+                    </div>
+
+                    <div class="idea-separator"></div>
+
+                    <div class="idea-item">
+                        <div class="idea-header">
+                            <h3>Dataism</h3>
+                            <div class="upvote-btn" data-idea="dataism" onclick="toggleUpvote('dataism')">
+                                <span class="upvote-icon">▲</span>
+                                <span class="upvote-count" id="upvote-dataism">0</span>
+                            </div>
+                        </div>
+                        <p class="idea-tagline">Your photos should pay you, not just train AI for free</p>
+                        
+                        <p><strong>The Reality:</strong> AI companies need your photos and videos — the real-world visual data that makes their models work. Right now, they take it for free.</p>
+                        
+                        <p><strong>The Platform:</strong> Dataism pays users for giving selective access to their iCloud or Google Photos. You choose what to share. You earn based on quality, diversity, and rarity of your content.</p>
+                        
+                        <p><strong>How It Protects You:</strong> All data is anonymized. Your privacy stays intact while you generate income from the digital footprint you already produce.</p>
+                        
+                        <p><strong>The Business Model:</strong> AI companies license content through Dataism. Fair, transparent compensation for individual data contributors.</p>
+                        
+                        <p><strong>The Bigger Idea:</strong> Creating a data economy where individuals are actually compensated. Your data should work for you, not the other way around.</p>
+                    </div>
                 </div>
 
-                <div class="project-card">
-                    <span class="project-tag">Idea</span>
-                    <h3>OnlyFriends — not that one 😉</h3>
-                    <p>A platform to book time with someone you follow — just to talk, vent, or feel heard.
-Not therapy. Not dating. Just connection.
-Like having a friend who’s there when you need one.
-
-Anyone can sign up — you don’t need to be a creator or a licensed professional.
-People offer their time, empathy, or experience, and others can book short one-on-one calls for real human conversation.
-
-It starts transactional, but it doesn’t have to stay that way — sometimes a chat turns into genuine friendship.
-
-OnlyFriends makes human connection simple, accessible, and real.</p>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-tag">Idea</span>
-                    <h3>Gravity Seat</h3>
-                    <p>A diagonally tilted toilet seat designed to use gravity and posture for better digestive health.
-You lean back slightly, allowing gravity to assist — reducing strain and supporting your spine and pelvic floor.
-The result: easier, more natural elimination and improved gut function.
-
-1 in 3 adults struggles with digestive or pelvic floor issues caused by poor toilet posture — yet the fix is as simple as changing the seat angle.
-Gravity Seat is a minimal, ergonomic redesign of something universal — merging design and wellness into a quiet everyday innovation.
-A small tilt, a big difference.</p>
-                </div>
-
-                <div class="project-card">
-                    <span class="project-tag">Idea</span>
-                    <h3>Dataism</h3>
-                    <p>A platform that pays users for giving selective access to their photos and videos — the kind of real-world visual data that AI companies need to train smarter models.
-Users connect their iCloud or Google Photos, choose what to share, and earn based on quality, diversity, and rarity of content.
-
-The platform anonymizes all data, ensuring privacy while generating income for the user.
-AI companies license this content through Dataism, finally creating a fair, transparent data economy where individuals are compensated for the digital footprint they already produce.
-
-It’s a simple idea with huge implications: your data should work for you, not the other way around.</p>
+                <div class="ideas-scroll-indicator" id="ideasScrollIndicator">
+                    <div class="mouse">
+                        <div class="scroller"></div>
+                    </div>
                 </div>
             </div>
+
+            <button class="comments-button" onclick="openCommentsModal()">
+                💬 Share Your Thoughts
+            </button>
         </div>
     </section>
 
-    <!-- Services Section (formerly NOW) -->
+    <!-- Comments Modal -->
+    <div class="modal-overlay" id="commentsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Community Thoughts</h3>
+                <button class="modal-close" onclick="closeCommentsModal()">×</button>
+            </div>
+            
+            <div class="comments-list" id="commentsList">
+                <!-- Comments will be loaded here -->
+            </div>
+
+            <div class="comment-form">
+                <div class="form-group">
+                    <label for="commentName">Your Name</label>
+                    <input type="text" id="commentName" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="commentText">Your Thoughts</label>
+                    <textarea id="commentText" placeholder="Share your thoughts on these ideas..." required></textarea>
+                </div>
+                <button class="submit-btn" onclick="submitComment()">Post Comment</button>
+            </div>
+        </div>
+    </div>
+
     <section id="services" class="section">
         <div class="container">
             <div class="section-header">
@@ -1220,7 +1978,6 @@ It’s a simple idea with huge implications: your data should work for you, not 
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="section">
         <div class="container">
             <div class="section-header">
@@ -1244,6 +2001,7 @@ It’s a simple idea with huge implications: your data should work for you, not 
                 <div class="contact-links">
                     <a href="mailto:tima@aeoess.com" class="contact-link">EMAIL</a>
                     <a href="https://linkedin.com/in/tymofii-pidlisnyi" class="contact-link" target="_blank">LINKEDIN</a>
+                    <a href="https://instagram.com/tima.fey" class="contact-link" target="_blank">INSTAGRAM</a>
                 </div>
             </div>
         </div>
@@ -1283,6 +2041,26 @@ It’s a simple idea with huge implications: your data should work for you, not 
         window.addEventListener('resize', resize);
         animate();
 
+        // Cookie Consent Management
+        function checkCookieConsent() {
+            const consent = localStorage.getItem('cookieConsent');
+            if (!consent) {
+                setTimeout(() => {
+                    document.getElementById('cookieBanner').classList.add('show');
+                }, 1000);
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.getElementById('cookieBanner').classList.remove('show');
+        }
+
+        function rejectCookies() {
+            localStorage.setItem('cookieConsent', 'rejected');
+            document.getElementById('cookieBanner').classList.remove('show');
+        }
+
         // Theme Toggle
         function toggleTheme() {
             const body = document.body;
@@ -1305,6 +2083,52 @@ It’s a simple idea with huge implications: your data should work for you, not 
             const savedTheme = localStorage.getItem('theme') || 'dark';
             document.body.setAttribute('data-theme', savedTheme);
             document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+            
+            checkCookieConsent();
+            loadUpvotes();
+            loadComments();
+        });
+
+        // Profile Photo Hover Overlay
+        const profilePhoto = document.getElementById('profilePhoto');
+        const profileOverlay = document.getElementById('profileOverlay');
+        let hoverTimeout;
+
+        profilePhoto.addEventListener('mouseenter', () => {
+            hoverTimeout = setTimeout(() => {
+                profileOverlay.classList.add('show');
+            }, 200);
+        });
+
+        profilePhoto.addEventListener('mouseleave', () => {
+            clearTimeout(hoverTimeout);
+        });
+
+        profileOverlay.addEventListener('mouseenter', () => {
+            clearTimeout(hoverTimeout);
+            profileOverlay.classList.add('show');
+        });
+
+        profileOverlay.addEventListener('mouseleave', () => {
+            profileOverlay.classList.remove('show');
+        });
+
+        // Navigation Hide/Show on Scroll
+        let lastScrollTop = 0;
+        const nav = document.getElementById('mainNav');
+        const scrollThreshold = 100;
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (Math.abs(scrollTop - lastScrollTop) > scrollThreshold) {
+                if (scrollTop > lastScrollTop && scrollTop > 200) {
+                    nav.classList.add('hidden');
+                } else {
+                    nav.classList.remove('hidden');
+                }
+                lastScrollTop = scrollTop;
+            }
         });
 
         // Smooth scroll for navigation
@@ -1321,7 +2145,7 @@ It’s a simple idea with huge implications: your data should work for you, not 
             });
         });
 
-        // Hide scroll indicator on scroll
+        // Hide scroll indicator on scroll (hero)
         let scrollIndicator = document.querySelector('.scroll-indicator');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100 && scrollIndicator) {
@@ -1333,6 +2157,20 @@ It’s a simple idea with huge implications: your data should work for you, not 
             }
         });
 
+        // Ideas Section Scroll Indicator
+        const ideasScrollable = document.getElementById('ideasScrollable');
+        const ideasScrollIndicator = document.getElementById('ideasScrollIndicator');
+
+        if (ideasScrollable && ideasScrollIndicator) {
+            ideasScrollable.addEventListener('scroll', () => {
+                if (ideasScrollable.scrollTop > 50) {
+                    ideasScrollIndicator.classList.add('hidden');
+                } else {
+                    ideasScrollIndicator.classList.remove('hidden');
+                }
+            });
+        }
+
         // Add parallax effect to hero text
         const heroTexts = document.querySelectorAll('.hero-text');
         window.addEventListener('scroll', () => {
@@ -1342,6 +2180,128 @@ It’s a simple idea with huge implications: your data should work for you, not 
                 text.style.transform = `translateY(${scrolled * speed}px)`;
                 text.style.opacity = Math.max(0, 1 - (scrolled / 500));
             });
+        });
+
+        // UPVOTE FUNCTIONALITY
+        function generateUserId() {
+            let userId = localStorage.getItem('aeoess_user_id');
+            if (!userId) {
+                userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('aeoess_user_id', userId);
+            }
+            return userId;
+        }
+
+        function loadUpvotes() {
+            const userId = generateUserId();
+            const ideas = ['quests', 'onlyfriends', 'gravityseat', 'dataism'];
+            
+            ideas.forEach(idea => {
+                const count = localStorage.getItem(`upvote_count_${idea}`) || 0;
+                document.getElementById(`upvote-${idea}`).textContent = count;
+                
+                const userVotes = JSON.parse(localStorage.getItem('user_votes') || '{}');
+                if (userVotes[idea]) {
+                    const btn = document.querySelector(`[data-idea="${idea}"]`);
+                    btn.classList.add('voted');
+                }
+            });
+        }
+
+        function toggleUpvote(ideaId) {
+            const userId = generateUserId();
+            const btn = document.querySelector(`[data-idea="${ideaId}"]`);
+            const countElement = document.getElementById(`upvote-${ideaId}`);
+            
+            let userVotes = JSON.parse(localStorage.getItem('user_votes') || '{}');
+            let currentCount = parseInt(localStorage.getItem(`upvote_count_${ideaId}`) || 0);
+            
+            if (userVotes[ideaId]) {
+                currentCount = Math.max(0, currentCount - 1);
+                delete userVotes[ideaId];
+                btn.classList.remove('voted');
+            } else {
+                currentCount += 1;
+                userVotes[ideaId] = true;
+                btn.classList.add('voted');
+            }
+            
+            localStorage.setItem(`upvote_count_${ideaId}`, currentCount);
+            localStorage.setItem('user_votes', JSON.stringify(userVotes));
+            countElement.textContent = currentCount;
+        }
+
+        // COMMENTS FUNCTIONALITY
+        function openCommentsModal() {
+            document.getElementById('commentsModal').classList.add('show');
+            loadComments();
+        }
+
+        function closeCommentsModal() {
+            document.getElementById('commentsModal').classList.remove('show');
+        }
+
+        function loadComments() {
+            const commentsList = document.getElementById('commentsList');
+            const comments = JSON.parse(localStorage.getItem('site_comments') || '[]');
+            
+            if (comments.length === 0) {
+                commentsList.innerHTML = '<p style="text-align: center; color: var(--text-muted); padding: 2rem;">No comments yet. Be the first to share your thoughts!</p>';
+                return;
+            }
+            
+            commentsList.innerHTML = comments.map(comment => `
+                <div class="comment-item">
+                    <div class="comment-header">
+                        <span class="comment-author">${comment.name}</span>
+                        <span class="comment-date">${comment.date}</span>
+                    </div>
+                    <p class="comment-text">${comment.text}</p>
+                </div>
+            `).reverse().join('');
+        }
+
+        function submitComment() {
+            const nameInput = document.getElementById('commentName');
+            const textInput = document.getElementById('commentText');
+            
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+            
+            if (!name || !text) {
+                alert('Please fill in both name and comment fields.');
+                return;
+            }
+            
+            const comments = JSON.parse(localStorage.getItem('site_comments') || '[]');
+            
+            const newComment = {
+                name: name,
+                text: text,
+                date: new Date().toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric', 
+                    year: 'numeric' 
+                }),
+                timestamp: Date.now()
+            };
+            
+            comments.push(newComment);
+            localStorage.setItem('site_comments', JSON.stringify(comments));
+            
+            nameInput.value = '';
+            textInput.value = '';
+            
+            loadComments();
+            
+            alert('Thank you for your comment!');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('commentsModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCommentsModal();
+            }
         });
     </script>
 </body>
