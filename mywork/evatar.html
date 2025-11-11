@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evatar.ai — Tymofii Pidlisnyi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0F0E0D;
+            --bg-secondary: #1A1715;
+            --text: #F5F3F0;
+            --text-muted: #8B9199;
+            --border: #262320;
+            --accent-cyan: #5DADE2;
+            --accent-yellow: #F4D03F;
+        }
+
+        [data-theme="bright"] {
+            --bg: #FDFCFA;
+            --bg-secondary: #F9F7F4;
+            --text: #2B2622;
+            --text-muted: #6B7280;
+            --border: #E8E4DF;
+            --accent-cyan: #3498DB;
+            --accent-yellow: #F39C12;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: var(--accent-cyan);
+            transform: translateX(-5px);
+        }
+
+        /* Header */
+        .project-header {
+            margin-bottom: 4rem;
+        }
+
+        .project-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--bg);
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .project-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .project-tagline {
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .project-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 4rem;
+        }
+
+        .content-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .content-section h3 {
+            font-size: 1.3rem;
+            margin: 2rem 0 1rem;
+            color: var(--text);
+        }
+
+        .content-section p {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-section ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .content-section ul li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .content-section ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        /* Video Container */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            margin: 2rem 0;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(93, 173, 226, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .gallery-caption {
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* PDF Embed */
+        .pdf-embed {
+            width: 100%;
+            height: 600px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Links Section */
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .project-link {
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        .project-link.primary {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            border: none;
+            color: var(--bg);
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .project-tagline {
+                font-size: 1.1rem;
+            }
+
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1001;
+            width: 60px;
+            height: 30px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            cursor: pointer;
+            padding: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-cyan);
+        }
+
+        .theme-toggle-slider {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        [data-theme="bright"] .theme-toggle-slider {
+            transform: translateX(30px);
+            background: var(--accent-yellow);
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <div class="theme-toggle-slider">
+            <span id="theme-icon">🌙</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <a href="../index.html" class="back-btn">← Back to Home</a>
+
+        <!-- Project Header -->
+        <div class="project-header">
+            <div class="project-status">🚀 ACTIVE PROJECT</div>
+            <h1 class="project-title">Evatar.ai</h1>
+            <p class="project-tagline">AI agents that run your social media on autopilot</p>
+            
+            <div class="project-meta">
+                <div class="project-meta-item">
+                    <span>📅</span>
+                    <span>May 2024 — Present</span>
+                </div>
+                <div class="project-meta-item">
+                    <span>👤</span>
+                    <span>Founder & CEO</span>
+                </div>
+                <div class="project-meta-item">
+                    <span>📍</span>
+                    <span>Los Angeles, CA</span>
+                </div>
+            </div>
+
+            <div class="project-links">
+                <a href="https://evatar.ai" target="_blank" class="project-link primary">Visit Evatar.ai →</a>
+                <a href="https://twitter.com/evatar_ai" target="_blank" class="project-link">Twitter/X</a>
+                <a href="https://linkedin.com/company/evatar-ai" target="_blank" class="project-link">LinkedIn</a>
+            </div>
+        </div>
+
+        <!-- Overview -->
+        <div class="content-section">
+            <h2>Overview</h2>
+            <p>
+                Evatar.ai is an agentic GenAI platform that automates social media management for startups and SMBs. 
+                At its core is Eva — a creative voice-to-content assistant that transforms casual speech into platform-optimized social posts.
+            </p>
+            <p>
+                I launched Evatar from idea to live beta in 16 weeks, building a cross-functional team of 8 people 
+                (2 engineers, 3 designers, 1 PM, 2 marketers). We've acquired 121 users generating 400K+ weekly impressions 
+                across multiple social platforms.
+            </p>
+        </div>
+
+        <!-- Key Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">121</div>
+                <div class="stat-label">Active Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">400K+</div>
+                <div class="stat-label">Weekly Impressions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">16</div>
+                <div class="stat-label">Weeks to MVP</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Team Members</div>
+            </div>
+        </div>
+
+        <!-- Demo Video -->
+        <div class="content-section">
+            <h2>Product Demo</h2>
+            <!-- Replace with actual YouTube video ID -->
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
+                    title="Evatar.ai Demo" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p style="text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-top: 1rem;">
+                Watch how Eva transforms voice notes into engaging social media content
+            </p>
+        </div>
+
+        <!-- The Problem -->
+        <div class="content-section">
+            <h2>The Problem</h2>
+            <p>
+                Social media management is exhausting for founders and small teams. It requires:
+            </p>
+            <ul>
+                <li>Constant content ideation and planning</li>
+                <li>Platform-specific formatting and optimization</li>
+                <li>Consistent posting schedules across multiple channels</li>
+                <li>Brand voice consistency while maintaining authenticity</li>
+                <li>Engagement monitoring and community management</li>
+            </ul>
+            <p>
+                Most founders either neglect social entirely or spend hours per week on tasks that don't scale. 
+                Existing tools are either too basic (scheduling only) or too complex (enterprise-grade with steep learning curves).
+            </p>
+        </div>
+
+        <!-- The Solution -->
+        <div class="content-section">
+            <h2>The Solution</h2>
+            <p>
+                Evatar.ai runs your social media on autopilot through Eva, an AI assistant that:
+            </p>
+            <ul>
+                <li><strong>Accepts voice input:</strong> Just talk naturally about what you're building or thinking about</li>
+                <li><strong>Understands context:</strong> Eva learns your brand voice, products, and target audience</li>
+                <li><strong>Generates platform-optimized content:</strong> Creates posts tailored for Twitter, LinkedIn, Instagram, etc.</li>
+                <li><strong>Schedules intelligently:</strong> Posts at optimal times based on audience engagement patterns</li>
+                <li><strong>Maintains consistency:</strong> Ensures brand voice stays authentic across all platforms</li>
+            </ul>
+        </div>
+
+        <!-- Key Features -->
+        <div class="content-section">
+            <h2>Key Features</h2>
+            
+            <h3>🎙️ Voice-to-Content</h3>
+            <p>
+                Record a quick voice note about your product update, startup journey, or industry insight. 
+                Eva transforms it into polished, platform-specific posts in seconds.
+            </p>
+
+            <h3>🧠 Context-Aware AI</h3>
+            <p>
+                Eva learns from your past content, brand guidelines, and audience preferences to maintain 
+                consistency while adapting tone for each platform.
+            </p>
+
+            <h3>📊 Multi-Platform Optimization</h3>
+            <p>
+                One input generates optimized versions for Twitter threads, LinkedIn articles, Instagram captions, 
+                and more — each formatted for maximum engagement on that platform.
+            </p>
+
+            <h3>⏰ Smart Scheduling</h3>
+            <p>
+                Posts are automatically scheduled based on when your audience is most active, with manual override available.
+            </p>
+
+            <h3>🎨 Brand Voice Control</h3>
+            <p>
+                Fine-tune Eva's output style from casual and conversational to professional and authoritative, 
+                maintaining your unique brand personality.
+            </p>
+        </div>
+
+        <!-- Screenshots/Mockups -->
+        <div class="content-section">
+            <h2>Product Screenshots</h2>
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="../evatar-screenshot-1.jpg" alt="Evatar Dashboard" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">Main dashboard showing content calendar and performance metrics</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../evatar-screenshot-2.jpg" alt="Eva Voice Interface" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">Eva's voice-to-content interface in action</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../evatar-screenshot-3.jpg" alt="Content Generation" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">AI-generated content with platform-specific optimization</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Approach -->
+        <div class="content-section">
+            <h2>Technical Approach</h2>
+            <p>
+                Building Evatar required solving several complex challenges:
+            </p>
+            <ul>
+                <li><strong>Multimodal AI:</strong> Integrating speech-to-text, natural language understanding, and content generation</li>
+                <li><strong>Context management:</strong> Maintaining conversation history and brand context across sessions</li>
+                <li><strong>Platform APIs:</strong> Deep integration with Twitter, LinkedIn, Instagram, and other social platforms</li>
+                <li><strong>Real-time processing:</strong> Fast content generation and editing workflow for immediate feedback</li>
+                <li><strong>Scalable architecture:</strong> Backend designed to handle growing user base and content volume</li>
+            </ul>
+        </div>
+
+        <!-- Results & Impact -->
+        <div class="content-section">
+            <h2>Results & Impact</h2>
+            <p>
+                Since launching the beta in May 2024:
+            </p>
+            <ul>
+                <li>Acquired 121 users through product-led growth and direct outreach</li>
+                <li>Generated 400K+ weekly social media impressions for our users</li>
+                <li>Reduced average time spent on social media management by 75% for active users</li>
+                <li>Achieved 80% weekly retention rate among core users</li>
+                <li>Collected feedback driving 4 major product iterations</li>
+            </ul>
+        </div>
+
+        <!-- Learnings -->
+        <div class="content-section">
+            <h2>Key Learnings</h2>
+            <p>
+                Building Evatar taught me invaluable lessons about product development and AI:
+            </p>
+            <ul>
+                <li><strong>Voice UX is hard:</strong> Getting the conversational interface right required extensive user testing</li>
+                <li><strong>Context is everything:</strong> Users want AI that remembers their brand, not generic content generators</li>
+                <li><strong>Platform nuances matter:</strong> What works on Twitter doesn't work on LinkedIn — optimization is critical</li>
+                <li><strong>Speed trumps perfection:</strong> Shipping fast and iterating based on real feedback beats building in isolation</li>
+                <li><strong>Team chemistry:</strong> A small, aligned team can move faster than a large, misaligned one</li>
+            </ul>
+        </div>
+
+        <!-- What's Next -->
+        <div class="content-section">
+            <h2>What's Next</h2>
+            <p>
+                We're actively developing:
+            </p>
+            <ul>
+                <li><strong>Team collaboration features:</strong> Multi-user workflows for agencies and larger teams</li>
+                <li><strong>Advanced analytics:</strong> Deep insights into content performance and audience growth</li>
+                <li><strong>Custom AI training:</strong> Allow users to fine-tune Eva on their specific brand voice</li>
+                <li><strong>Content repurposing:</strong> Automatically transform blog posts, podcasts, and videos into social content</li>
+                <li><strong>Community features:</strong> Connect users building in public and sharing growth strategies</li>
+            </ul>
+            <p>
+                We're also fundraising to accelerate development and scaling. If you're interested in learning more, 
+                <a href="mailto:tima@aeoess.com" style="color: var(--accent-cyan);">reach out</a>.
+            </p>
+        </div>
+
+        <!-- Additional Resources -->
+        <div class="content-section">
+            <h2>Additional Resources</h2>
+            <div class="project-links">
+                <a href="https://evatar.ai" target="_blank" class="project-link">Product Website</a>
+                <a href="https://docs.evatar.ai" target="_blank" class="project-link">Documentation</a>
+                <a href="https://twitter.com/evatar_ai" target="_blank" class="project-link">Follow on Twitter</a>
+                <a href="https://youtube.com/@evatar-ai" target="_blank" class="project-link">YouTube Channel</a>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border);">
+            <a href="../index.html" class="back-btn">← Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.setAttribute('data-theme', 'bright');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'bright');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        window.addEventListener('load', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.body.setAttribute('data-theme', savedTheme);
+            document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+        });
+    </script>
+</body>
+</html>
