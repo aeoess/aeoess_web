@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evatar.ai — Tymofii Pidlisnyi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -164,7 +167,8 @@
         .video-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
             margin: 2rem 0;
             background: var(--bg-secondary);
             border-radius: 12px;
@@ -347,6 +351,7 @@
         }
     </style>
 </head>
+
 <body data-theme="dark">
     <!-- Theme Toggle -->
     <div class="theme-toggle" onclick="toggleTheme()">
@@ -363,7 +368,7 @@
             <div class="project-status">🚀 ACTIVE PROJECT</div>
             <h1 class="project-title">Evatar.ai</h1>
             <p class="project-tagline">AI agents that run your social media on autopilot</p>
-            
+
             <div class="project-meta">
                 <div class="project-meta-item">
                     <span>📅</span>
@@ -427,15 +432,10 @@
         <div class="content-section">
             <h2>Product Demo</h2>
             <div class="video-container">
-                <iframe 
-                    width="560"
-                    height="315"
-                    src="https://www.youtube.com/embed/8N0dR8BUx0M?si=dC_DDtdX-oSKC7yx"
-                    title="YouTube video player"
-                    frameborder="0"
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/8N0dR8BUx0M"
+                    title="YouTube video player" style="border: none;"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    allowfullscreen>
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
                 </iframe>
             </div>
             <p style="text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-top: 1rem;">
@@ -559,7 +559,7 @@
             const body = document.body;
             const themeIcon = document.getElementById('theme-icon');
             const currentTheme = body.getAttribute('data-theme');
-            
+
             if (currentTheme === 'dark') {
                 body.setAttribute('data-theme', 'bright');
                 themeIcon.textContent = '☀️';
@@ -579,4 +579,5 @@
         });
     </script>
 </body>
+
 </html>
