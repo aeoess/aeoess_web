@@ -236,6 +236,99 @@
             background: #6B7280;
         }
 
+        /* Ambient Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 0.5rem 1rem 0.5rem 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .music-player:hover {
+            border-color: var(--accent-cyan);
+        }
+
+        .music-btn {
+            width: 32px;
+            height: 32px;
+            background: var(--border);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .music-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg);
+        }
+
+        .music-btn.playing {
+            background: var(--accent-cyan);
+            color: var(--bg);
+        }
+
+        .music-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .music-visualizer {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            height: 16px;
+        }
+
+        .music-bar {
+            width: 2px;
+            height: 4px;
+            background: var(--accent-cyan);
+            border-radius: 1px;
+            transition: height 0.1s ease;
+        }
+
+        .music-player.playing .music-bar {
+            animation: musicBars 0.5s ease-in-out infinite alternate;
+        }
+
+        .music-bar:nth-child(1) { animation-delay: 0s; }
+        .music-bar:nth-child(2) { animation-delay: 0.1s; }
+        .music-bar:nth-child(3) { animation-delay: 0.2s; }
+        .music-bar:nth-child(4) { animation-delay: 0.1s; }
+
+        @keyframes musicBars {
+            0% { height: 4px; }
+            100% { height: 14px; }
+        }
+
+        @media (max-width: 768px) {
+            .music-player {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.4rem 0.8rem 0.4rem 0.4rem;
+            }
+
+            .music-label {
+                display: none;
+            }
+        }
+
         .theme-toggle {
             position: fixed;
             top: 2rem;
@@ -1314,13 +1407,124 @@
 
         @media (max-width: 768px) {
             .hero-text {
-                font-size: clamp(1rem, 4.5vw, 2rem);
+                font-size: clamp(1.4rem, 6vw, 2.5rem);
+            }
+
+            /* Refined mobile cards */
+            .project-card {
+                background: transparent;
+                border: none;
+                border-left: 2px solid var(--accent-cyan);
+                border-radius: 0;
+                padding: 1.2rem 0 1.2rem 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .project-card::before {
+                display: none;
+            }
+
+            .project-card:hover {
+                transform: none;
+                box-shadow: none;
+                background: rgba(93, 173, 226, 0.05);
+            }
+
+            .project-tag {
+                padding: 0.25rem 0.75rem;
+                font-size: 0.65rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .project-card h3 {
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .project-card p {
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
+
+            .projects-grid {
+                gap: 0;
+            }
+
+            /* Refined lab cards for mobile */
+            .lab-card {
+                background: transparent;
+                border: none;
+                border-bottom: 1px solid var(--border);
+                border-radius: 0;
+                padding: 1.2rem 0;
+            }
+
+            .lab-card::after {
+                display: none;
+            }
+
+            .lab-card:hover {
+                transform: none;
+                border-color: var(--border);
+                background: transparent;
+            }
+
+            .lab-card:last-child {
+                border-bottom: none;
+            }
+
+            .lab-status {
+                font-size: 0.65rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .lab-card h4 {
+                font-size: 1rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .lab-card p {
+                font-size: 0.8rem;
+                line-height: 1.4;
+            }
+
+            .lab-grid {
+                gap: 0;
+            }
+
+            .section-header {
+                margin-bottom: 2rem;
+            }
+
+            .section-title {
+                font-size: 0.8rem;
+                letter-spacing: 0.2em;
             }
         }
 
         @media (max-width: 480px) {
             .hero-text {
-                font-size: clamp(0.9rem, 4vw, 1.5rem);
+                font-size: clamp(1.2rem, 5.5vw, 2rem);
+            }
+
+            .project-card {
+                padding: 1rem 0 1rem 1.2rem;
+            }
+
+            .project-card h3 {
+                font-size: 1.1rem;
+            }
+
+            .project-card p {
+                font-size: 0.8rem;
+            }
+
+            .lab-card h4 {
+                font-size: 0.95rem;
+            }
+
+            .lab-card p {
+                font-size: 0.75rem;
             }
         }
 
@@ -1460,6 +1664,21 @@
             <span id="theme-icon">🌙</span>
         </div>
     </div>
+
+    <!-- Ambient Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <button class="music-btn" id="musicBtn" onclick="toggleMusic()">▶</button>
+        <div class="music-visualizer">
+            <div class="music-bar"></div>
+            <div class="music-bar"></div>
+            <div class="music-bar"></div>
+            <div class="music-bar"></div>
+        </div>
+        <span class="music-label">ambient</span>
+    </div>
+    <audio id="ambientAudio" loop preload="auto">
+        <source src="assets/audio/ambient.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="logo-container">
         <img src="assets/images/my_photo.jpg" alt="Tima" class="profile-photo" id="profilePhoto">
@@ -1974,6 +2193,29 @@
                 body.setAttribute('data-theme', 'dark');
                 if (themeIcon) themeIcon.textContent = '🌙';
                 localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Ambient Music Player
+        function toggleMusic() {
+            const audio = document.getElementById('ambientAudio');
+            const btn = document.getElementById('musicBtn');
+            const player = document.getElementById('musicPlayer');
+
+            if (audio.paused) {
+                audio.volume = 0.15; // Very low volume
+                audio.play().then(() => {
+                    btn.textContent = '❚❚';
+                    btn.classList.add('playing');
+                    player.classList.add('playing');
+                }).catch(e => {
+                    console.log('Audio play prevented:', e);
+                });
+            } else {
+                audio.pause();
+                btn.textContent = '▶';
+                btn.classList.remove('playing');
+                player.classList.remove('playing');
             }
         }
 
