@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evatar.ai — Tymofii Pidlisnyi</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,40 +14,78 @@
         }
 
         :root {
-            --bg: #0F0E0D;
-            --bg-secondary: #1A1715;
-            --text: #F5F3F0;
-            --text-muted: #8B9199;
-            --border: #262320;
-            --accent-cyan: #5DADE2;
-            --accent-yellow: #F4D03F;
+            --bg: #09090b;
+            --bg-secondary: rgba(24, 24, 27, 0.8);
+            --text: #fafafa;
+            --text-muted: #a1a1aa;
+            --border: rgba(63, 63, 70, 0.5);
+            --accent-primary: #06b6d4;
+            --accent-secondary: #8b5cf6;
+            --accent-tertiary: #f59e0b;
+            --glow: rgba(6, 182, 212, 0.3);
         }
 
-        [data-theme="bright"] {
-            --bg: #FDFCFA;
-            --bg-secondary: #F9F7F4;
-            --text: #2B2622;
-            --text-muted: #6B7280;
-            --border: #E8E4DF;
-            --accent-cyan: #3498DB;
-            --accent-yellow: #F39C12;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse 80% 50% at 20% -20%, rgba(6, 182, 212, 0.15), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 0%, rgba(139, 92, 246, 0.12), transparent),
+                radial-gradient(ellipse 50% 30% at 50% 100%, rgba(245, 158, 11, 0.08), transparent);
+            animation: gradientShift 15s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Grid Pattern Overlay */
+        .grid-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 3rem 2rem;
+            position: relative;
         }
 
-        /* Back Button */
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
         .back-btn {
             display: inline-flex;
             align-items: center;
@@ -57,123 +93,390 @@
             color: var(--text-muted);
             text-decoration: none;
             font-size: 0.9rem;
-            margin-bottom: 3rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
             transition: all 0.3s ease;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
         }
 
         .back-btn:hover {
-            color: var(--accent-cyan);
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
             transform: translateX(-5px);
         }
 
-        /* Header */
-        .project-header {
-            margin-bottom: 4rem;
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            cursor: pointer;
+            font-size: 1.1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
-        .project-status {
+        .theme-toggle:hover {
+            border-color: var(--accent-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 2rem 0 4rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .status-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
-            border-radius: 20px;
+            padding: 0.5rem 1.25rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 50px;
             font-size: 0.75rem;
-            color: var(--bg);
-            letter-spacing: 0.1em;
-            margin-bottom: 1.5rem;
+            color: white;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
             font-weight: 600;
+            margin-bottom: 2rem;
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        .project-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+        .status-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(6, 182, 212, 0.5); }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: gradientText 5s ease infinite;
+            letter-spacing: -0.02em;
         }
 
-        .project-tagline {
-            font-size: 1.3rem;
-            color: var(--text);
-            margin-bottom: 1.5rem;
+        @keyframes gradientText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
             font-weight: 400;
         }
 
-        .project-meta {
+        .hero-meta {
             display: flex;
+            justify-content: center;
             gap: 2rem;
             flex-wrap: wrap;
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            margin-bottom: 2.5rem;
         }
 
-        .project-meta-item {
+        .hero-meta-item {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
+        /* CTA Buttons */
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(6, 182, 212, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text);
+            border-color: var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        .ph-badge {
+            transition: transform 0.3s ease;
+        }
+
+        .ph-badge:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(6, 182, 212, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
         /* Content Sections */
-        .content-section {
-            margin-bottom: 4rem;
+        .section {
+            padding: 4rem 0;
         }
 
-        .content-section h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--text);
+        .section-header {
+            margin-bottom: 2rem;
         }
 
-        .content-section h3 {
-            font-size: 1.3rem;
-            margin: 2rem 0 1rem;
-            color: var(--text);
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .content-section p {
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 1.5rem;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 2px;
+        }
+
+        .content-text {
             font-family: 'Inter', sans-serif;
             color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.8;
+            font-size: 1.1rem;
+            line-height: 1.9;
             margin-bottom: 1.5rem;
         }
 
-        .content-section ul {
-            list-style: none;
-            margin: 1.5rem 0;
+        /* Glass Card */
+        .glass-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+            margin-bottom: 2rem;
         }
 
-        .content-section ul li {
+        /* Feature List */
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
             position: relative;
             padding-left: 2rem;
             margin-bottom: 1rem;
             color: var(--text-muted);
             font-family: 'Inter', sans-serif;
             font-size: 1.05rem;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
-        .content-section ul li::before {
+        .feature-list li::before {
             content: '→';
             position: absolute;
             left: 0;
-            color: var(--accent-cyan);
+            color: var(--accent-primary);
             font-weight: bold;
         }
 
+        /* Product Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(6, 182, 212, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .feature-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
         /* Video Container */
+        .video-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+        }
+
+        .video-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--accent-primary), transparent 30%);
+            animation: rotate 4s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-wrapper:hover::before {
+            opacity: 0.3;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
         .video-container {
             position: relative;
             width: 100%;
             padding-bottom: 56.25%;
-            /* 16:9 aspect ratio */
-            margin: 2rem 0;
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border);
+            z-index: 1;
         }
 
         .video-container iframe {
@@ -182,401 +485,448 @@
             left: 0;
             width: 100%;
             height: 100%;
+            border: none;
         }
 
-        /* Image Gallery */
-        .image-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
+        /* Traction Pills */
+        .traction-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
 
-        .gallery-item {
+        .traction-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
             background: var(--bg-secondary);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
 
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(93, 173, 226, 0.2);
+        .traction-pill:hover {
+            border-color: var(--accent-primary);
+            color: var(--text);
         }
 
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            display: block;
+        .traction-pill .icon {
+            font-size: 1.1rem;
         }
 
-        .gallery-caption {
-            padding: 1rem;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* PDF Embed */
-        .pdf-embed {
-            width: 100%;
-            height: 600px;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            margin: 2rem 0;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
+        /* Resources Links */
+        .resources-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .stat-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* Links Section */
-        .project-links {
-            display: flex;
+            grid-template-columns: repeat(4, 1fr);
             gap: 1rem;
-            flex-wrap: wrap;
-            margin: 2rem 0;
         }
 
-        .project-link {
-            padding: 0.75rem 1.5rem;
+        .resource-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.5rem;
             background: var(--bg-secondary);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 16px;
             text-decoration: none;
             color: var(--text);
-            font-size: 0.9rem;
+            backdrop-filter: blur(20px);
             transition: all 0.3s ease;
         }
 
-        .project-link:hover {
-            border-color: var(--accent-cyan);
-            transform: translateY(-2px);
+        .resource-link:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-4px);
         }
 
-        .project-link.primary {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
-            border: none;
-            color: var(--bg);
-            font-weight: 500;
+        .resource-link .icon {
+            font-size: 1.5rem;
+        }
+
+        .resource-link span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 2rem 1.5rem;
-            }
-
-            .project-title {
-                font-size: 2rem;
-            }
-
-            .project-tagline {
-                font-size: 1.1rem;
-            }
-
-            .image-gallery {
-                grid-template-columns: 1fr;
-            }
-
+        @media (max-width: 900px) {
             .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .features-grid {
                 grid-template-columns: 1fr;
+            }
+            .resources-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        /* Theme Toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            z-index: 1001;
-            width: 60px;
-            height: 30px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 30px;
-            cursor: pointer;
-            padding: 3px;
-            transition: all 0.3s ease;
+        @media (max-width: 600px) {
+            .container {
+                padding: 2rem 1.25rem;
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-tagline {
+                font-size: 1.2rem;
+            }
+            .stat-number {
+                font-size: 2.25rem;
+            }
+            .cta-group {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
-        .theme-toggle:hover {
-            border-color: var(--accent-cyan);
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
         }
 
-        .theme-toggle-slider {
-            width: 24px;
-            height: 24px;
-            background: var(--accent-cyan);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-        }
-
-        [data-theme="bright"] .theme-toggle-slider {
-            transform: translateX(30px);
-            background: var(--accent-yellow);
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 
-<body data-theme="dark">
-    <!-- Theme Toggle -->
-    <div class="theme-toggle" onclick="toggleTheme()">
-        <div class="theme-toggle-slider">
-            <span id="theme-icon">🌙</span>
-        </div>
-    </div>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="grid-pattern"></div>
 
     <div class="container">
-        <a href="../index.html" class="back-btn">← Back to Home</a>
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="../index.html" class="back-btn">← Back to Home</a>
+            <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">🌙</button>
+        </nav>
 
-        <!-- Project Header -->
-        <div class="project-header">
-            <div class="project-status">🚀 ACTIVE PROJECT</div>
-            <h1 class="project-title">Evatar.ai</h1>
-            <p class="project-tagline">AI agents that run your social media on autopilot</p>
-
-            <div class="project-meta">
-                <div class="project-meta-item">
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="status-badge">Active Project</div>
+            <h1 class="hero-title">Evatar.ai</h1>
+            <p class="hero-tagline">AI agents that run your social media on autopilot</p>
+            
+            <div class="hero-meta">
+                <div class="hero-meta-item">
                     <span>📅</span>
                     <span>May 2024 — Present</span>
                 </div>
-                <div class="project-meta-item">
+                <div class="hero-meta-item">
                     <span>👤</span>
                     <span>Founder & CEO</span>
                 </div>
-                <div class="project-meta-item">
+                <div class="hero-meta-item">
                     <span>📍</span>
                     <span>Los Angeles, CA</span>
                 </div>
             </div>
 
-            <div class="project-links">
-                <a href="https://evatar.ai" target="_blank" class="project-link primary">Visit Evatar.ai →</a>
-                <a href="https://twitter.com/evatar_ai" target="_blank" class="project-link">Twitter/X</a>
-                <a href="https://linkedin.com/company/evatar-ai" target="_blank" class="project-link">LinkedIn</a>
+            <div class="cta-group">
+                <a href="https://evatar.ai" target="_blank" class="btn btn-primary">Visit Evatar.ai →</a>
+                <a href="https://twitter.com/evatar_ai" target="_blank" class="btn btn-secondary">Twitter/X</a>
+                <a href="https://linkedin.com/company/evatar-ai" target="_blank" class="btn btn-secondary">LinkedIn</a>
+                <a href="https://www.producthunt.com/products/evatar-ai?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-eva&#0045;6" target="_blank" class="ph-badge">
+                    <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1035356&theme=dark&t=1765047499701" alt="Eva - Product Hunt" style="width: 200px; height: 43px;" width="200" height="43" />
+                </a>
             </div>
-        </div>
+        </header>
 
+        <!-- Stats Section -->
+        <section class="stats-section fade-in">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" data-target="163">0</div>
+                    <div class="stat-label">Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="1.6" data-suffix="M+">0</div>
+                    <div class="stat-label">Monthly Impressions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="20" data-prefix="~" data-suffix="%">0</div>
+                    <div class="stat-label">Conversion Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="16">0</div>
+                    <div class="stat-label">Weeks to MVP</div>
+                </div>
+            </div>
+        </section>
 
         <!-- Overview -->
-        <div class="content-section">
-            <h2>Overview</h2>
-            <p>
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Overview</h2>
+            </div>
+            <p class="content-text">
                 Evatar is an agentic AI platform that automates your entire social media presence.
                 At the center is Eva — a voice-to-content creative assistant that turns raw thoughts
                 into ready-to-post content. Avatars generate videos, and agent workflows handle posting,
                 scheduling and engagement across platforms.
             </p>
-            <p>
+            <p class="content-text">
                 I built Evatar from idea to live beta in 16 weeks and now lead product, engineering,
                 creative and go-to-market. The platform is in active beta with paying users and running
                 case studies with founders, creators and operators.
             </p>
-        </div>
-
-        <!-- Key Stats -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">121</div>
-                <div class="stat-label">Beta Users</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">26</div>
-                <div class="stat-label">Paying Users</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">1.6M+</div>
-                <div class="stat-label">Total Impressions</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">16</div>
-                <div class="stat-label">Weeks to MVP</div>
-            </div>
-        </div>
+        </section>
 
         <!-- Product Demo -->
-        <div class="content-section">
-            <h2>Product Demo</h2>
-            <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/8N0dR8BUx0M"
-                    title="YouTube video player" style="border: none;"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-                </iframe>
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Product Demo</h2>
             </div>
-            <p style="text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-top: 1rem;">
-                Watch how Eva turns voice notes into avatar-led content and automated posting.
-            </p>
-        </div>
+            <div class="video-wrapper">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/8N0dR8BUx0M"
+                        title="Evatar Demo"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </section>
 
         <!-- Problem -->
-        <div class="content-section">
-            <h2>The Problem</h2>
-            <p>
-                Social media is essential but exhausting for founders and small teams. It demands:
-            </p>
-            <ul>
-                <li>constant content ideation and planning</li>
-                <li>platform-specific formatting and optimization</li>
-                <li>consistent posting across multiple channels</li>
-                <li>keeping a coherent voice while staying authentic</li>
-                <li>ongoing replies to comments and DMs</li>
-            </ul>
-            <p>
-                Most people either neglect social entirely or burn out trying to keep up. Existing tools
-                either only schedule posts or become yet another system that needs managing.
-            </p>
-        </div>
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">The Problem</h2>
+            </div>
+            <div class="glass-card">
+                <p class="content-text" style="margin-bottom: 1.5rem;">
+                    Social media is essential but exhausting for founders and small teams.
+                </p>
+                <ul class="feature-list">
+                    <li>Constant content ideation and planning</li>
+                    <li>Platform-specific formatting and optimization</li>
+                    <li>Consistent posting across multiple channels</li>
+                    <li>Keeping a coherent voice while staying authentic</li>
+                    <li>Ongoing replies to comments and DMs</li>
+                </ul>
+                <p class="content-text" style="margin-top: 1.5rem; margin-bottom: 0;">
+                    Most people either neglect social entirely or burn out trying to keep up. Existing tools
+                    either only schedule posts or become yet another system that needs managing.
+                </p>
+            </div>
+        </section>
 
         <!-- Core Product -->
-        <div class="content-section">
-            <h2>Core Product</h2>
-
-            <h3>Eva — Voice-to-Content Creative Assistant</h3>
-            <ul>
-                <li>turns voice notes into scripts, posts and video narratives</li>
-                <li>expands rough ideas into structured content in your tone</li>
-                <li>rewrites, polishes and repurposes content across formats</li>
-                <li>guides you through what to post and why, not just how</li>
-            </ul>
-
-            <h3>AI Video Avatars (ATOM + Argil)</h3>
-            <ul>
-                <li>unlimited avatars from a single image via Argil pipelines</li>
-                <li>realistic lip-sync driven by the latest ATOM model</li>
-                <li>multiple visual styles and templates for short-form video</li>
-                <li>voice cloning through ElevenLabs for natural delivery</li>
-            </ul>
-
-            <h3>Autonomous Posting & Engagement</h3>
-            <ul>
-                <li>multi-platform posting to Instagram, TikTok, YouTube and LinkedIn</li>
-                <li>scheduling and queue management with platform-aware formatting</li>
-                <li>caption and hashtag generation tuned by Eva</li>
-                <li>agent that replies to comments and DMs in your tone using avatar context</li>
-            </ul>
-
-            <h3>Multi-Model Generation Layer</h3>
-            <ul>
-                <li>ATOM for avatar rendering and motion</li>
-                <li>Sora-style B-roll generation (beta)</li>
-                <li>planned Veo integration for cinematic outputs</li>
-                <li>OpenAI and Perplexity as the reasoning layer for content and strategy</li>
-                <li>Argil for appearance and avatar generation</li>
-            </ul>
-        </div>
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Core Product</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3><span class="feature-icon">🎙️</span> Eva — Creative Assistant</h3>
+                    <ul class="feature-list">
+                        <li>Turns voice notes into scripts, posts and video narratives</li>
+                        <li>Expands rough ideas into structured content in your tone</li>
+                        <li>Rewrites, polishes and repurposes content across formats</li>
+                        <li>Guides you through what to post and why</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3><span class="feature-icon">🎬</span> AI Video Avatars</h3>
+                    <ul class="feature-list">
+                        <li>Unlimited avatars from a single image via Argil</li>
+                        <li>Realistic lip-sync driven by ATOM model</li>
+                        <li>Multiple visual styles and templates</li>
+                        <li>Voice cloning through ElevenLabs</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3><span class="feature-icon">🤖</span> Autonomous Posting</h3>
+                    <ul class="feature-list">
+                        <li>Multi-platform posting to IG, TikTok, YouTube, LinkedIn</li>
+                        <li>Scheduling with platform-aware formatting</li>
+                        <li>Caption and hashtag generation</li>
+                        <li>Auto-replies to comments and DMs</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3><span class="feature-icon">⚡</span> Multi-Model Layer</h3>
+                    <ul class="feature-list">
+                        <li>ATOM for avatar rendering and motion</li>
+                        <li>Sora-style B-roll generation (beta)</li>
+                        <li>OpenAI & Perplexity for reasoning</li>
+                        <li>Planned Veo integration</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
         <!-- Traction -->
-        <div class="content-section">
-            <h2>Traction</h2>
-            <ul>
-                <li>121 beta users with 26 paying customers (around 20% conversion)</li>
-                <li>over 1.6 million views across Instagram, TikTok, YouTube and LinkedIn</li>
-                <li>completed LVLUP Ventures accelerator</li>
-                <li>received Google Startup grant, ElevenLabs grant and Stripe grant</li>
-                <li>autonomous comment and DM replying agent in active testing</li>
-            </ul>
-        </div>
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Traction</h2>
+            </div>
+            <div class="traction-grid">
+                <div class="traction-pill"><span class="icon">📊</span> 163 users → 1.6M+ monthly impressions</div>
+                <div class="traction-pill"><span class="icon">💰</span> ~20% free-to-paid conversion</div>
+                <div class="traction-pill"><span class="icon">🎓</span> LVLUP Ventures accelerator</div>
+                <div class="traction-pill"><span class="icon">🏆</span> Google Startup grant</div>
+                <div class="traction-pill"><span class="icon">🎤</span> ElevenLabs grant</div>
+                <div class="traction-pill"><span class="icon">💳</span> Stripe grant</div>
+            </div>
+        </section>
 
         <!-- Learnings -->
-        <div class="content-section">
-            <h2>What I Learned Building Evatar</h2>
-            <ul>
-                <li>consistency beats perfect content every time</li>
-                <li>voice UX by itself is not enough — people need simple agent flows that do the work</li>
-                <li>most users do not want “a tool”, they want finished output</li>
-                <li>realistic avatars only matter when tied to a clear content strategy</li>
-                <li>speed of iteration is more important than long planning cycles</li>
-                <li>performance metrics are key to making content systems feel “intelligent” instead of random</li>
-            </ul>
-        </div>
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">What I Learned</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="feature-list">
+                    <li>Consistency beats perfect content every time</li>
+                    <li>Voice UX alone isn't enough — people need agent flows that do the work</li>
+                    <li>Most users don't want "a tool", they want finished output</li>
+                    <li>Realistic avatars only matter when tied to clear content strategy</li>
+                    <li>Speed of iteration beats long planning cycles</li>
+                    <li>Performance metrics make content systems feel "intelligent" instead of random</li>
+                </ul>
+            </div>
+        </section>
 
         <!-- What's Next -->
-        <div class="content-section">
-            <h2>What’s Next</h2>
-            <ul>
-                <li>full mobile app with voice-first Eva assistant</li>
-                <li>deeper automated replies and community engagement tools</li>
-                <li>self-learning content loops where the agent adjusts based on performance</li>
-                <li>new formats: text posts with visuals, blog posts and avatar-free generated videos</li>
-                <li>AI strategy and insights dashboard for tracking what works</li>
-                <li>API for agencies and teams managing multiple brands</li>
-            </ul>
-        </div>
-        <!-- Additional Resources -->
-        <div class="content-section">
-            <h2>Additional Resources</h2>
-            <div class="project-links">
-                <a href="https://evatar.ai" target="_blank" class="project-link">Product Website</a>
-                <a href="https://docs.evatar.ai" target="_blank" class="project-link">Documentation</a>
-                <a href="https://twitter.com/evatar_ai" target="_blank" class="project-link">Follow on Twitter</a>
-                <a href="https://youtube.com/@evatar-ai" target="_blank" class="project-link">YouTube Channel</a>
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">What's Next</h2>
             </div>
-        </div>
+            <div class="glass-card">
+                <ul class="feature-list">
+                    <li>Full mobile app with voice-first Eva assistant</li>
+                    <li>Deeper automated replies and community engagement</li>
+                    <li>Self-learning content loops that adjust based on performance</li>
+                    <li>New formats: text posts with visuals, blog posts, avatar-free videos</li>
+                    <li>AI strategy and insights dashboard</li>
+                    <li>API for agencies and multi-brand teams</li>
+                </ul>
+            </div>
+        </section>
 
-        <div style="text-align: center; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border);">
+        <!-- Resources -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Resources</h2>
+            </div>
+            <div class="resources-grid">
+                <a href="https://evatar.ai" target="_blank" class="resource-link">
+                    <span class="icon">🌐</span>
+                    <span>Product Website</span>
+                </a>
+                <a href="https://docs.evatar.ai" target="_blank" class="resource-link">
+                    <span class="icon">📚</span>
+                    <span>Documentation</span>
+                </a>
+                <a href="https://twitter.com/evatar_ai" target="_blank" class="resource-link">
+                    <span class="icon">𝕏</span>
+                    <span>Twitter/X</span>
+                </a>
+                <a href="https://youtube.com/@evatar-ai" target="_blank" class="resource-link">
+                    <span class="icon">▶️</span>
+                    <span>YouTube</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
             <a href="../index.html" class="back-btn">← Back to Home</a>
-        </div>
+        </footer>
     </div>
 
     <script>
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number[data-target]');
+            
+            counters.forEach(counter => {
+                const target = parseFloat(counter.getAttribute('data-target'));
+                const prefix = counter.getAttribute('data-prefix') || '';
+                const suffix = counter.getAttribute('data-suffix') || '';
+                const isDecimal = target % 1 !== 0;
+                const duration = 2000;
+                const steps = 60;
+                const increment = target / steps;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = prefix + (isDecimal ? current.toFixed(1) : Math.floor(current)) + suffix;
+                }, duration / steps);
+            });
+        }
+
+        // Scroll Animations
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        if (entry.target.querySelector('.stat-number')) {
+                            animateCounters();
+                        }
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(el => observer.observe(el));
+        }
+
         // Theme Toggle
         function toggleTheme() {
             const body = document.body;
-            const themeIcon = document.getElementById('theme-icon');
-            const currentTheme = body.getAttribute('data-theme');
-
-            if (currentTheme === 'dark') {
-                body.setAttribute('data-theme', 'bright');
-                themeIcon.textContent = '☀️';
-                localStorage.setItem('theme', 'bright');
+            const btn = document.getElementById('theme-toggle');
+            const isDark = body.style.getPropertyValue('--bg') !== '#fafafa';
+            
+            if (isDark) {
+                document.documentElement.style.setProperty('--bg', '#fafafa');
+                document.documentElement.style.setProperty('--bg-secondary', 'rgba(244, 244, 245, 0.9)');
+                document.documentElement.style.setProperty('--text', '#18181b');
+                document.documentElement.style.setProperty('--text-muted', '#52525b');
+                document.documentElement.style.setProperty('--border', 'rgba(212, 212, 216, 0.8)');
+                btn.textContent = '☀️';
             } else {
-                body.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = '🌙';
-                localStorage.setItem('theme', 'dark');
+                document.documentElement.style.setProperty('--bg', '#09090b');
+                document.documentElement.style.setProperty('--bg-secondary', 'rgba(24, 24, 27, 0.8)');
+                document.documentElement.style.setProperty('--text', '#fafafa');
+                document.documentElement.style.setProperty('--text-muted', '#a1a1aa');
+                document.documentElement.style.setProperty('--border', 'rgba(63, 63, 70, 0.5)');
+                btn.textContent = '🌙';
             }
         }
 
-        // Load saved theme
-        window.addEventListener('load', () => {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            document.body.setAttribute('data-theme', savedTheme);
-            document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
-        });
+        // Initialize
+        document.addEventListener('DOMContentLoaded', handleScrollAnimations);
     </script>
 </body>
 
