@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ofNature — Tymofii Pidlisnyi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #09090b;
+            --bg-secondary: rgba(24, 24, 27, 0.8);
+            --text: #fafafa;
+            --text-muted: #a1a1aa;
+            --border: rgba(63, 63, 70, 0.5);
+            --accent-primary: #22a559;
+            --accent-secondary: #10b981;
+            --accent-tertiary: #34d399;
+            --glow: rgba(34, 165, 89, 0.3);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse 80% 50% at 20% -20%, rgba(34, 165, 89, 0.15), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 0%, rgba(16, 185, 129, 0.12), transparent),
+                radial-gradient(ellipse 50% 30% at 50% 100%, rgba(52, 211, 153, 0.08), transparent);
+            animation: gradientShift 15s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .grid-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            position: relative;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            color: var(--accent-primary);
+            border-color: var(--accent-primary);
+            transform: translateX(-5px);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 2rem 0 4rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .hero-logo {
+            width: 180px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 30px rgba(34, 165, 89, 0.3));
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.8), rgba(220, 38, 38, 0.8));
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: white;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientText 5s ease infinite;
+            letter-spacing: -0.02em;
+        }
+
+        @keyframes gradientText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-tagline {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 400;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            box-shadow: 0 4px 20px rgba(34, 165, 89, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(34, 165, 89, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text);
+            border-color: var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Vindication Banner */
+        .vindication-banner {
+            background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(245, 158, 11, 0.15));
+            border: 1px solid rgba(234, 179, 8, 0.4);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            margin: 2rem 0 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .vindication-banner .label {
+            font-size: 0.8rem;
+            color: #eab308;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .vindication-banner .title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(34, 165, 89, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 1.5rem;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 2px;
+        }
+
+        .content-text {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: var(--accent-tertiary);
+            font-weight: 500;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+            margin-bottom: 2rem;
+        }
+
+        /* Feature List */
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .feature-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary), #ef4444, #eab308);
+            border-radius: 1px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            border: 3px solid var(--bg);
+            box-shadow: 0 0 0 3px var(--accent-primary);
+        }
+
+        .timeline-item:nth-child(2)::before {
+            background: var(--accent-secondary);
+            box-shadow: 0 0 0 3px var(--accent-secondary);
+        }
+
+        .timeline-item:nth-child(3)::before {
+            background: #ef4444;
+            box-shadow: 0 0 0 3px #ef4444;
+        }
+
+        .timeline-item:nth-child(4)::before {
+            background: #eab308;
+            box-shadow: 0 0 0 3px #eab308;
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item:nth-child(2) .timeline-date { color: var(--accent-secondary); }
+        .timeline-item:nth-child(3) .timeline-date { color: #ef4444; }
+        .timeline-item:nth-child(4) .timeline-date { color: #eab308; }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Product Gallery */
+        .product-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .product-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .product-item:hover {
+            border-color: rgba(34, 165, 89, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .product-item img {
+            max-width: 100%;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+
+        .product-item .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Video Container */
+        .video-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+            margin: 2rem 0;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+        }
+
+        /* Results Pills */
+        .results-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .result-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .result-pill:hover {
+            border-color: var(--accent-primary);
+            color: var(--text);
+        }
+
+        .result-pill .icon {
+            font-size: 1.1rem;
+        }
+
+        /* Role Grid */
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .role-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .role-card:hover {
+            border-color: rgba(34, 165, 89, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .role-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .role-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        /* Resources */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .resource-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--text);
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-4px);
+        }
+
+        .resource-link .icon {
+            font-size: 1.5rem;
+        }
+
+        .resource-link span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .role-grid {
+                grid-template-columns: 1fr;
+            }
+            .product-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 2rem 1.25rem;
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-tagline {
+                font-size: 1.1rem;
+            }
+            .stat-number {
+                font-size: 2rem;
+            }
+            .cta-group {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-gradient"></div>
+    <div class="grid-pattern"></div>
+
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="../index.html" class="back-btn">← Back to Home</a>
+        </nav>
+
+        <!-- Hero Section -->
+        <header class="hero">
+            <img src="assets/ofnature/logo.png" alt="ofNature Logo" class="hero-logo">
+            <div class="status-badge">Ended by War</div>
+            <h1 class="hero-title">ofNature</h1>
+            <p class="hero-tagline">I invented the technology. War destroyed the company. McDonald's adopted it worldwide.</p>
+            
+            <div class="hero-meta">
+                <div class="hero-meta-item">
+                    <span>📅</span>
+                    <span>Dec 2020 — Mar 2022</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span>👤</span>
+                    <span>Co-Founder & CEO</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span>📍</span>
+                    <span>Los Angeles + Ukraine</span>
+                </div>
+            </div>
+
+            <div class="cta-group">
+                <a href="https://drive.google.com/file/d/1UlAwwlZZhV4cDYYZlr-KDF7ZEA_aLR9h/view" target="_blank" class="btn btn-primary">View Pitch Deck →</a>
+                <a href="https://www.crunchbase.com/organization/ofnature" target="_blank" class="btn btn-secondary">Crunchbase</a>
+            </div>
+        </header>
+
+        <!-- Vindication Banner -->
+        <div class="vindication-banner fade-in">
+            <div class="label">🏆 Vindication — January 2025</div>
+            <div class="title">McDonald's adopted acetate cellulose straws worldwide — the exact technology we pioneered.</div>
+        </div>
+
+        <!-- Stats Section -->
+        <section class="stats-section fade-in">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">$150K</div>
+                    <div class="stat-label">Pre-Seed Raised</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$120K</div>
+                    <div class="stat-label">Monthly Output</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1st</div>
+                    <div class="stat-label">To Market</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">🌍</div>
+                    <div class="stat-label">Now Global</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Story -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">The Story</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2019</div>
+                    <div class="timeline-title">The discovery.</div>
+                    <div class="timeline-content">
+                        Working at HAY! Straws (selling straws made from wheat stems), my friend — an inventor — 
+                        came up with something obvious in hindsight: <span class="highlight">acetate cellulose</span>. 
+                        A material already in everyone's kitchen. Machine-made. Standardized. Identical every time. 
+                        Exactly what McDonald's and Starbucks needed but plant-based straws couldn't provide.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Dec 2020</div>
+                    <div class="timeline-title">Founded ofNature.</div>
+                    <div class="timeline-content">
+                        Raised $150K pre-seed. Built a custom manufacturing facility in Ukraine. 
+                        Developed product lines, secured certifications, landed our first commercial contract 
+                        with a coffee chain. Scaled to $120K/month in beta output.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Feb 2022</div>
+                    <div class="timeline-title">Russia invaded Ukraine.</div>
+                    <div class="timeline-content">
+                        Factory. Team. 80% of investment. Gone. I had to tell investors I couldn't return their money. 
+                        They surprised me: "This was a risk. What happened was out of your control."
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Jan 2025</div>
+                    <div class="timeline-title">McDonald's adopted it worldwide.</div>
+                    <div class="timeline-content">
+                        The exact technology we pioneered. Acetate cellulose straws — now in every McDonald's 
+                        on earth. We built something that changed an industry, even if we didn't get to finish it.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Innovation -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">The Innovation</h2>
+            </div>
+            <div class="glass-card">
+                <p class="content-text" style="margin-bottom: 1.5rem;">
+                    <strong>The problem:</strong> Plastic straws got banned worldwide. The alternatives — paper (soggy), 
+                    bamboo (inconsistent), hay (variable) — couldn't scale. QSR chains needed something machine-made, 
+                    standardized, and identical every time.
+                </p>
+                <p class="content-text" style="margin-bottom: 0;">
+                    <strong>The insight:</strong> Acetate cellulose was already everywhere — the material in your kitchen 
+                    right now. But nobody had thought to use it for disposable straws. It could be mass-produced with 
+                    existing manufacturing techniques. Same quality every time. Compostable. And it actually worked.
+                </p>
+            </div>
+        </section>
+
+        <!-- Product Gallery -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Products</h2>
+            </div>
+            <div class="product-gallery">
+                <div class="product-item">
+                    <img src="assets/ofnature/5001.png" alt="500 unit box">
+                    <div class="label">500 Units</div>
+                </div>
+                <div class="product-item">
+                    <img src="assets/ofnature/25001.png" alt="2500 unit box">
+                    <div class="label">2,500 Units</div>
+                </div>
+                <div class="product-item">
+                    <img src="assets/ofnature/100001.png" alt="10000 unit box">
+                    <div class="label">10,000 Units</div>
+                </div>
+                <div class="product-item">
+                    <img src="assets/ofnature/lids.png" alt="Lids">
+                    <div class="label">Lids</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Demo -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">In Action</h2>
+            </div>
+            <div class="video-wrapper">
+                <video controls playsinline>
+                    <source src="assets/ofnature/video1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <!-- What I Built -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">What I Built</h2>
+            </div>
+            <div class="role-grid">
+                <div class="role-card">
+                    <h3><span class="role-icon">🏭</span> Manufacturing</h3>
+                    <ul class="feature-list">
+                        <li>Built custom beta manufacturing facility in Ukraine</li>
+                        <li>Developed production processes from scratch</li>
+                        <li>Scaled to $120K/month output capacity</li>
+                        <li>Managed international supply chain</li>
+                    </ul>
+                </div>
+                <div class="role-card">
+                    <h3><span class="role-icon">📋</span> Certification</h3>
+                    <ul class="feature-list">
+                        <li>Secured food-safety certifications</li>
+                        <li>Filed patents for manufacturing process</li>
+                        <li>Registered trademarks</li>
+                        <li>Met compliance for US/EU markets</li>
+                    </ul>
+                </div>
+                <div class="role-card">
+                    <h3><span class="role-icon">💰</span> Fundraising</h3>
+                    <ul class="feature-list">
+                        <li>Raised $150K pre-seed (found investors 3x, lost them 3x before closing)</li>
+                        <li>Built investor materials and pitch deck</li>
+                        <li>Managed cap table and legal</li>
+                        <li>Navigated complex investor relations post-war</li>
+                    </ul>
+                </div>
+                <div class="role-card">
+                    <h3><span class="role-icon">🎯</span> GTM & Sales</h3>
+                    <ul class="feature-list">
+                        <li>Landed first commercial contract with coffee chain</li>
+                        <li>Developed B2B sales strategy for QSR segment</li>
+                        <li>Created brand identity and packaging design</li>
+                        <li>Built product line and pricing structure</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Results</h2>
+            </div>
+            <div class="results-grid">
+                <div class="result-pill"><span class="icon">💰</span> $150K pre-seed raised</div>
+                <div class="result-pill"><span class="icon">🏭</span> Manufacturing facility built</div>
+                <div class="result-pill"><span class="icon">📈</span> $120K/month beta output</div>
+                <div class="result-pill"><span class="icon">📄</span> Patents filed</div>
+                <div class="result-pill"><span class="icon">☕</span> First commercial contract signed</div>
+                <div class="result-pill"><span class="icon">🍟</span> Technology adopted by McDonald's</div>
+            </div>
+        </section>
+
+        <!-- What I Learned -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">What I Learned</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="feature-list">
+                    <li>The best innovations are often obvious in hindsight — acetate cellulose was everywhere</li>
+                    <li>Hardware is brutal: manufacturing, certification, supply chain all have to work simultaneously</li>
+                    <li>Geopolitical risk is real — we built everything in Ukraine 2 years before the invasion</li>
+                    <li>Good investors understand risk: "What happened was out of your control"</li>
+                    <li>You can be first and still not win — but the idea lives on</li>
+                    <li>Resilience means promising to make it right, then actually building something new</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Resources -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Resources</h2>
+            </div>
+            <div class="resources-grid">
+                <a href="https://drive.google.com/file/d/1UlAwwlZZhV4cDYYZlr-KDF7ZEA_aLR9h/view" target="_blank" class="resource-link">
+                    <span class="icon">📊</span>
+                    <span>Pitch Deck</span>
+                </a>
+                <a href="https://www.crunchbase.com/organization/ofnature" target="_blank" class="resource-link">
+                    <span class="icon">💼</span>
+                    <span>Crunchbase</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <a href="../index.html" class="back-btn">← Back to Home</a>
+        </footer>
+    </div>
+
+    <script>
+        // Scroll Animations
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(el => observer.observe(el));
+        }
+
+        document.addEventListener('DOMContentLoaded', handleScrollAnimations);
+    </script>
+</body>
+
+</html>
