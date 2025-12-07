@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ÆOESS — Tymofii Pidlisnyi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +46,7 @@
             right: 0;
             bottom: 0;
             z-index: -1;
-            background: 
+            background:
                 radial-gradient(ellipse 80% 50% at 20% -20%, rgba(6, 182, 212, 0.15), transparent),
                 radial-gradient(ellipse 60% 40% at 80% 0%, rgba(34, 211, 238, 0.12), transparent),
                 radial-gradient(ellipse 50% 30% at 50% 100%, rgba(103, 232, 249, 0.08), transparent);
@@ -52,8 +54,15 @@
         }
 
         @keyframes gradientShift {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
         }
 
         .grid-pattern {
@@ -63,9 +72,9 @@
             right: 0;
             bottom: 0;
             z-index: -1;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
             background-size: 60px 60px;
         }
 
@@ -420,7 +429,7 @@
             left: 0;
             right: 0;
             padding: 1rem;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
             font-size: 0.85rem;
             color: white;
         }
@@ -728,7 +737,7 @@
 
         <!-- Hero -->
         <section class="hero fade-in">
-            <img src="assets/aeoess/logo.png" alt="ÆOESS" class="hero-logo">
+            <img src="../assets/aeoess/aeoess_logo-05.png" alt="ÆOESS" class="hero-logo">
             <div class="status-badge">Hardware R&D · On Hold</div>
             <h1 class="hero-title">ÆOESS</h1>
             <p class="hero-tagline">An IoT breath-training wearable with AI coaching — the Peloton for breathing.</p>
@@ -737,7 +746,8 @@
         <!-- Vision Banner -->
         <div class="vision-banner fade-in">
             <div class="label">💨 The Core Insight</div>
-            <div class="tagline">"Breathing is the only autonomic function humans can consciously control — training it changes everything."</div>
+            <div class="tagline">"Breathing is the only autonomic function humans can consciously control — training it
+                changes everything."</div>
         </div>
 
         <!-- Stats -->
@@ -796,16 +806,22 @@
             </div>
             <div class="glass-card">
                 <p class="content-text">
-                    ÆOESS isn't a meditation app in hardware form. It's <span class="highlight">physical, measurable, repeatable performance training</span> — 
-                    treating breath the way a gym treats muscles. The diaphragm is muscle tissue. It responds to progressive resistance.
+                    ÆOESS isn't a meditation app in hardware form. It's <span class="highlight">physical, measurable,
+                        repeatable performance training</span> —
+                    treating breath the way a gym treats muscles. The diaphragm is muscle tissue. It responds to
+                    progressive resistance.
                 </p>
                 <p class="content-text">
-                    The device creates calibrated resistance during inhalation and exhalation. Sensors capture airflow patterns. 
-                    The AI coach interprets patterns, detects dysfunction, and guides users through personalized training cycles.
+                    The device creates calibrated resistance during inhalation and exhalation. Sensors capture airflow
+                    patterns.
+                    The AI coach interprets patterns, detects dysfunction, and guides users through personalized
+                    training cycles.
                 </p>
                 <p class="content-text">
-                    Long-term vision: An always-on companion that understands your physiological state — stress patterns, 
-                    emotional regulation, performance readiness — and helps you consciously control what was previously unconscious.
+                    Long-term vision: An always-on companion that understands your physiological state — stress
+                    patterns,
+                    emotional regulation, performance readiness — and helps you consciously control what was previously
+                    unconscious.
                 </p>
             </div>
 
@@ -820,35 +836,35 @@
                 <h2 class="section-title">Hardware Development</h2>
             </div>
             <p class="content-text">
-                The journey from concept to working prototype involved multiple iterations of mouthpiece geometry, 
-                sensor integration, and electronics design. Each version taught something new about airflow dynamics, 
+                The journey from concept to working prototype involved multiple iterations of mouthpiece geometry,
+                sensor integration, and electronics design. Each version taught something new about airflow dynamics,
                 user comfort, and data capture accuracy.
             </p>
 
             <h3 style="font-size: 1.3rem; margin: 2rem 0 1rem;">MVP Prototypes</h3>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="assets/aeoess/mvp2.jpg" alt="MVP Prototype v2">
+                    <img src="../assets/aeoess/mvp2.jpg" alt="MVP Prototype v2">
                     <div class="caption">MVP v2 — Core assembly</div>
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/aeoess/iteration3.jpg" alt="Iteration 3">
+                    <img src="../assets/aeoess/iteration3.jpg" alt="Iteration 3">
                     <div class="caption">Form factor iteration</div>
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/aeoess/iteration7.jpg" alt="Iteration 7">
+                    <img src="../assets/aeoess/iteration4.jpg" alt="Iteration 4">
                     <div class="caption">Refined mouthpiece design</div>
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/aeoess/electronics3.jpg" alt="Electronics v3">
+                    <img src="../assets/aeoess/electronics3.jpg" alt="Electronics v3">
                     <div class="caption">Sensor + MCU integration</div>
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/aeoess/electronics4.jpg" alt="Electronics v4">
+                    <img src="../assets/aeoess/electronics4.jpg" alt="Electronics v4">
                     <div class="caption">Compact electronics layout</div>
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/aeoess/mvp5.jpg" alt="MVP v5">
+                    <img src="../assets/aeoess/mvp5.jpg" alt="MVP v5">
                     <div class="caption">Late-stage prototype</div>
                 </div>
             </div>
@@ -881,35 +897,36 @@
                 <h2 class="section-title">Industrial Design</h2>
             </div>
             <p class="content-text">
-                Beyond function, the device needed to feel premium and intentional — something people would want to use daily. 
-                Worked with industrial designers to explore 19 different design directions, balancing aesthetics with 
+                Beyond function, the device needed to feel premium and intentional — something people would want to use
+                daily.
+                Worked with industrial designers to explore 19 different design directions, balancing aesthetics with
                 manufacturability and user experience.
             </p>
 
             <div class="renders-grid">
                 <div class="render-card">
-                    <img src="assets/aeoess/render-1.png" alt="Design Render 1">
+                    <img src="../assets/aeoess/1.1.png" alt="Design Render 1">
                     <div class="info">
                         <h4>Concept A — Minimal</h4>
                         <p>Clean lines, medical aesthetic</p>
                     </div>
                 </div>
                 <div class="render-card">
-                    <img src="assets/aeoess/render-2.png" alt="Design Render 2">
+                    <img src="../assets/aeoess/1.5.png" alt="Design Render 2">
                     <div class="info">
                         <h4>Concept B — Organic</h4>
                         <p>Curved forms, softer appeal</p>
                     </div>
                 </div>
                 <div class="render-card">
-                    <img src="assets/aeoess/render-3.png" alt="Design Render 3">
+                    <img src="../assets/aeoess/1.10.png" alt="Design Render 3">
                     <div class="info">
                         <h4>Concept C — Technical</h4>
                         <p>Visible internals, tech-forward</p>
                     </div>
                 </div>
                 <div class="render-card">
-                    <img src="assets/aeoess/render-4.png" alt="Design Render 4">
+                    <img src="../assets/aeoess/1.15.png" alt="Design Render 4">
                     <div class="info">
                         <h4>Concept D — Premium</h4>
                         <p>Material contrasts, high-end feel</p>
@@ -925,7 +942,7 @@
             </div>
             <div class="glass-card">
                 <p class="content-text">
-                    Hardware alone isn't enough. People need guidance, motivation, feedback, and personalization. 
+                    Hardware alone isn't enough. People need guidance, motivation, feedback, and personalization.
                     The AI layer transforms raw sensor data into actionable coaching.
                 </p>
 
@@ -970,7 +987,7 @@
                 <h2 class="section-title">Research Foundation</h2>
             </div>
             <p class="content-text">
-                The project was grounded in respiratory physiology research, sensor technology literature, and 
+                The project was grounded in respiratory physiology research, sensor technology literature, and
                 clinical studies on breath training outcomes. Key areas of investigation included:
             </p>
             <div class="results-grid">
@@ -993,15 +1010,16 @@
                     <div class="timeline-date">Month 1-2</div>
                     <div class="timeline-title">Concept & Research</div>
                     <div class="timeline-content">
-                        Explored resistance breathing mechanics. Researched sensor options, 
-                        airflow measurement techniques, and competitive landscape. Established core hypothesis and product vision.
+                        Explored resistance breathing mechanics. Researched sensor options,
+                        airflow measurement techniques, and competitive landscape. Established core hypothesis and
+                        product vision.
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">Month 2-3</div>
                     <div class="timeline-title">Prototyping</div>
                     <div class="timeline-content">
-                        Built early MVP hardware with pressure sensing. Tested mouthpiece geometries. 
+                        Built early MVP hardware with pressure sensing. Tested mouthpiece geometries.
                         Integrated sensors with microcontroller. Started brand identity.
                     </div>
                 </div>
@@ -1009,7 +1027,7 @@
                     <div class="timeline-date">Month 4-5</div>
                     <div class="timeline-title">Electronics & App Architecture</div>
                     <div class="timeline-content">
-                        Developed BLE communication protocol. Designed app architecture and data pipeline. 
+                        Developed BLE communication protocol. Designed app architecture and data pipeline.
                         Built breathing pattern analysis logic.
                     </div>
                 </div>
@@ -1017,7 +1035,7 @@
                     <div class="timeline-date">Month 5-6</div>
                     <div class="timeline-title">Industrial Design & Pitch</div>
                     <div class="timeline-content">
-                        Commissioned professional 3D renders — 19 design directions explored. 
+                        Commissioned professional 3D renders — 19 design directions explored.
                         Created pitch deck. Refined positioning. Project paused to focus on Evatar.ai.
                     </div>
                 </div>
@@ -1064,7 +1082,8 @@
                 <h2 class="section-title">Resources</h2>
             </div>
             <div class="resources-grid">
-                <a href="https://drive.google.com/file/d/YOUR_AEOESS_DECK_ID/view" target="_blank" class="resource-link">📄 Pitch Deck</a>
+                <a href="https://drive.google.com/file/d/YOUR_AEOESS_DECK_ID/view" target="_blank"
+                    class="resource-link">📄 Pitch Deck</a>
                 <a href="https://aeoess.com" target="_blank" class="resource-link">🌐 aeoess.com</a>
             </div>
         </section>
@@ -1076,8 +1095,8 @@
             </div>
             <div class="glass-card">
                 <p class="content-text">
-                    This was my first hardware product — taking an idea from napkin sketch to working prototype, 
-                    industrial design renders, and investor-ready pitch. Even though it never reached market, 
+                    This was my first hardware product — taking an idea from napkin sketch to working prototype,
+                    industrial design renders, and investor-ready pitch. Even though it never reached market,
                     the experience was invaluable:
                 </p>
                 <ul class="feature-list">

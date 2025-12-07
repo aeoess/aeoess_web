@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ofNature — Tymofii Pidlisnyi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,7 +46,7 @@
             right: 0;
             bottom: 0;
             z-index: -1;
-            background: 
+            background:
                 radial-gradient(ellipse 80% 50% at 20% -20%, rgba(34, 165, 89, 0.15), transparent),
                 radial-gradient(ellipse 60% 40% at 80% 0%, rgba(16, 185, 129, 0.12), transparent),
                 radial-gradient(ellipse 50% 30% at 50% 100%, rgba(52, 211, 153, 0.08), transparent);
@@ -52,8 +54,15 @@
         }
 
         @keyframes gradientShift {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
         }
 
         .grid-pattern {
@@ -63,9 +72,9 @@
             right: 0;
             bottom: 0;
             z-index: -1;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
             background-size: 60px 60px;
         }
 
@@ -158,8 +167,15 @@
         }
 
         @keyframes gradientText {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
         }
 
         .hero-tagline {
@@ -452,9 +468,17 @@
             margin-bottom: 0.5rem;
         }
 
-        .timeline-item:nth-child(2) .timeline-date { color: var(--accent-secondary); }
-        .timeline-item:nth-child(3) .timeline-date { color: #ef4444; }
-        .timeline-item:nth-child(4) .timeline-date { color: #eab308; }
+        .timeline-item:nth-child(2) .timeline-date {
+            color: var(--accent-secondary);
+        }
+
+        .timeline-item:nth-child(3) .timeline-date {
+            color: #ef4444;
+        }
+
+        .timeline-item:nth-child(4) .timeline-date {
+            color: #eab308;
+        }
 
         .timeline-title {
             font-size: 1.2rem;
@@ -641,9 +665,11 @@
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
             .role-grid {
                 grid-template-columns: 1fr;
             }
+
             .product-gallery {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -653,22 +679,28 @@
             .container {
                 padding: 2rem 1.25rem;
             }
+
             .hero-title {
                 font-size: 2.5rem;
             }
+
             .hero-tagline {
                 font-size: 1.1rem;
             }
+
             .stat-number {
                 font-size: 2rem;
             }
+
             .cta-group {
                 flex-direction: column;
             }
+
             .btn {
                 width: 100%;
                 justify-content: center;
             }
+
             .resources-grid {
                 grid-template-columns: 1fr;
             }
@@ -700,11 +732,12 @@
 
         <!-- Hero Section -->
         <header class="hero">
-            <img src="assets/ofnature/logo.png" alt="ofNature Logo" class="hero-logo">
+            <img src="assets/ofnature/OFNATURE LOGO.PNG" alt="ofNature Logo" class="hero-logo">
             <div class="status-badge">Ended by War</div>
             <h1 class="hero-title">ofNature</h1>
-            <p class="hero-tagline">I invented the technology. War destroyed the company. McDonald's adopted it worldwide.</p>
-            
+            <p class="hero-tagline">I invented the technology. War destroyed the company. McDonald's adopted it
+                worldwide.</p>
+
             <div class="hero-meta">
                 <div class="hero-meta-item">
                     <span>📅</span>
@@ -721,15 +754,18 @@
             </div>
 
             <div class="cta-group">
-                <a href="https://drive.google.com/file/d/1UlAwwlZZhV4cDYYZlr-KDF7ZEA_aLR9h/view" target="_blank" class="btn btn-primary">View Pitch Deck →</a>
-                <a href="https://www.crunchbase.com/organization/ofnature" target="_blank" class="btn btn-secondary">Crunchbase</a>
+                <a href="https://drive.google.com/file/d/1UlAwwlZZhV4cDYYZlr-KDF7ZEA_aLR9h/view" target="_blank"
+                    class="btn btn-primary">View Pitch Deck →</a>
+                <a href="https://www.crunchbase.com/organization/ofnature" target="_blank"
+                    class="btn btn-secondary">Crunchbase</a>
             </div>
         </header>
 
         <!-- Vindication Banner -->
         <div class="vindication-banner fade-in">
             <div class="label">🏆 Vindication — January 2025</div>
-            <div class="title">McDonald's adopted acetate cellulose straws worldwide — the exact technology we pioneered.</div>
+            <div class="title">McDonald's adopted acetate cellulose straws worldwide — the exact technology we
+                pioneered.</div>
         </div>
 
         <!-- Stats Section -->
@@ -764,9 +800,9 @@
                     <div class="timeline-date">2019</div>
                     <div class="timeline-title">The discovery.</div>
                     <div class="timeline-content">
-                        Working at HAY! Straws (selling straws made from wheat stems), my friend — an inventor — 
-                        came up with something obvious in hindsight: <span class="highlight">acetate cellulose</span>. 
-                        A material already in everyone's kitchen. Machine-made. Standardized. Identical every time. 
+                        Working at HAY! Straws (selling straws made from wheat stems), my friend — an inventor —
+                        came up with something obvious in hindsight: <span class="highlight">acetate cellulose</span>.
+                        A material already in everyone's kitchen. Machine-made. Standardized. Identical every time.
                         Exactly what McDonald's and Starbucks needed but plant-based straws couldn't provide.
                     </div>
                 </div>
@@ -774,8 +810,8 @@
                     <div class="timeline-date">Dec 2020</div>
                     <div class="timeline-title">Founded ofNature.</div>
                     <div class="timeline-content">
-                        Raised $150K pre-seed. Built a custom manufacturing facility in Ukraine. 
-                        Developed product lines, secured certifications, landed our first commercial contract 
+                        Raised $150K pre-seed. Built a custom manufacturing facility in Ukraine.
+                        Developed product lines, secured certifications, landed our first commercial contract
                         with a coffee chain. Scaled to $120K/month in beta output.
                     </div>
                 </div>
@@ -783,7 +819,7 @@
                     <div class="timeline-date">Feb 2022</div>
                     <div class="timeline-title">Russia invaded Ukraine.</div>
                     <div class="timeline-content">
-                        Factory. Team. 80% of investment. Gone. I had to tell investors I couldn't return their money. 
+                        Factory. Team. 80% of investment. Gone. I had to tell investors I couldn't return their money.
                         They surprised me: "This was a risk. What happened was out of your control."
                     </div>
                 </div>
@@ -791,7 +827,7 @@
                     <div class="timeline-date">Jan 2025</div>
                     <div class="timeline-title">McDonald's adopted it worldwide.</div>
                     <div class="timeline-content">
-                        The exact technology we pioneered. Acetate cellulose straws — now in every McDonald's 
+                        The exact technology we pioneered. Acetate cellulose straws — now in every McDonald's
                         on earth. We built something that changed an industry, even if we didn't get to finish it.
                     </div>
                 </div>
@@ -805,13 +841,14 @@
             </div>
             <div class="glass-card">
                 <p class="content-text" style="margin-bottom: 1.5rem;">
-                    <strong>The problem:</strong> Plastic straws got banned worldwide. The alternatives — paper (soggy), 
-                    bamboo (inconsistent), hay (variable) — couldn't scale. QSR chains needed something machine-made, 
+                    <strong>The problem:</strong> Plastic straws got banned worldwide. The alternatives — paper (soggy),
+                    bamboo (inconsistent), hay (variable) — couldn't scale. QSR chains needed something machine-made,
                     standardized, and identical every time.
                 </p>
                 <p class="content-text" style="margin-bottom: 0;">
-                    <strong>The insight:</strong> Acetate cellulose was already everywhere — the material in your kitchen 
-                    right now. But nobody had thought to use it for disposable straws. It could be mass-produced with 
+                    <strong>The insight:</strong> Acetate cellulose was already everywhere — the material in your
+                    kitchen
+                    right now. But nobody had thought to use it for disposable straws. It could be mass-produced with
                     existing manufacturing techniques. Same quality every time. Compostable. And it actually worked.
                 </p>
             </div>
@@ -836,7 +873,7 @@
                     <div class="label">10,000 Units</div>
                 </div>
                 <div class="product-item">
-                    <img src="assets/ofnature/lids.png" alt="Lids">
+                    <img src="assets/ofnature/lidsDONE31.png" alt="Lids">
                     <div class="label">Lids</div>
                 </div>
             </div>
@@ -849,7 +886,7 @@
             </div>
             <div class="video-wrapper">
                 <video controls playsinline>
-                    <source src="assets/ofnature/video1.mp4" type="video/mp4">
+                    <source src="assets/ofnature/1637946883965355.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
@@ -923,7 +960,8 @@
             <div class="glass-card">
                 <ul class="feature-list">
                     <li>The best innovations are often obvious in hindsight — acetate cellulose was everywhere</li>
-                    <li>Hardware is brutal: manufacturing, certification, supply chain all have to work simultaneously</li>
+                    <li>Hardware is brutal: manufacturing, certification, supply chain all have to work simultaneously
+                    </li>
                     <li>Geopolitical risk is real — we built everything in Ukraine 2 years before the invasion</li>
                     <li>Good investors understand risk: "What happened was out of your control"</li>
                     <li>You can be first and still not win — but the idea lives on</li>
@@ -938,7 +976,8 @@
                 <h2 class="section-title">Resources</h2>
             </div>
             <div class="resources-grid">
-                <a href="https://drive.google.com/file/d/1UlAwwlZZhV4cDYYZlr-KDF7ZEA_aLR9h/view" target="_blank" class="resource-link">
+                <a href="https://drive.google.com/file/d/1UlAwwlZZhV4cDYYZlr-KDF7ZEA_aLR9h/view" target="_blank"
+                    class="resource-link">
                     <span class="icon">📊</span>
                     <span>Pitch Deck</span>
                 </a>
@@ -959,7 +998,7 @@
         // Scroll Animations
         function handleScrollAnimations() {
             const elements = document.querySelectorAll('.fade-in');
-            
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
