@@ -1,759 +1,1006 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Work History — Tymofii Pidlisnyi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
-            --bg: #0F0E0D;
-            --bg-secondary: #1A1715;
-            --text: #F5F3F0;
-            --text-muted: #8B9199;
-            --border: #262320;
-            --accent-cyan: #5DADE2;
-            --accent-yellow: #F4D03F;
+            /* Deep Emerald/Teal Light Theme */
+            --bg-primary: #f6faf9;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #ecf5f3;
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --text-primary: #0f1f1c;
+            --text-secondary: #3d5a54;
+            --text-muted: #6b8f86;
+            --accent-primary: #059669;
+            --accent-secondary: #10b981;
+            --accent-tertiary: #34d399;
+            --accent-light: #d1fae5;
+            --accent-gradient: linear-gradient(135deg, #047857 0%, #059669 50%, #10b981 100%);
+            --accent-glow: rgba(5, 150, 105, 0.15);
+            --border-color: #d1e7e2;
+            --shadow-sm: 0 1px 2px rgba(15, 31, 28, 0.04);
+            --shadow-md: 0 4px 6px -1px rgba(15, 31, 28, 0.06), 0 2px 4px -1px rgba(15, 31, 28, 0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(15, 31, 28, 0.08), 0 4px 6px -2px rgba(15, 31, 28, 0.04);
+            --shadow-xl: 0 20px 25px -5px rgba(15, 31, 28, 0.1), 0 10px 10px -5px rgba(15, 31, 28, 0.04);
+            --glass-bg: rgba(246, 250, 249, 0.8);
+            --glass-border: rgba(209, 231, 226, 0.5);
         }
 
-        [data-theme="bright"] {
-            --bg: #FDFCFA;
-            --bg-secondary: #F9F7F4;
-            --text: #2B2622;
-            --text-muted: #6B7280;
-            --border: #E8E4DF;
-            --accent-cyan: #3498DB;
-            --accent-yellow: #B8E6D5;
+        [data-theme="dark"] {
+            --bg-primary: #0f1f1c;
+            --bg-secondary: #162925;
+            --bg-tertiary: #1e3830;
+            --bg-card: rgba(22, 41, 37, 0.85);
+            --text-primary: #f0fdf9;
+            --text-secondary: #a7d7cd;
+            --text-muted: #5f9a8c;
+            --accent-primary: #10b981;
+            --accent-secondary: #34d399;
+            --accent-tertiary: #6ee7b7;
+            --accent-light: rgba(16, 185, 129, 0.15);
+            --accent-glow: rgba(16, 185, 129, 0.2);
+            --border-color: #2a4a42;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            --glass-bg: rgba(15, 31, 28, 0.8);
+            --glass-border: rgba(42, 74, 66, 0.5);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        
         body {
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            transition: background-color 0.5s ease, color 0.5s ease;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        /* Theme Toggle */
-        .theme-toggle {
+        /* Animated Background */
+        .bg-pattern {
             position: fixed;
-            top: 2rem;
-            right: 2rem;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            animation: float 25s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 700px;
+            height: 700px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            top: -300px;
+            right: -200px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #047857, #065f46);
+            bottom: -150px;
+            left: -150px;
+            animation-delay: -8s;
+        }
+
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(135deg, var(--accent-tertiary), #a7f3d0);
+            top: 40%;
+            left: 30%;
+            animation-delay: -16s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(40px, -40px) scale(1.05) rotate(5deg); }
+            50% { transform: translate(-30px, 30px) scale(0.95) rotate(-5deg); }
+            75% { transform: translate(-40px, -25px) scale(1.02) rotate(3deg); }
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--accent-gradient);
             z-index: 1001;
-            width: 60px;
-            height: 30px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 30px;
+            transition: width 0.1s ease;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .back-link:hover {
+            color: var(--accent-primary);
+            background: var(--accent-light);
+        }
+
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 100px;
+            padding: 0.5rem;
             cursor: pointer;
-            padding: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
             transition: all 0.3s ease;
         }
 
         .theme-toggle:hover {
-            border-color: var(--accent-cyan);
+            border-color: var(--accent-primary);
+            transform: scale(1.05);
         }
 
-        .theme-toggle-slider {
-            width: 24px;
-            height: 24px;
-            background: var(--accent-cyan);
-            border-radius: 50%;
-            transition: transform 0.3s ease;
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: var(--text-primary);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        [data-theme="light"] .moon-icon { display: block; }
+        [data-theme="light"] .sun-icon { display: none; }
+        [data-theme="dark"] .moon-icon { display: none; }
+        [data-theme="dark"] .sun-icon { display: block; }
+
+        /* Hero */
+        .hero {
+            padding: 9rem 2rem 5rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            opacity: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.75rem, 7vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-pill {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 100px;
+            padding: 0.85rem 1.75rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 12px;
-        }
-
-        [data-theme="bright"] .theme-toggle-slider {
-            transform: translateX(30px);
-            background: var(--accent-yellow);
-        }
-
-        /* Back Button */
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            margin-bottom: 3rem;
+            gap: 0.6rem;
+            font-size: 0.95rem;
+            box-shadow: var(--shadow-md);
             transition: all 0.3s ease;
         }
 
-        .back-btn:hover {
-            color: var(--accent-cyan);
-            transform: translateX(-5px);
+        .stat-pill:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-primary);
         }
 
-        /* Page Header */
-        .page-header {
-            text-align: center;
-            margin-bottom: 5rem;
+        .stat-pill strong {
+            color: var(--accent-primary);
+            font-weight: 700;
+            font-size: 1.1rem;
         }
 
-        .page-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .page-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.7;
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 3rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-yellow));
-            opacity: 0.5;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 5rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2.5rem;
-            transition: all 0.4s ease;
-        }
-
-        .timeline-item:hover {
-            transform: translateX(10px);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 10px 40px rgba(93, 173, 226, 0.15);
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -3.4rem;
-            top: 2.5rem;
-            width: 14px;
-            height: 14px;
-            background: var(--accent-cyan);
-            border-radius: 50%;
-            border: 3px solid var(--bg);
-            box-shadow: 0 0 20px rgba(93, 173, 226, 0.5);
-        }
-
-        .timeline-date {
+        .stat-pill .small {
             font-size: 0.85rem;
             color: var(--text-muted);
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        /* Section Styling */
+        .main-content section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .main-content section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-primary);
             text-transform: uppercase;
-        }
-
-        .timeline-company-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+            letter-spacing: 0.15em;
             margin-bottom: 0.5rem;
+            display: block;
         }
 
-        .company-logo {
-            width: 50px;
-            height: 50px;
-            object-fit: contain;
-            background: white;
-            padding: 5px;
-            border-radius: 10px;
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
         }
 
-        .timeline-company {
-            font-size: 1.8rem;
-            font-weight: 500;
+        .section-description {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 650px;
         }
 
-        .timeline-company a {
-            color: var(--text);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .timeline-company a:hover {
-            color: var(--accent-cyan);
-        }
-
-        .timeline-company-note {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            font-weight: 400;
-            font-style: italic;
-        }
-
-        .timeline-role {
-            font-size: 1.1rem;
-            color: var(--text);
+        /* Job Cards */
+        .job-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
             margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-
-        .timeline-description {
-            color: var(--text-muted);
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .timeline-bullets {
-            list-style: none;
-            margin: 1.5rem 0;
-        }
-
-        .timeline-bullets li {
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
             position: relative;
-            padding-left: 2rem;
+            overflow: hidden;
+        }
+
+        .job-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .job-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--accent-primary);
+        }
+
+        .job-card:hover::before {
+            opacity: 1;
+        }
+
+        .job-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
             margin-bottom: 1rem;
-            color: var(--text-muted);
-            font-family: 'Inter', sans-serif;
+            flex-wrap: wrap;
+        }
+
+        .job-title-group h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .job-title-group h3 a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .job-title-group h3 a:hover {
+            color: var(--accent-primary);
+        }
+
+        .job-role {
+            color: var(--text-secondary);
             font-size: 0.95rem;
+        }
+
+        .job-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            font-size: 1rem;
             line-height: 1.7;
         }
 
-        .timeline-bullets li::before {
+        .job-highlights {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .job-highlights li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.6rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .job-highlights li::before {
             content: '→';
             position: absolute;
             left: 0;
-            color: var(--accent-cyan);
-            font-weight: bold;
+            color: var(--accent-primary);
+            font-weight: 600;
         }
 
-        .timeline-links {
+        .job-links {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border);
         }
 
-        .timeline-link {
-            padding: 0.6rem 1.2rem;
-            background: var(--bg);
-            border: 1px solid var(--border);
+        .job-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
+            color: var(--text-primary);
             text-decoration: none;
-            color: var(--text);
             font-size: 0.85rem;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-link:hover {
-            border-color: var(--accent-cyan);
-            transform: translateY(-2px);
-        }
-
-        .timeline-link.primary {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-yellow));
-            border: none;
-            color: var(--bg);
             font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .job-link:hover {
+            background: var(--accent-light);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .job-link.primary {
+            background: var(--accent-gradient);
+            border-color: transparent;
+            color: white;
+        }
+
+        .job-link.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--accent-glow);
         }
 
         /* Skills Section */
-        .skills-section {
-            margin-top: 5rem;
-            padding-top: 3rem;
-            border-top: 2px solid var(--border);
+        .skills-intro {
+            background: linear-gradient(135deg, var(--accent-light) 0%, rgba(5, 150, 105, 0.08) 100%);
+            border: 1px solid var(--accent-primary);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .skills-intro strong {
+            color: var(--text-primary);
+        }
+
+        .skills-intro em {
+            color: var(--accent-primary);
+            font-style: normal;
+            font-weight: 600;
         }
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
 
-        .skill-category {
+        .skill-card {
             background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.75rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
         }
 
-        .skill-category h3 {
-            font-size: 1.2rem;
+        .skill-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-primary);
+        }
+
+        .skill-card h4 {
+            font-size: 1.1rem;
             margin-bottom: 1rem;
-            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .skill-category ul {
+        .skill-card ul {
             list-style: none;
         }
 
-        .skill-category li {
-            padding: 0.5rem 0;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
+        .skill-card li {
+            padding: 0.4rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        /* Responsive */
+        .skill-card li:last-child {
+            border-bottom: none;
+        }
+
+        /* Education */
+        .edu-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .edu-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-primary);
+        }
+
+        .edu-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .edu-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .edu-meta {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .edu-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+        }
+
+        footer a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile */
         @media (max-width: 768px) {
-            .container {
-                padding: 2rem 1.5rem;
-            }
-
-            .timeline {
-                padding-left: 2rem;
-            }
-
-            .timeline-item {
-                padding: 1.5rem;
-            }
-
-            .timeline-company {
-                font-size: 1.4rem;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
+            .hero { padding: 7rem 1.5rem 3rem; }
+            .stats-row { gap: 1rem; }
+            .stat-pill { padding: 0.6rem 1rem; font-size: 0.85rem; }
+            .main-content { padding: 0 1.5rem 3rem; }
+            .job-card { padding: 1.5rem; }
+            .job-header { flex-direction: column; }
+            .nav { padding: 1rem 1.5rem; }
         }
     </style>
 </head>
-<body data-theme="dark">
-    <!-- Theme Toggle -->
-    <div class="theme-toggle" onclick="toggleTheme()">
-        <div class="theme-toggle-slider">
-            <span id="theme-icon">🌙</span>
-        </div>
+<body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <div class="bg-pattern">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
     </div>
 
-    <div class="container">
-        <a href="../index.html" class="back-btn">← Back to Home</a>
+    <nav class="nav">
+        <a href="../index.html" class="back-link">← Back to Home</a>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <svg class="sun-icon" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24">
+                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+        </button>
+    </nav>
 
-        <!-- Page Header -->
-        <div class="page-header">
-            <h1 class="page-title">Work History</h1>
-            <p class="page-subtitle">
-                5+ years building zero-to-one products across AI, SaaS, e-commerce, and CPG. 
-                From scaling startups to founding companies, here's the complete journey.
-            </p>
+    <section class="hero">
+        <h1>Work History</h1>
+        <p class="hero-subtitle">
+            5+ years building zero-to-one products across AI, SaaS, e-commerce, and CPG.
+            From scaling startups to founding companies, here's the complete journey.
+        </p>
+        <div class="stats-row">
+            <div class="stat-pill"><strong>5+</strong> Years Building Zero-to-One</div>
+            <div class="stat-pill"><strong>3</strong> Companies Founded</div>
+            <div class="stat-pill"><strong>Full-Stack</strong> <span class="small">Product · Ops · Sales · Growth</span></div>
         </div>
+    </section>
 
-        <!-- Timeline -->
-        <div class="timeline">
-            <!-- Evatar.ai -->
-            <div class="timeline-item">
-                <div class="timeline-date">MAY 2024 — PRESENT</div>
-                <div class="timeline-company-wrapper">
-                    <div class="company-logo" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
-                    <div class="timeline-company"><a href="evatar.html">Evatar.ai</a></div>
-                </div>
-                <div class="timeline-role">Founder & CEO • Los Angeles, CA</div>
-                <p class="timeline-description">
-                   Launched agentic GenAI platform that autonomously creates and posts social media content and avatar-led UGC for startups and SMBs.
-                </p>
-                <ul class="timeline-bullets">
-                    <li>Acquired 121 beta users and reached 400K+ weekly views through organic, product-led growth with zero ad spend</li>
-                    <li>Owned roadmap from ideation to beta launch; shipped MVP in 16 weeks; stack: Java 21/Spring Boot 3.3, PostgreSQL, MongoDB (AWS-hosted), Flutter (mobile/web) and Next.js (web)</li>
-                    <li>Defined user stories, PRDs and backlog; led 8-person cross-functional team (engineering, design, GTM) through sprints and weekly releases</li>
-                    <li>Scoped and launched GenAI workflows including voice synthesis and multi-platform auto-posting (IG, TikTok, YouTube, LinkedIn, X)</li>
-                    <li>Conducted 50+ user interviews and sandbox tests, translating insights into UX/UI changes that increased conversion by 30%</li>
-                    <li>Integrated AI tools (Perplexity, Reka Vision, Argil, Veo) into workflows, automating video generation and reducing manual production by 60%</li>
-                     <li>Bootstrapped platform to launch on a lean budget – built internal automations that reduced manual ops by 60%</li>
-                </ul>
-                <div class="timeline-links">
-                    <a href="evatar.html" class="timeline-link primary">Full Case Study →</a>
-                    <a href="https://evatar.ai" target="_blank" class="timeline-link">Visit Website</a>
-                </div>
+    <div class="main-content">
+        <!-- Featured -->
+        <section>
+            <div class="section-header">
+                <span class="section-label">Featured</span>
+                <h2 class="section-title">Current Focus</h2>
             </div>
 
-            <!-- Pero Pero -->
-            <div class="timeline-item">
-                <div class="timeline-date">MAY 2024 — AUG 2025</div>
-                <div class="timeline-company-wrapper">
-                    <div class="company-logo" style="background: #f59e0b;"></div>
-                    <div class="timeline-company"><a href="peropero.html">Pero Pero</a></div>
+            <div class="job-card">
+                <div class="job-date">MAY 2024 — PRESENT</div>
+                <div class="job-header">
+                    <div class="job-title-group">
+                        <h3><a href="evatar.html">Evatar.ai</a></h3>
+                        <div class="job-role">Founder & CEO • Los Angeles, CA</div>
+                    </div>
                 </div>
-                <div class="timeline-role">COO • Los Angeles, CA</div>
-                <p class="timeline-description">
-                    Built pet care brand from scratch for celebrity founders Stella Maxwell and Barbara Palvin. Developed products, multi-channel sales strategy, and complete operational infrastructure.
-                </p>
-                <ul class="timeline-bullets">
+                <p class="job-description">Building an agentic GenAI platform that autonomously creates and posts social media content. Recently launched Eva — a voice-to-content AI assistant that transforms conversations into ready-to-publish posts.</p>
+                <ul class="job-highlights">
+                    <li>Grew to 160+ users and 1.6M+ monthly impressions through organic, product-led growth with zero ad spend</li>
+                    <li>Shipped MVP in 16 weeks; launched second major release with Eva voice assistant for content creation</li>
+                    <li>Building and leading 8-person cross-functional team (engineering, design, GTM) through sprints and weekly releases</li>
+                    <li>Scoped and launched GenAI workflows including voice synthesis and multi-platform auto-posting (IG, TikTok, YouTube, LinkedIn, X)</li>
+                    <li>Conducted 50+ user interviews, translating insights into UX/UI changes that increased conversion by 30%</li>
+                    <li>Integrated AI tools (Perplexity, Reka Vision, Argil, Veo) into workflows, automating video generation</li>
+                </ul>
+                <div class="job-links">
+                    <a href="evatar.html" class="job-link primary">Full Case Study →</a>
+                    <a href="https://evatar.ai" target="_blank" class="job-link">🌐 Visit Website</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section>
+            <div class="section-header">
+                <span class="section-label">Experience</span>
+                <h2 class="section-title">The Journey</h2>
+            </div>
+
+            <div class="job-card">
+                <div class="job-date">MAY 2024 — AUG 2025</div>
+                <div class="job-header">
+                    <div class="job-title-group">
+                        <h3><a href="peropero.html">Pero Pero</a></h3>
+                        <div class="job-role">COO • Los Angeles, CA</div>
+                    </div>
+                </div>
+                <p class="job-description">Built pet care brand from scratch for celebrity founders Stella Maxwell and Barbara Palvin. Full operational ownership from product development to multi-channel sales.</p>
+                <ul class="job-highlights">
                     <li>Built brand identity, product line, and e-commerce platform from zero to launch</li>
                     <li>Developed multi-channel sales strategy: DTC, retail partnerships (Petco, local boutiques), and wholesale</li>
                     <li>Established supply chain and fulfillment operations supporting rapid growth trajectory</li>
                     <li>Launched to market in 6 months with celebrity founder backing and press coverage</li>
-                    <li>Managed all operations: product development, supplier relationships, logistics, e-commerce</li>
                 </ul>
-                <div class="timeline-links">
-                    <a href="peropero.html" class="timeline-link primary">Full Case Study →</a>
+                <div class="job-links">
+                    <a href="peropero.html" class="job-link primary">Full Case Study →</a>
                 </div>
             </div>
 
-            <!-- AuthorityTech -->
-            <div class="timeline-item">
-                <div class="timeline-date">JUN 2021 — JUL 2022</div>
-                <div class="timeline-company-wrapper">
-                    <div class="company-logo" style="background: #2563eb;"></div>
-                    <div class="timeline-company"><a href="authoritytech.html">AuthorityTech</a></div>
+            <div class="job-card">
+                <div class="job-date">NOV 2020 — MAR 2024</div>
+                <div class="job-header">
+                    <div class="job-title-group">
+                        <h3><a href="elegatto.html">Elegatto</a></h3>
+                        <div class="job-role">Head of Strategy & Operations • Los Angeles, CA</div>
+                    </div>
                 </div>
-                <div class="timeline-role">Sales Operations Manager • Remote</div>
-                <p class="timeline-description">
-                    Scaled client acquisition by 700% and revenue from $100K to $2M. Built full-cycle sales and marketing operations, automated lead generation for tech startups.
-                </p>
-                <ul class="timeline-bullets">
-                    <li>Scaled client acquisition by 700% through systematic outbound and inbound funnel optimization</li>
-                    <li>Built and managed sales operations infrastructure: CRM, automation, lead scoring</li>
-                    <li>Developed repeatable sales playbooks that increased close rates by 45%</li>
-                    <li>Managed cross-functional collaboration between sales, marketing, and product teams</li>
-                </ul>
-                <div class="timeline-links">
-                    <a href="authoritytech.html" class="timeline-link primary">Full Case Study →</a>
-                    <a href="https://authoritytech.io" target="_blank" class="timeline-link">Visit Website</a>
-                </div>
-            </div>
-
-            <!-- ofNature -->
-            <div class="timeline-item">
-                <div class="timeline-date">DEC 2020 — MAR 2022</div>
-                <div class="timeline-company-wrapper">
-                    <div class="company-logo" style="background: #059669;"></div>
-                    <div class="timeline-company"><a href="ofnature.html">ofNature</a></div>
-                </div>
-                <div class="timeline-role">Co-Founder & CEO • Los Angeles, CA</div>
-                <p class="timeline-description">
-                    Launched eco CPG brand amid global plastic bans, pioneering acetate-cellulose disposables adopted by McDonald's in 2025.
-                </p>
-                <ul class="timeline-bullets">
-                    <li>Raised $150K pre-seed, built Ukraine-based manufacturing and secured commercial contracts</li>
-                    <li>Led product development, certification, supply chain and GTM strategy, scaling to $120K/month in beta-stage output</li>
-                    <li>Led R&D, regulatory compliance (FDA, EU), and pilot program execution with major QSR chain</li>
-                    <li>Managed all aspects of early-stage startup: product, operations, fundraising, partnerships</li>
-                </ul>
-                <div class="timeline-links">
-                    <a href="ofnature.html" class="timeline-link primary">Full Case Study →</a>
-                    <a href="https://www.crunchbase.com/organization/ofnature" target="_blank" class="timeline-link">Crunchbase</a>
-                </div>
-            </div>
-
-            <!-- Elegatto -->
-            <div class="timeline-item">
-                <div class="timeline-date">NOV 2020 — MAR 2024</div>
-                <div class="timeline-company-wrapper">
-                    <div class="company-logo" style="background: #1a1a1a;"></div>
-                    <div class="timeline-company"><a href="elegatto.html">Elegatto</a></div>
-                </div>
-                <div class="timeline-role">Head of Strategy & Operations • Los Angeles, CA</div>
-                <p class="timeline-description">
-                    Scaled a DTC jewelry brand from launch to $3M ARR through customer-driven GTM, trend-informed product development and lean operations.
-                </p>
-                <ul class="timeline-bullets">
+                <p class="job-description">Scaled a DTC jewelry brand from launch to $3M ARR and 100K+ orders, earning the Shopify 100K Orders award. Full-funnel ownership across product, marketing, and operations.</p>
+                <ul class="job-highlights">
                     <li>Tripled revenue in 24 months via full-funnel strategy across DTC and wholesale</li>
                     <li>Oversaw product lifecycle from concept to launch, driving trend-informed development and rapid iteration</li>
                     <li>Secured $300K Meta-funded campaign (2.8x ROAS), generating $840K in attributed revenue</li>
                     <li>Designed outbound and retention systems, acquiring 160+ wholesale accounts and expanding B2B distribution</li>
                     <li>Led CX, paid media and lifecycle marketing, achieving 43% ROI on SMS and 28% on email campaigns</li>
-                    <li>Established East Asian fulfillment hub, reducing shipping costs by 95% and supporting global expansion past 100K+ orders</li>
+                    <li>Established East Asian fulfillment hub, reducing shipping costs by 95%</li>
                 </ul>
-                <div class="timeline-links">
-                    <a href="elegatto.html" class="timeline-link primary">Full Case Study →</a>
-                    <a href="https://elegatto.com" target="_blank" class="timeline-link">Visit Website</a>
+                <div class="job-links">
+                    <a href="elegatto.html" class="job-link primary">Full Case Study →</a>
+                    <a href="https://elegatto.com" target="_blank" class="job-link">🌐 Visit Website</a>
                 </div>
             </div>
 
-            <!-- NJF Worldwide -->
-            <div class="timeline-item">
-                <div class="timeline-date">FEB 2020 — MAR 2024</div>
-                <div class="timeline-company-wrapper">
-                    <div class="company-logo" style="background: #1e3a8a;"></div>
-                    <div class="timeline-company"><a href="njf.html">NJF Worldwide</a></div>
-                </div>
-                <div class="timeline-role">Capture Strategist • New York, NY</div>
-                <p class="timeline-description">
-                    Expanded presence in government contracting sector. Led outbound marketing and stakeholder engagement, helped secure a $159M contract with New York State for COVID-19 test kits.
-                </p>
-                <ul class="timeline-bullets">
-                    <li>Developed and executed capture strategy for large-scale government contracts</li>
-                    <li>Led stakeholder mapping and relationship building with government decision-makers</li>
-                    <li>Created proposal content and competitive positioning for multi-million dollar bids</li>
-                    <li>Contributed to securing $159M COVID-19 test kit contract with New York State</li>
-                </ul>
-                <div class="timeline-links">
-                    <a href="njf.html" class="timeline-link primary">Full Case Study →</a>
-                    <a href="https://njfworldwide.com" target="_blank" class="timeline-link">Visit Website</a>
-                </div>
-            </div>
-
-            <!-- HAY! Straws -->
-            <div class="timeline-item">
-                <div class="timeline-date">SEP 2018 — NOV 2020</div>
-                <div class="timeline-company-wrapper">
-                    <div class="company-logo" style="background: #16a34a;"></div>
-                    <div class="timeline-company"><a href="haystraws.html">HAY! Straws</a></div>
-                </div>
-                <div class="timeline-role">Head of Growth & Partnerships • San Francisco, CA</div>
-                <p class="timeline-description">
-                    Secured 2,000+ B2B accounts including Hilton, Hyatt, Marriott. Generated $4M+ in sales.
-                </p>
-                <ul class="timeline-bullets">
-                    <li>Built and scaled B2B sales function from scratch for sustainable straw company</li>
-                    <li>Secured partnerships with major hospitality chains: Hilton, Hyatt, Marriott</li>
-                    <li>Generated $4M+ in revenue through strategic account management</li>
-                    <li>Developed distribution strategy and partnership frameworks for CPG product</li>
-                </ul>
-                <div class="timeline-links">
-                    <a href="haystraws.html" class="timeline-link primary">Full Case Study →</a>
-                    <a href="https://www.haystraws.com" target="_blank" class="timeline-link">Visit Website</a>
-                </div>
-            </div>
-
-            <!-- Allset -->
-            <div class="timeline-item">
-                <div class="timeline-date">NOV 2016 — SEP 2018</div>
-                <div class="timeline-company-wrapper">
-                    <div class="company-logo" style="background: #7c3aed;"></div>
-                    <div class="timeline-company">
-                        <a href="allset.html">Allset</a> 
-                        <span class="timeline-company-note">(acquired by SoundHound AI)</span>
+            <div class="job-card">
+                <div class="job-date">JUN 2021 — JUL 2022</div>
+                <div class="job-header">
+                    <div class="job-title-group">
+                        <h3><a href="authoritytech.html">AuthorityTech</a></h3>
+                        <div class="job-role">Sales Operations Manager • Remote</div>
                     </div>
                 </div>
-                <div class="timeline-role">VP of Sales • New York, NY</div>
-                <p class="timeline-description">
-                    Rebuilt GTM systems, activated new segments and drove pivotal traction for food-tech startup, enabling Series A funding.
-                </p>
-                <ul class="timeline-bullets">
+                <p class="job-description">Led growth and sales ops for a PR tech agency serving VC-backed startups. Built systems that scaled revenue 20x.</p>
+                <ul class="job-highlights">
+                    <li>Grew revenue from $100K to $2M and expanded client base from 11 to 87 within one year</li>
+                    <li>Built CRM, outbound and automation systems; developed GTM narrative and sales playbooks</li>
+                    <li>Trained team to execute at scale with repeatable processes</li>
+                </ul>
+                <div class="job-links">
+                    <a href="authoritytech.html" class="job-link primary">Full Case Study →</a>
+                    <a href="https://authoritytech.io" target="_blank" class="job-link">🌐 Visit Website</a>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-date">DEC 2020 — MAR 2022</div>
+                <div class="job-header">
+                    <div class="job-title-group">
+                        <h3><a href="ofnature.html">ofNature</a></h3>
+                        <div class="job-role">Co-Founder & CEO • Los Angeles, CA</div>
+                    </div>
+                </div>
+                <p class="job-description">Launched eco CPG brand amid global plastic bans, pioneering acetate-cellulose disposables later adopted by McDonald's in 2025.</p>
+                <ul class="job-highlights">
+                    <li>Raised $150K pre-seed, built Ukraine-based manufacturing and secured commercial contracts</li>
+                    <li>Led product development, certification, supply chain and GTM strategy, scaling to $120K/month</li>
+                    <li>Led R&D, regulatory compliance (FDA, EU), and pilot program execution with major QSR chain</li>
+                </ul>
+                <div class="job-links">
+                    <a href="ofnature.html" class="job-link primary">Full Case Study →</a>
+                    <a href="https://www.crunchbase.com/organization/ofnature" target="_blank" class="job-link">📊 Crunchbase</a>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-date">FEB 2020 — MAR 2024</div>
+                <div class="job-header">
+                    <div class="job-title-group">
+                        <h3><a href="njf.html">NJF Worldwide</a></h3>
+                        <div class="job-role">Go-To-Market Strategy Consultant • Remote</div>
+                    </div>
+                </div>
+                <p class="job-description">Led GTM strategy and public sector outreach for a veteran-owned medical distributor during COVID-19 and the fentanyl crisis.</p>
+                <ul class="job-highlights">
+                    <li>Sourced and advanced $159M NY State COVID-testing deal through GTM strategy and stakeholder outreach</li>
+                    <li>Devised bipartisan GTM frameworks aligned with zero-tolerance and harm-reduction policy models</li>
+                    <li>Led stakeholder mapping and relationship building with government decision-makers</li>
+                </ul>
+                <div class="job-links">
+                    <a href="njf.html" class="job-link primary">Full Case Study →</a>
+                    <a href="https://njfworldwide.com" target="_blank" class="job-link">🌐 Visit Website</a>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-date">SEP 2018 — NOV 2020</div>
+                <div class="job-header">
+                    <div class="job-title-group">
+                        <h3><a href="haystraws.html">HAY! Straws</a></h3>
+                        <div class="job-role">Head of Growth & Partnerships • San Francisco, CA</div>
+                    </div>
+                </div>
+                <p class="job-description">Led growth strategy and product development at a sustainable products startup.</p>
+                <ul class="job-highlights">
+                    <li>Invented & commercialized a new product format — transforming raw reed into a scalable, manufacturable straw adopted globally</li>
+                    <li>Secured and managed 2,000+ global B2B accounts, including Hilton, Hyatt, Marriott and Sysco</li>
+                    <li>Generated $4M+ in sales through strategic account management</li>
+                </ul>
+                <div class="job-links">
+                    <a href="haystraws.html" class="job-link primary">Full Case Study →</a>
+                    <a href="https://www.haystraws.com" target="_blank" class="job-link">🌐 Visit Website</a>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-date">NOV 2016 — SEP 2018</div>
+                <div class="job-header">
+                    <div class="job-title-group">
+                        <h3><a href="allset.html">Allset</a></h3>
+                        <div class="job-role">VP of Sales • New York, NY</div>
+                    </div>
+                </div>
+                <p class="job-description">Rebuilt GTM systems, activated new segments and drove pivotal traction for food-tech startup, enabling $5M Series A funding. Company later acquired by SoundHound AI.</p>
+                <ul class="job-highlights">
                     <li>Joined with no sales experience and became top performer; promoted to VP in 8 months</li>
-                    <li>Boosted monthly partnerships by 600% (30 to 200); led team of 7 direct reports + 2 team leads (lead gen, onboarding)</li>
+                    <li>Boosted monthly partnerships by 600% (30 to 200); led team of 7 direct reports + 2 team leads</li>
                     <li>Developed empathy-based outbound funnel that drove 95% open and 75% conversion rates</li>
                     <li>Designed cross-team retention playbook that cut churn 90% and unlocked multi-location deals</li>
-                    <li>Built corporate segment and closed national chain partnerships, scaling footprint from 300 to 3,400+ locations across 14 cities</li>
+                    <li>Built corporate segment and closed national chain partnerships, scaling from 300 to 3,400+ locations across 14 cities</li>
                 </ul>
-                <div class="timeline-links">
-                    <a href="allset.html" class="timeline-link primary">Full Case Study →</a>
-                    <a href="https://www.crunchbase.com/organization/allset" target="_blank" class="timeline-link">Crunchbase</a>
+                <div class="job-links">
+                    <a href="allset.html" class="job-link primary">Full Case Study →</a>
+                    <a href="https://www.crunchbase.com/organization/allset" target="_blank" class="job-link">📊 Crunchbase</a>
                 </div>
             </div>
+        </section>
 
-            <!-- Legrem Law Firm -->
-            <div class="timeline-item">
-                <div class="timeline-date">2012 — 2014</div>
-                <div class="timeline-company-wrapper">
-                    <div class="company-logo" style="background: #8e44ad;"></div>
-                    <div class="timeline-company"><a href="legrem.html">Legrem Law Firm</a></div>
+        <!-- Earlier Career -->
+        <section>
+            <div class="section-header">
+                <span class="section-label">Foundation</span>
+                <h2 class="section-title">Earlier Career</h2>
+            </div>
+
+            <div class="job-card" style="padding: 1.5rem;">
+                <div class="job-date">2012 — 2014</div>
+                <div class="job-title-group">
+                    <h3 style="font-size: 1.15rem;"><a href="legrem.html">Legrem Law Firm</a></h3>
+                    <div class="job-role">Strategic Communications & PR Associate • Kyiv, Ukraine</div>
                 </div>
-                <div class="timeline-role">Strategic Communications & PR Associate • Kyiv, Ukraine</div>
-                <p class="timeline-description">
-                    Mediated business disputes, managed communications during corporate transitions and bank seizures.
+                <p class="job-description" style="margin-bottom: 0;">Mediated business disputes, managed communications during corporate transitions and bank seizures.</p>
+            </div>
+
+            <div class="job-card" style="padding: 1.5rem;">
+                <div class="job-date">2008 — 2013</div>
+                <div class="job-title-group">
+                    <h3 style="font-size: 1.15rem;"><a href="amplifier-agency.html">Amplifier Entertainment Agency</a></h3>
+                    <div class="job-role">Founder & Event Organizer • Kyiv, Ukraine</div>
+                </div>
+                <p class="job-description" style="margin-bottom: 0;">Organized UNICEF, USAID, and ICRC conferences and major entertainment events with teams of 20+ staff.</p>
+            </div>
+
+            <div class="job-card" style="padding: 1.5rem;">
+                <div class="job-date">2006 — 2007</div>
+                <div class="job-title-group">
+                    <h3 style="font-size: 1.15rem;"><a href="m1tv.html">M1 TV Music Channel</a></h3>
+                    <div class="job-role">Assistant Director (Internship) • Kyiv, Ukraine</div>
+                </div>
+                <p class="job-description" style="margin-bottom: 0;">Assisted in directing music videos and live productions — first storytelling experience.</p>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section>
+            <div class="section-header">
+                <span class="section-label">Capabilities</span>
+                <h2 class="section-title">Core Competencies</h2>
+            </div>
+
+            <div class="skills-intro">
+                <p>
+                    <strong>Yes, I know — this is a lot of skills from very different areas.</strong> 
+                    But what can I say? I'm <em>curious</em>. I work on things, I create stuff in my free time as a hobby. 
+                    Film directing to law to event production to sales to hardware R&D to AI products — that's just the path curiosity took me on. 
+                    I don't see disciplines, I see problems worth solving and tools worth learning.
                 </p>
-                <ul class="timeline-bullets">
-                    <li>Managed crisis communications for law firm clients during high-stakes transitions</li>
-                    <li>Mediated business disputes and facilitated resolution strategies</li>
-                    <li>Coordinated communication strategies during bank seizures and corporate restructuring</li>
-                    <li>Developed PR strategies for legal and financial services clients</li>
-                </ul>
             </div>
 
-            <!-- Amplifier Entertainment Agency -->
-            <div class="timeline-item">
-                <div class="timeline-date">2008 — 2013</div>
-                <div class="timeline-company-wrapper">
-                    <div class="company-logo" style="background: #e67e22;"></div>
-                    <div class="timeline-company"><a href="amplifier-agency.html">Amplifier Entertainment Agency</a></div>
-                </div>
-                <div class="timeline-role">Founder & Event Organizer • Kyiv, Ukraine</div>
-                <p class="timeline-description">
-                    Organized UNICEF, USAID, and ICRC conferences and major entertainment events.
-                </p>
-                <ul class="timeline-bullets">
-                    <li>Founded and operated full-service event agency in Ukraine</li>
-                    <li>Organized conferences for international organizations: UNICEF, USAID, ICRC</li>
-                    <li>Produced major entertainment events with teams of 20+ staff and vendors</li>
-                    <li>Built network of government, NGO, and corporate contacts</li>
-                </ul>
-            </div>
-
-            <!-- M1 TV -->
-            <div class="timeline-item">
-                <div class="timeline-date">2006 — 2007</div>
-                <div class="timeline-company-wrapper">
-                    <div class="company-logo" style="background: #dc2626;"></div>
-                    <div class="timeline-company"><a href="m1tv.html">M1 TV Music Channel</a></div>
-                </div>
-                <div class="timeline-role">Assistant Director (Internship) • Kyiv, Ukraine</div>
-                <p class="timeline-description">
-                    Assisted in directing music videos and live productions — first storytelling experience.
-                </p>
-                <ul class="timeline-bullets">
-                    <li>Assisted in directing music videos and live TV productions</li>
-                    <li>Learned visual storytelling fundamentals and production workflows</li>
-                    <li>First professional experience in creative direction</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Skills Section -->
-        <div class="skills-section">
-            <h2 style="font-size: 2rem; margin-bottom: 1rem; text-align: center;">Core Competencies</h2>
-            <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto; font-family: 'Inter', sans-serif;">
-                A blend of product management, operations, and creative leadership built through hands-on experience.
-            </p>
-            
             <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Product Management</h3>
+                <div class="skill-card">
+                    <h4>🎯 Product Management</h4>
                     <ul>
                         <li>Zero-to-one product development</li>
                         <li>Product strategy & roadmapping</li>
                         <li>User research & feedback loops</li>
                         <li>Agile & sprint management</li>
                         <li>Cross-functional team leadership</li>
+                        <li>PRDs, user stories & backlog</li>
                     </ul>
                 </div>
 
-                <div class="skill-category">
-                    <h3>AI & Technical</h3>
+                <div class="skill-card">
+                    <h4>🤖 AI & Technical</h4>
                     <ul>
                         <li>AI product design & implementation</li>
-                        <li>Multimodal AI systems</li>
+                        <li>Agentic systems & multimodal AI</li>
+                        <li>LLM integration & prompt engineering</li>
                         <li>API integrations & automation</li>
                         <li>Technical documentation</li>
                         <li>No-code/low-code tools</li>
                     </ul>
                 </div>
 
-                <div class="skill-category">
-                    <h3>Operations</h3>
+                <div class="skill-card">
+                    <h4>⚙️ Operations</h4>
                     <ul>
                         <li>Supply chain management</li>
                         <li>P&L ownership</li>
                         <li>Process optimization</li>
                         <li>Vendor & partner management</li>
                         <li>Scaling operational systems</li>
+                        <li>International logistics</li>
                     </ul>
                 </div>
 
-                <div class="skill-category">
-                    <h3>Go-to-Market</h3>
+                <div class="skill-card">
+                    <h4>📈 Go-to-Market</h4>
                     <ul>
                         <li>Sales strategy & execution</li>
                         <li>Marketing campaign management</li>
                         <li>Customer acquisition & retention</li>
                         <li>Brand development</li>
                         <li>Partnership development</li>
+                        <li>Empathy-based outbound (95% open rates)</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card">
+                    <h4>🎬 Creative & Storytelling</h4>
+                    <ul>
+                        <li>Visual storytelling & cinematography</li>
+                        <li>Brand identity development</li>
+                        <li>Pitch deck creation</li>
+                        <li>Content strategy</li>
+                        <li>UX/UI intuition from film background</li>
+                        <li>Music production</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card">
+                    <h4>🔧 Hardware & IoT</h4>
+                    <ul>
+                        <li>Hardware product development</li>
+                        <li>IoT architecture design</li>
+                        <li>Industrial design coordination</li>
+                        <li>Signal processing for biometrics</li>
+                        <li>Prototype to production pipeline</li>
+                        <li>Cross-functional hardware teams</li>
                     </ul>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- EDUCATION SECTION -->
-        <div class="skills-section" style="margin-top: 5rem; padding-top: 3rem; border-top: 2px solid var(--border);">
-            <h2 style="font-size: 2rem; margin-bottom: 1rem; text-align: center;">Education</h2>
-            <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto; font-family: 'Inter', sans-serif;">
-                A multidisciplinary foundation combining creative arts, technology, and law.
-            </p>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">2006 — 2010</div>
-                    <div class="timeline-company-wrapper">
-                        <div class="company-logo" style="background: #34495e;"></div>
-                        <div class="timeline-company">Kyiv National I. K. Karpenko-Kary Theatre, Cinema and Television University</div>
-                    </div>
-                    <div class="timeline-role">B.A. in Film Directing • Kyiv, Ukraine</div>
-                    <p class="timeline-description">
-                        Studied visual storytelling, cinematography, and creative direction. This foundation in film directing deeply influences my approach to product design and user experience.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2007 — 2010</div>
-                    <div class="timeline-company-wrapper">
-                        <div class="company-logo" style="background: #c0392b;"></div>
-                        <div class="timeline-company">Branch of Lomonosov Moscow State University in Sevastopol</div>
-                    </div>
-                    <div class="timeline-role">Faculty of Jurisprudence (Law) • Distance Learning • Not Completed</div>
-                    <p class="timeline-description">
-                        Studied law remotely while working on film projects. Gained understanding of legal frameworks, contracts, and business law that later proved valuable in startup operations.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-date">2005 — 2006</div>
-                    <div class="timeline-company-wrapper">
-                        <div class="company-logo" style="background: #16a085;"></div>
-                        <div class="timeline-company">Kyiv Polytechnic Institute</div>
-                    </div>
-                    <div class="timeline-role">Faculty of Publishing and Editing • Not Completed</div>
-                    <p class="timeline-description">
-                        Initial exploration of publishing and editorial processes. Developed early interest in how information is structured and communicated.
-                    </p>
-                </div>
+        <!-- Education -->
+        <section>
+            <div class="section-header">
+                <span class="section-label">Education</span>
+                <h2 class="section-title">Education</h2>
+                <p class="section-description">A multidisciplinary foundation combining creative arts, technology, and law.</p>
             </div>
-        </div>
 
-        <div style="text-align: center; margin-top: 5rem;">
-            <a href="../index.html" class="back-btn">← Back to Home</a>
-        </div>
+            <div class="edu-card">
+                <div class="edu-date">2006 — 2010</div>
+                <h4>Kyiv National I. K. Karpenko-Kary Theatre, Cinema and Television University</h4>
+                <div class="edu-meta">B.A. in Film Directing • Kyiv, Ukraine</div>
+                <p>Studied visual storytelling, cinematography, and creative direction. This foundation deeply influences my approach to product design and user experience.</p>
+            </div>
+
+            <div class="edu-card">
+                <div class="edu-date">2007 — 2010</div>
+                <h4>Branch of Lomonosov Moscow State University in Sevastopol</h4>
+                <div class="edu-meta">Faculty of Jurisprudence (Law) • Distance Learning • Not Completed</div>
+                <p>Studied law remotely. Gained understanding of legal frameworks, contracts, and business law valuable in startup operations.</p>
+            </div>
+
+            <div class="edu-card">
+                <div class="edu-date">2005 — 2006</div>
+                <h4>Kyiv Polytechnic Institute</h4>
+                <div class="edu-meta">Faculty of Publishing and Editing • Not Completed</div>
+                <p>Initial exploration of publishing and editorial processes. Early interest in information structure and communication.</p>
+            </div>
+        </section>
     </div>
 
+    <footer>
+        <a href="../index.html">← Back to Home</a>
+        <p style="margin-top: 1rem;">Tymofii Pidlisnyi • Los Angeles, CA</p>
+    </footer>
+
     <script>
-        // Theme Toggle
         function toggleTheme() {
-            const body = document.body;
-            const themeIcon = document.getElementById('theme-icon');
-            const currentTheme = body.getAttribute('data-theme');
-            
-            if (currentTheme === 'dark') {
-                body.setAttribute('data-theme', 'bright');
-                if (themeIcon) themeIcon.textContent = '☀️';
-                localStorage.setItem('theme', 'bright');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                if (themeIcon) themeIcon.textContent = '🌙';
-                localStorage.setItem('theme', 'dark');
-            }
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
         }
 
-        // Load saved theme
-        window.addEventListener('load', () => {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            document.body.setAttribute('data-theme', savedTheme);
-            const themeIcon = document.getElementById('theme-icon');
-            if (themeIcon) {
-                themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
-            }
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            scrollProgress.style.width = progress + '%';
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.main-content section').forEach(section => {
+            observer.observe(section);
         });
     </script>
 </body>
