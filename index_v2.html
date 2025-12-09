@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tymofii Pidlisnyi — Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;600&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+:root {
+    /* Dark Theme (Default) */
+    --bg-color: #050505;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --accent-color: #e0e0e0;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --font-main: 'Outfit', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+    --spacing-container: 8vw;
+    --hero-gradient: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 70%);
+}
+
+[data-theme="light"] {
+    --bg-color: #f0f0f0;
+    --card-bg: rgba(255, 255, 255, 0.6);
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --accent-color: #333333;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(0, 0, 0, 0.05);
+    /* Softer border for light mode */
+    --hero-gradient: radial-gradient(circle at 50% 50%, #e0e0e0 0%, #f0f0f0 70%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 300;
+    letter-spacing: -0.02em;
+}
+
+/* Utilities */
+.container {
+    padding: 0 var(--spacing-container);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-padding {
+    padding: 120px 0;
+}
+
+.mono {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Grid System */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+/* Reveal Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Hero Section --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 70%);
+    opacity: 0.5;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 8vw, 8rem);
+    line-height: 0.9;
+    margin-bottom: 2rem;
+    mix-blend-mode: difference;
+}
+
+.hero-sub {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: var(--spacing-container);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.line {
+    width: 60px;
+    height: 1px;
+    background: var(--text-secondary);
+}
+
+/* --- Bio Section --- */
+.bio-content {
+    max-width: 800px;
+}
+
+.bio-text {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: #d0d0d0;
+}
+
+.bio-link {
+    display: inline-block;
+    margin-top: 2rem;
+    border-bottom: 1px solid var(--text-primary);
+    padding-bottom: 5px;
+}
+
+/* --- Navigation (Floating) --- */
+.nav-floating {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    z-index: 100;
+    mix-blend-mode: exclusion;
+}
+
+.menu-trigger {
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* --- Projects Section --- */
+.project-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 40px;
+    border-radius: 4px;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.card-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.card-desc {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.card-link {
+    margin-top: auto;
+    font-family: var(--font-mono);
+}
+
+/* --- Lab Section (Terminal Style) --- */
+.lab-section {
+    border-top: 1px solid var(--glass-border);
+}
+
+.lab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1px;
+    background: var(--glass-border);
+}
+
+.lab-item {
+    background: var(--bg-color);
+    padding: 30px;
+    transition: background 0.3s;
+    font-family: var(--font-mono);
+}
+
+.lab-item:hover {
+    background: #0f0f0f;
+}
+
+.lab-title {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+    text-transform: uppercase;
+}
+
+.lab-desc {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* --- Ideas Section --- */
+.idea-card {
+    padding: 40px;
+    margin-bottom: 20px;
+    border-left: 2px solid var(--glass-border);
+    transition: border-color 0.3s;
+}
+
+.idea-card:hover {
+    border-color: var(--text-primary);
+}
+
+/* --- Article / Bio Styling --- */
+.article-header {
+    margin-bottom: 60px;
+    max-width: 900px;
+}
+
+.article-title {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    line-height: 1.1;
+    margin-bottom: 2rem;
+}
+
+.article-body {
+    max-width: 800px;
+    margin-left: auto;
+    /* Offset layout */
+    margin-right: 0;
+}
+
+.article-section {
+    margin-bottom: 80px;
+}
+
+.article-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+    border-left: 2px solid var(--accent-color);
+    padding-left: 20px;
+}
+
+.article-section p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.article-section p strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* --- Theme Switcher --- */
+.theme-switch-container {
+    position: fixed;
+    top: 40px;
+    left: 40px;
+    z-index: 100;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-icon {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+.btn-icon:hover {
+    background: var(--text-primary);
+    color: var(--bg-color);
+}
+
+/* --- Footer --- */
+.footer {
+    border-top: 1px solid var(--glass-border);
+    padding: 80px var(--spacing-container);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav-floating">
+        <div class="menu-trigger mono">MENU</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero container">
+        <div class="hero-background"></div>
+        <div class="hero-content reveal">
+            <h1 class="hero-title">TYMOFII<br>PIDLISNYI</h1>
+            <div class="hero-sub">
+                <p class="mono hero-sub-text">Product Manager & Creative Founder</p>
+            </div>
+        </div>
+        <div class="scroll-indicator mono">
+            <div class="line"></div> SCROLL TO EXPLORE
+        </div>
+    </section>
+
+    <!-- Bio Section -->
+    <section id="about" class="section-padding container">
+        <div class="bio-content reveal">
+            <span class="mono">01 / THE PHOENIX</span>
+            <br><br>
+            <p class="bio-text">
+                I'm Tima. I might look cocky, but I'm not — I'm sensitive, deeply empathetic and often misread.
+                <br><br>
+                For my first 30 years, I was a dreamer who lived through stories. Then at 33, something switched. I
+                became obsessed with execution.
+                <br><br>
+                I've learned more than I ever imagined possible — and burned down more times than most would survive.
+                But every time, I rise again — like a phoenix with a restless mind and an unshakable belief in human
+                imagination.
+            </p>
+            <a href="bio_v2.html" class="bio-link mono">READ FULL STORY</a>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section-padding container">
+        <div class="section-header reveal" style="margin-bottom: 60px;">
+            <span class="mono">02 / SELECTED WORKS</span>
+            <span class="mono" style="float: right;"><a href="projects_v2.html">VIEW ALL WORK →</a></span>
+        </div>
+
+        <div class="grid-2">
+            <!-- Project 1 -->
+            <a href="https://evatar.ai" target="_blank" class="project-card reveal">
+                <div>
+                    <h3 class="card-title">Evatar.ai</h3>
+                    <p class="card-desc">AI agents that run your social media on autopilot. Not a tool. A friend.</p>
+                </div>
+                <div class="card-link">VISIT SITE →</div>
+            </a>
+
+            <!-- Project 2 -->
+            <a href="https://myperopero.com" target="_blank" class="project-card reveal">
+                <div>
+                    <h3 class="card-title">Pero Pero</h3>
+                    <p class="card-desc">Pet care brand for supermodels. Built from scratch — products, store,
+                        infrastructure.</p>
+                </div>
+                <div class="card-link">VISIT STORE →</div>
+            </a>
+
+            <!-- Project 3 -->
+            <a href="https://www.crunchbase.com/organization/ofnature" target="_blank" class="project-card reveal">
+                <div>
+                    <h3 class="card-title">ofNature</h3>
+                    <p class="card-desc">Eco CPG brand pioneering acetate-cellulose disposables. Adopted by McDonald's
+                        2025.</p>
+                </div>
+                <div class="card-link">VIEW CASE →</div>
+            </a>
+
+            <!-- Project 4 -->
+            <a href="#" class="project-card reveal">
+                <div>
+                    <h3 class="card-title">Amplifier Agency</h3>
+                    <p class="card-desc">Event and entertainment agency producing conferences and live shows.</p>
+                </div>
+                <div class="card-link">VIEW COMMUNITY →</div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Lab Section -->
+    <section id="lab" class="section-padding">
+        <div class="container reveal">
+            <span class="mono" style="margin-bottom: 40px; display: block;">03 / THE LAB</span>
+        </div>
+
+        <div class="lab-grid">
+            <a href="https://prompt-director.rork.app" class="lab-item">
+                <h4 class="lab-title">Prompt Director</h4>
+                <p class="lab-desc">Cinematic video prompts from simple ideas.</p>
+            </a>
+            <a href="https://memoir-vault.rork.app" class="lab-item">
+                <h4 class="lab-title">Memoir App</h4>
+                <p class="lab-desc">Storytelling app for preserving life histories.</p>
+            </a>
+            <a href="mywork/aeoess.html" class="lab-item">
+                <h4 class="lab-title">ÆOESS Device</h4>
+                <p class="lab-desc">IoT nose wearable for breathing analytics.</p>
+            </a>
+            <a href="#" class="lab-item">
+                <h4 class="lab-title">SheetHappens</h4>
+                <p class="lab-desc">World's first lucky toilet paper with an app.</p>
+            </a>
+            <a href="https://evatar-ai.github.io/skyscraper/" class="lab-item">
+                <h4 class="lab-title">Skyscraper</h4>
+                <p class="lab-desc">3D sketch of a 167-floor dream tower.</p>
+            </a>
+            <a href="#" class="lab-item">
+                <h4 class="lab-title">æœss music</h4>
+                <p class="lab-desc">AI music born from unrequited love.</p>
+            </a>
+            <a href="mywork/creative-projects.html" class="lab-item">
+                <h4 class="lab-title">Creative Projects</h4>
+                <p class="lab-desc">Film direction, music videos, installations.</p>
+            </a>
+            <div class="lab-item">
+                <h4 class="lab-title">ACI</h4>
+                <p class="lab-desc">Artificial Creative Intelligence framework.</p>
+            </div>
+            <div class="lab-item">
+                <h4 class="lab-title">Vibe Coding</h4>
+                <p class="lab-desc">Turning ideas into products instantly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Ideas Section -->
+    <section id="ideas" class="section-padding container">
+        <div class="reveal">
+            <span class="mono" style="margin-bottom: 40px; display: block;">04 / FRESH IDEAS</span>
+
+            <div class="idea-card">
+                <h3 class="card-title">Quests</h3>
+                <p class="bio-text" style="font-size: 1.1rem; margin-top: 10px;">A geo-based social marketplace that
+                    turns the real world into a playable map. Your neighborhood becomes an open-world economy.</p>
+            </div>
+
+            <div class="idea-card">
+                <h3 class="card-title">OnlyFriends</h3>
+                <p class="bio-text" style="font-size: 1.1rem; margin-top: 10px;">Book time with someone — just to talk.
+                    Combating loneliness with genuine human connection.</p>
+            </div>
+
+            <div class="idea-card">
+                <h3 class="card-title">Gravity Seat</h3>
+                <p class="bio-text" style="font-size: 1.1rem; margin-top: 10px;">A diagonally tilted toilet seat
+                    designed to use gravity for better digestive health. Small tilt, big difference.</p>
+            </div>
+
+            <div class="idea-card">
+                <h3 class="card-title">Dataism</h3>
+                <p class="bio-text" style="font-size: 1.1rem; margin-top: 10px;">Your photos should pay you. A
+                    marketplace where you license your visual data to AI companies transparently.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-left">
+            <h2 style="font-size: 2rem;">Let's build<br>something unseen.</h2>
+            <p class="mono" style="margin-top: 20px; color: var(--text-secondary);">© 2025 Tymofii Pidlisnyi</p>
+        </div>
+
+        <div class="social-links mono">
+            <a href="#">EMAIL</a>
+            <a href="#">LINKEDIN</a>
+            <a href="#">INSTAGRAM</a>
+            <a href="#">GITHUB</a>
+        </div>
+    </footer>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Scroll Reveal Animation
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Smooth Scroll for Anchors
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Dynamic Title (optional easter egg)
+    const titles = ["Product Manager", "Creative Founder", "Polymath", "Dreamer", "Executor"];
+    let titleIndex = 0;
+
+    // Theme Switcher Logic
+    const themeBtn = document.getElementById('theme-btn');
+    if (themeBtn) {
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+    }
+
+    function updateThemeIcon(theme) {
+        if (!themeBtn) return;
+        // Simple text or SVG swap could go here. 
+        // For now, let's just toggle a class or simpler emoji
+        themeBtn.textContent = theme === 'dark' ? '☀' : '☾';
+    }
+    const subElement = document.querySelector('.hero-sub-text');
+
+    // Simple typewriter effect or fade could go here if requested, 
+    // keeping it simple for now to focus on CSS animations.
+});
+    </script>
+
+    <!-- Global Switcher -->
+    <a href="index.html" class="ux-switch-btn"
+        style="position:fixed; top:30px; right:30px; z-index:9999; background:rgba(255,255,255,0.1); padding:10px 20px; border-radius:30px; color:white; text-decoration:none; font-family:monospace; font-size:12px; backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.2);">
+        ⇄ SWITCH TO LEGACY
+    </a>
+</body>
+
+</html>
