@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S7QVCJGMKR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-S7QVCJGMKR');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataDividend Manifesto — The Future of Personal Data</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0F0E0D;
+            --bg-secondary: #1A1715;
+            --text: #F5F3F0;
+            --text-muted: #8B9199;
+            --border: #262320;
+            --accent-cyan: #5DADE2;
+            --accent-yellow: #F4D03F;
+            --accent-green: #58D68D;
+        }
+
+        [data-theme="bright"] {
+            --bg: #FDFCFA;
+            --bg-secondary: #F9F7F4;
+            --text: #2B2622;
+            --text-muted: #6B7280;
+            --border: #E8E4DF;
+            --accent-cyan: #3498DB;
+            --accent-yellow: #B8E6D5;
+            --accent-green: #27AE60;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+        }
+
+        .manifesto-page {
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background effects */
+        #grain-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.08;
+            z-index: 1;
+        }
+
+        .moving-gradient {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle,
+                    rgba(93, 173, 226, 0.1) 0%,
+                    transparent 25%,
+                    transparent 75%,
+                    rgba(244, 208, 63, 0.1) 100%);
+            animation: gradient-rotate 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gradient-rotate {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.2);
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: float 15s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-green);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-cyan);
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(45deg, var(--accent-yellow), var(--accent-green));
+            top: 60%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-30px, 30px) scale(0.9);
+            }
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1001;
+            width: 60px;
+            height: 30px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            cursor: pointer;
+            padding: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-cyan);
+        }
+
+        .theme-toggle-slider {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        [data-theme="bright"] .theme-toggle-slider {
+            transform: translateX(30px);
+            background: var(--accent-yellow);
+        }
+
+        .back-to-home {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1001;
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-to-home:hover {
+            border-color: var(--accent-cyan);
+            transform: translateX(-3px);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .manifesto-header {
+            text-align: center;
+            padding: 8rem 0 4rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 4rem;
+        }
+
+        .manifesto-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, var(--accent-green), #27AE60);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--bg);
+            margin-bottom: 2rem;
+            animation: badgeGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes badgeGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(88, 214, 141, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(88, 214, 141, 0.6); }
+        }
+
+        .manifesto-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 500;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .manifesto-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+
+        .manifesto-content {
+            padding-bottom: 4rem;
+        }
+
+        .manifesto-section {
+            margin-bottom: 4rem;
+            padding: 3rem;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(26, 23, 21, 0.5) 100%);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .manifesto-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan), var(--accent-yellow));
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .section-number {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--accent-green);
+            opacity: 0.3;
+            float: left;
+            margin-right: 1rem;
+            margin-top: -0.5rem;
+            line-height: 1;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .section-content {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        .section-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, rgba(88, 214, 141, 0.2), rgba(93, 173, 226, 0.2));
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .quote-section {
+            background: linear-gradient(135deg, rgba(244, 208, 63, 0.1), rgba(88, 214, 141, 0.1));
+            border-left: 4px solid var(--accent-yellow);
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .quote-section::before {
+            content: '"';
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 4rem;
+            color: var(--accent-yellow);
+            position: absolute;
+            top: -0.5rem;
+            left: 1rem;
+            opacity: 0.7;
+        }
+
+        .quote-text {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .quote-author {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            text-align: right;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--bg-secondary), rgba(88, 214, 141, 0.05));
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-green);
+        }
+
+        .cta-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-text {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--accent-green), #27AE60);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(88, 214, 141, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .manifesto-header {
+                padding: 6rem 0 3rem;
+            }
+            
+            .manifesto-section {
+                padding: 2rem 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .section-number {
+                font-size: 2rem;
+                float: none;
+                display: block;
+                margin-bottom: 1rem;
+            }
+            
+            .back-to-home {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.6rem 1.2rem;
+            }
+            
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="manifesto-page" data-theme="dark">
+    <!-- Background Effects -->
+    <canvas id="grain-canvas"></canvas>
+    <div class="moving-gradient"></div>
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+    <div class="floating-orb orb-3"></div>
+
+    <!-- Navigation -->
+    <a href="/" class="back-to-home">
+        <span>←</span>
+        Back to Home
+    </a>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <div class="theme-toggle-slider">🌙</div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="manifesto-header">
+            <div class="manifesto-badge">
+                <span>🚀</span>
+                The Future of Data
+            </div>
+            <h1 class="manifesto-title">DataDividend Manifesto</h1>
+            <p class="manifesto-subtitle">
+                Your data creates value. You should be the one getting paid for it.
+            </p>
+        </header>
+
+        <!-- Manifesto Content -->
+        <main class="manifesto-content">
+            
+            <!-- Section 1: The Problem -->
+            <section class="manifesto-section">
+                <div class="section-number">01</div>
+                <h2 class="section-title">Your Photos Are Worth Billions</h2>
+                <div class="section-content">
+                    <p>Every photo you take trains the next generation of AI. Every selfie, every sunset, every mundane Tuesday lunch — <span class="highlight">they're all worth money</span>. Billions of dollars, actually.</p>
+                    
+                    <p>AI companies are building trillion-dollar empires on your content. They scrape your images, feed them to their models, and sell the resulting intelligence back to you as "revolutionary" products. You get nothing. They get everything.</p>
+                    
+                    <p>This isn't just unfair. It's unsustainable. The creative economy can't survive when creators aren't compensated for their contributions.</p>
+                </div>
+            </section>
+
+            <!-- Section 2: The Vision -->
+            <section class="manifesto-section">
+                <div class="section-number">02</div>
+                <h2 class="section-title">Data Dividends, Not Data Theft</h2>
+                <div class="section-content">
+                    <p>Imagine getting paid every time your photo helps train an AI model. Imagine <span class="highlight">earning passive income</span> from the content you're already creating.</p>
+                    
+                    <p>DataDividend makes this real. We're building the infrastructure for people to license their personal photos directly to AI companies — transparently, fairly, and profitably.</p>
+                    
+                    <p>This isn't about selling your privacy. It's about recognizing the value you create and ensuring you capture it.</p>
+                </div>
+            </section>
+
+            <!-- Quote Section -->
+            <div class="quote-section">
+                <div class="quote-text">
+                    "The most valuable resource in the world is no longer oil, but data. Yet the people creating this data see none of its value."
+                </div>
+                <div class="quote-author">— The DataDividend Mission</div>
+            </div>
+
+            <!-- Section 3: How It Works -->
+            <section class="manifesto-section">
+                <div class="section-number">03</div>
+                <h2 class="section-title">Simple. Transparent. Profitable.</h2>
+                <div class="section-content">
+                    <p>Upload your photos. Set your price. Get paid when AI companies use them for training.</p>
+                    
+                    <p>We handle the licensing, the legal framework, the payments. You focus on what you do best — <span class="highlight">living your life and creating content</span>.</p>
+                    
+                    <p>Full transparency means you know exactly which companies are using your data and how much they're paying for it. No hidden algorithms. No mysterious revenue sharing. Just fair compensation for fair value.</p>
+                </div>
+            </section>
+
+            <!-- Section 4: The Movement -->
+            <section class="manifesto-section">
+                <div class="section-number">04</div>
+                <h2 class="section-title">Join the Data Revolution</h2>
+                <div class="section-content">
+                    <p>This is bigger than one platform. It's about <span class="highlight">restructuring the internet economy</span> so that value flows to the people who create it.</p>
+                    
+                    <p>Every person who joins DataDividend sends a message to Big Tech: our data has value, and we expect to be compensated for it.</p>
+                    
+                    <p>The future of AI doesn't have to be built on exploitation. It can be built on partnership, fairness, and shared prosperity.</p>
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <section class="cta-section">
+                <h2 class="cta-title">Ready to Get Paid?</h2>
+                <p class="cta-text">
+                    DataDividend is launching soon. Be among the first to turn your photos into passive income.
+                </p>
+                <a href="mailto:tima@aeoess.com?subject=DataDividend Early Access" class="cta-button">
+                    <span>💰</span>
+                    Join the Waitlist
+                </a>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const slider = document.querySelector('.theme-toggle-slider');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'bright');
+                slider.innerHTML = '☀️';
+                localStorage.setItem('theme', 'bright');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                slider.innerHTML = '🌙';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const body = document.body;
+            const slider = document.querySelector('.theme-toggle-slider');
+            
+            body.setAttribute('data-theme', savedTheme);
+            slider.innerHTML = savedTheme === 'bright' ? '☀️' : '🌙';
+        });
+
+        // Grain texture effect
+        function createGrainTexture() {
+            const canvas = document.getElementById('grain-canvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const imageData = ctx.createImageData(canvas.width, canvas.height);
+            const data = imageData.data;
+            
+            for (let i = 0; i < data.length; i += 4) {
+                const gray = Math.random() * 255;
+                data[i] = gray;     // R
+                data[i + 1] = gray; // G  
+                data[i + 2] = gray; // B
+                data[i + 3] = Math.random() * 50; // A
+            }
+            
+            ctx.putImageData(imageData, 0, 0);
+        }
+        
+        // Initialize grain texture
+        document.addEventListener('DOMContentLoaded', createGrainTexture);
+        window.addEventListener('resize', createGrainTexture);
+
+        // Smooth scroll for anchors
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
