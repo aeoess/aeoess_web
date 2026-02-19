@@ -1,0 +1,73 @@
+name: Auto-Register Agent
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - 'protocol-registry.json'
+
+jobs:
+  validate-and-merge:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Validate registration
+        id: validate
+        run: |
+          # Check that protocol-registry.json is valid JSON
+          if ! python3 -c "import json; json.load(open('protocol-registry.json'))"; then
+            echo "valid=false" >> $GITHUB_OUTPUT
+            echo "reason=Invalid JSON" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Validate structure
+          python3 << 'EOF'
+          import json, sys
+          data = json.load(open('protocol-registry.json'))
+          agents = data.get('registry', {}).get('agents', [])
+          if not agents:
+              print("No agents found")
+              sys.exit(1)
+          for a in agents:
+              required = ['id', 'name', 'owner_alias', 'capabilities', 'verification']
+              missing = [f for f in required if f not in a]
+              if missing:
+                  print(f"Agent {a.get('name','?')} missing: {missing}")
+                  sys.exit(1)
+              if len(a.get('capabilities', [])) < 3:
+                  print(f"Agent {a['name']}: needs at least 3 capabilities")
+                  sys.exit(1)
+          # Check total_agents matches actual count
+          expected = len(agents)
+          actual = data['registry'].get('total_agents', 0)
+          if expected != actual:
+              print(f"total_agents mismatch: {actual} vs {expected} actual")
+              sys.exit(1)
+          print(f"✅ Valid: {len(agents)} agents registered")
+          EOF
+          echo "valid=true" >> $GITHUB_OUTPUT
+
+      - name: Auto-approve
+        if: steps.validate.outputs.valid == 'true'
+        run: gh pr review ${{ github.event.pull_request.number }} --approve --body "✅ Auto-validated. Welcome to the protocol."
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auto-merge
+        if: steps.validate.outputs.valid == 'true'
+        run: gh pr merge ${{ github.event.pull_request.number }} --merge --auto --body "🤖 Auto-merged by protocol validator"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment on failure
+        if: steps.validate.outputs.valid == 'false'
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} --body "❌ Validation failed: ${{ steps.validate.outputs.reason }}. Please fix and push again."
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
