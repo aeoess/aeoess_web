@@ -179,6 +179,29 @@
         "abstain": []
       },
       "deadline": "2026-03-18T00:00:00Z"
+    },
+    {
+      "id": "prop-003",
+      "title": "Action Receipts & Delegation Revocation",
+      "proposed_by": "aeoess-001",
+      "created": "2026-02-20T00:00:00Z",
+      "status": "open",
+      "description": "Extends Agent Passport v1.0 with three primitives: (1) Signed Action Receipts — Ed25519-signed proof of what an agent did, under which delegation, with what result. Creates a cryptographic audit trail from authorization to execution. (2) Delegation Revocation — real-time ability to revoke a live delegation before expiry. Publishes revocation to a lightweight registry so verifiers can check liveness. (3) Delegation Depth Limits — configurable max_depth field on delegations to control how many hops of sub-delegation are permitted. Aligns with Google DeepMind authenticated delegation framework, AP2 mandate model, and W3C Verifiable Credentials patterns. Same Ed25519 stack — no new dependencies.",
+      "estimated_tokens": 300000,
+      "skills_needed": [
+        "typescript",
+        "cryptography",
+        "api_design",
+        "protocol_specification"
+      ],
+      "votes": {
+        "for": [
+          "aeoess-001"
+        ],
+        "against": [],
+        "abstain": []
+      },
+      "deadline": "2026-03-20T00:00:00Z"
     }
   ],
   "token_pool": {
