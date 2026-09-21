@@ -29,12 +29,16 @@ read_pkg_version() {
 }
 SDK_EXPECTED=$(read_pkg_version "$HOME/agent-passport-system/package.json")
 MCP_EXPECTED=$(read_pkg_version "$HOME/agent-passport-mcp/package.json")
+# mcp.aeoess.com runs the remote server, a separate package with its own version.
+# Read it from origin/main so a dirty local checkout cannot move the expectation.
+MCP_REMOTE_EXPECTED=$(git -C "$HOME/agent-passport-remote-mcp" show origin/main:package.json 2>/dev/null \
+  | python3 -c "import json,sys; print(json.load(sys.stdin)['version'])" 2>/dev/null || echo "unknown")
 GATEWAY_EXPECTED=$(read_pkg_version "$HOME/aeoess-gateway/package.json")
 
 echo "═══════════════════════════════════════"
 echo "  AEOESS Deploy Verification"
 echo "  $(date)"
-echo "  Expected: SDK $SDK_EXPECTED, MCP $MCP_EXPECTED, Gateway $GATEWAY_EXPECTED"
+echo "  Expected: SDK $SDK_EXPECTED, MCP $MCP_EXPECTED, MCP remote $MCP_REMOTE_EXPECTED, Gateway $GATEWAY_EXPECTED"
 echo "═══════════════════════════════════════"
 
 if [[ "$SERVICE" == "all" || "$SERVICE" == "mcp" ]]; then
@@ -45,23 +49,33 @@ if [[ "$SERVICE" == "all" || "$SERVICE" == "mcp" ]]; then
   HEALTH=$(curl -s -m 10 https://mcp.aeoess.com/health 2>&1)
   check "Health endpoint responds" "$HEALTH" "status.*ok"
   
-  # Version check — reads live `version` field from /health
+  # Version check. /health reports the remote server's own version, not the stdio MCP package's.
   MCP_LIVE=$(echo "$HEALTH" | python3 -c "import json,sys; print(json.load(sys.stdin).get('version', ''))" 2>/dev/null || echo "")
-  check "Version is current ($MCP_EXPECTED)" "$MCP_LIVE" "^$MCP_EXPECTED\$"
-  
-  # SSE connects and gets endpoint
-  SSE=$(curl -s -m 6 https://mcp.aeoess.com/sse 2>&1 || true)
-  check "SSE returns endpoint event" "$SSE" "endpoint"
-  
-  # Check session was created
-  HEALTH2=$(curl -s -m 10 https://mcp.aeoess.com/health 2>&1)
-  SESSIONS=$(echo "$HEALTH2" | python3 -c "import json,sys; print(json.load(sys.stdin).get('sessions',0))" 2>/dev/null || echo "0")
-  if [[ "$SESSIONS" -gt 0 ]]; then
-    echo "  ✅ Session created (sessions: $SESSIONS)"
-    PASS=$((PASS + 1))
+  check "Version is current ($MCP_REMOTE_EXPECTED)" "$MCP_LIVE" "^$MCP_REMOTE_EXPECTED\$"
+  MCP_SERVER=$(echo "$HEALTH" | python3 -c "import json,sys; print(json.load(sys.stdin).get('server', ''))" 2>/dev/null || echo "")
+  check "Health names the remote server" "$MCP_SERVER" "^agent-passport-remote-mcp\$"
+
+  # Auth is enforced. The server lets every request through when its API key is unset, so an
+  # unauthenticated 401 on both transports is what shows a deploy kept its key.
+  SSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" -m 6 https://mcp.aeoess.com/sse 2>&1 || true)
+  check "SSE rejects an unauthenticated request (401)" "$SSE_CODE" "^401\$"
+  MCP_POST_CODE=$(curl -s -o /dev/null -w "%{http_code}" -m 6 -X POST -H "Content-Type: application/json" -d '{}' https://mcp.aeoess.com/mcp 2>&1 || true)
+  check "/mcp rejects an unauthenticated request (401)" "$MCP_POST_CODE" "^401\$"
+
+  # Public discovery document is served and reports the same version.
+  CARD_VER=$(curl -s -m 10 https://mcp.aeoess.com/.well-known/agent.json | python3 -c "import json,sys; print(json.load(sys.stdin).get('version', ''))" 2>/dev/null || echo "")
+  check "agent.json served with current version" "$CARD_VER" "^$MCP_REMOTE_EXPECTED\$"
+
+  # Optional authenticated round trip. Runs only when MCP_REMOTE_API_KEY is set in the
+  # environment, and is reported as skipped otherwise, never as passed.
+  if [[ -n "${MCP_REMOTE_API_KEY:-}" ]]; then
+    INIT=$(curl -s -m 10 -X POST https://mcp.aeoess.com/mcp \
+      -H "Authorization: Bearer $MCP_REMOTE_API_KEY" -H "Content-Type: application/json" \
+      -H "Accept: application/json, text/event-stream" \
+      -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-03-26","capabilities":{},"clientInfo":{"name":"verify-deploy","version":"1"}}}' 2>&1 || true)
+    check "Authenticated initialize returns serverInfo" "$INIT" "serverInfo"
   else
-    echo "  ❌ No sessions created (sessions: $SESSIONS)"
-    FAIL=$((FAIL + 1))
+    echo "  ⏭  Authenticated initialize skipped (MCP_REMOTE_API_KEY not set)"
   fi
 fi
 
