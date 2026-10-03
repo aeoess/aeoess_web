@@ -323,6 +323,8 @@ var canvas=document.getElementById("c"),ctx=canvas.getContext("2d"),INK=mk(),MEL
 var headEl=document.getElementById("head"),cellsEl=document.getElementById("cells"),wordEl=document.getElementById("word"),colorEl=document.getElementById("color"),meltEl=document.getElementById("melt");
 var cells=[],letters=[],cols=5,rows=2,NB=[],W=0,H=0,cw=0,HH=0,dpr=1,lw=2,pulses=[],chaos=false,chaosTimer=500,HEADK=.55,DIALK=.7,dcw=0,ox=0,oy=0,GW=0,volAmt=.7;
 var colorAmt=0,meltAmt=0,scope=false,nowMs=0,mw=1,mh=1;
+/* chaos color: swings between black and white, full color and the stops between */
+var CHAOS_STOPS=[0,1,.3,.69,0,1],cTarget=0,cHold=0,cRate=.05,cBefore=0,cBack=null;
 function center(i){return [ox+(i%cols+.5)*cw,oy+HH+(Math.floor(i/cols)+.5)*cw];}
 function hsl(h){h=((h%360)+360)%360;return "hsl("+h.toFixed(0)+","+(100*colorAmt).toFixed(0)+"%,"+(100-42*colorAmt).toFixed(0)+"%)";}
 function paint(c2d,m,o){
@@ -391,7 +393,7 @@ function makeCell(i,ch,k){
 }
 
 var chaosBtn=document.getElementById("chaos"),scopeBtn=document.getElementById("scope"),wordTimer=0,presetIx=0;
-function setChaos(on){chaos=on;chaosBtn.setAttribute("aria-pressed",on?"true":"false");chaosTimer=100;}
+function setChaos(on){if(on&&!chaos){cBefore=colorAmt;cBack=null;cHold=0;}if(!on&&chaos)cBack=cBefore;chaos=on;chaosBtn.setAttribute("aria-pressed",on?"true":"false");chaosTimer=100;}
 function setScope(on){scope=on;scopeBtn.setAttribute("aria-pressed",on?"true":"false");}
 chaosBtn.addEventListener("click",function(){setChaos(!chaos);});
 scopeBtn.addEventListener("click",function(){setScope(!scope);setChaos(scope);});
@@ -413,7 +415,7 @@ if(window.ResizeObserver){new ResizeObserver(resize).observe(canvas);}else{windo
 
 /* ---------- the three dials live in the piece and are drawn in its line ---------- */
 var DIALS=[
- {el:colorEl,label:"COLOR",e:0,set:function(v){setScope(false);colorAmt=v;}},
+ {el:colorEl,label:"COLOR",e:0,set:function(v){setScope(false);cBack=null;if(chaos)cBefore=v;colorAmt=v;}},
  {el:meltEl,label:"MELT",e:0,set:function(v){setScope(false);meltAmt=v;}},
  {el:document.getElementById("volume"),label:"VOLUME",e:0,set:function(v){volAmt=v;if(master)master.gain.value=v*.7;if(AC&&performance.now()-lastBlip>120){lastBlip=performance.now();tone(220+440*v,"sine",.12,.005,.25,0);}}}
 ],lastBlip=0;
@@ -478,6 +480,10 @@ function tick(now){
   if(offscreen){last=now;requestAnimationFrame(tick);return;}
   var dt=clamp(now-last,0,50);last=now;nowMs=now;var k=dt/16.67,i,j,m,mean,nb,N=cells.length,o,c,R,ae,p,anyWin=false;frame++;
   if(scope){colorAmt+=(1-colorAmt)*.012*k;meltAmt+=(.9-meltAmt)*.012*k;colorEl.value=colorAmt;meltEl.value=meltAmt;}
+  if(chaos&&!scope){cHold-=dt;
+    if(cHold<=0){cTarget=Math.random()<.2?Math.random():CHAOS_STOPS[Math.floor(Math.random()*CHAOS_STOPS.length)];cHold=500+Math.random()*2500;cRate=Math.random()<.3?.25:.015+Math.random()*.06;}
+    colorAmt+=(cTarget-colorAmt)*Math.min(1,cRate*k);colorEl.value=colorAmt;}
+  else if(cBack!==null){colorAmt+=(cBack-colorAmt)*Math.min(1,.05*k);if(Math.abs(cBack-colorAmt)<.004){colorAmt=cBack;cBack=null;}colorEl.value=colorAmt;}
   if(chaos){chaosTimer-=dt;
     if(chaosTimer<=0&&N){chaosTimer=400+Math.random()*1000;i=Math.floor(Math.random()*N);j=Math.random();if(j<.4)morph(i);else emit(i,j<.75?"ring":"chain");}
     for(i=0;i<N;i++){m=cells[i];if(m.held)continue;m.x+=(.9*Math.sin(now*.00023*(1+i*.13)+m.seed)-m.x)*.015*k;m.y+=(.9*Math.sin(now*.00019*(1+i*.11)+m.seed*2)-m.y)*.015*k;}}
