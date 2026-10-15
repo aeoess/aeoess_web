@@ -18,7 +18,7 @@ open. The Know Your Agent app lives at /kya/.
 
 ## What AEOESS is
 
-AEOESS builds enforcement infrastructure for AI agents. It's the company behind the Agent Passport System (APS) — an Apache 2.0 open protocol for cryptographic identity, scoped delegation, gateway enforcement, and signed receipts for autonomous agents.
+aeoess.com hosts enforcement infrastructure for the Agent Passport System (APS), an Apache 2.0 open protocol for cryptographic identity, scoped delegation, gateway enforcement, and signed receipts for autonomous agents. APS is built and maintained by Tymofii Pidlisnyi.
 
 This site (aeoess.com) is the company front and the managed gateway. The canonical protocol specification, RFCs, SDKs, and conformance suite live at agent-passport.org. Source code is at github.com/aeoess.
 

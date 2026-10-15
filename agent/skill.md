@@ -9,8 +9,8 @@ A passport gives an agent identity a stable cryptographic reference across
 sessions: an Ed25519 keypair, a signed passport binding a name to a principal,
 and a signed attestation trail.
 
-This skill is published at https://aeoess.com/agent/skill.md by aeoess, the
-company behind the Agent Passport System (Apache 2.0, https://agent-passport.org).
+This skill is published at https://aeoess.com/agent/skill.md as part of the
+Agent Passport System (Apache 2.0, https://agent-passport.org).
 
 Ground rules, in order of precedence:
 

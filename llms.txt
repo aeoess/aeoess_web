@@ -2,7 +2,7 @@
 
 > Governance infrastructure for the agentic economy. Built on the open Agent Passport System (APS) protocol: cryptographic identity, scoped delegation, gateway enforcement, and signed receipts.
 
-AEOESS is the company behind the Agent Passport System, an Apache 2.0 open protocol that gives every AI agent a cryptographically verifiable passport, scoped delegation, gateway-enforced policy evaluation, and tamper-evident receipts. The protocol is documented at agent-passport.org. The source is at github.com/aeoess. This site (aeoess.com) is the company front, the managed gateway, and the operational dashboard.
+aeoess.com is a site of the Agent Passport System (APS), an Apache 2.0 open protocol that gives every AI agent a cryptographically verifiable passport, scoped delegation, gateway-enforced policy evaluation, and tamper-evident receipts. APS is built and maintained by Tymofii Pidlisnyi. The protocol is documented at agent-passport.org. The source is at github.com/agent-passport-system. This site also hosts the managed gateway and the operational dashboard.
 
 This page (`/llms.txt`) is a short machine-readable index for LLM crawlers. The full content of every page on aeoess.com is also available as plain text at `/llms-full.txt`.
 
