@@ -23,9 +23,7 @@ function RoadmapPage({ onNavigate }) {
       sub: 'Active — current quarter',
       tone: 'primary',
       items: [
-        { date: 'Q3 2026', title: 'SOC 2 Type II', body: 'Audit window opens 2026·07. Expected report Q4. ISO 27001 follows.' },
         { date: 'Q3 2026', title: 'Go + Rust SDKs', body: 'Same conformance suite. Byte-parity receipts. Community-maintained, AEOESS-attested.' },
-        { date: 'Q3 2026', title: 'HSM / KMS integration', body: 'Bring your own root-of-trust. AWS KMS, GCP KMS, YubiHSM, on-prem PKCS#11.' },
         { date: 'Q3 2026', title: 'EU AI Act mapping pack', body: 'Pre-mapped controls for Articles 9–15. Exportable evidence bundles.' },
       ],
     },

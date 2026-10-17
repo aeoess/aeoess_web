@@ -169,14 +169,14 @@ function AeoessStatus({ palette }) {
   };
 
   const SERVICES = [
-    { name:'Gateway · us-east',  status:'operational', uptime:'99.998%', dots: series('a') },
-    { name:'Gateway · eu-west',  status:'operational', uptime:'99.992%', dots: series('b', [], [42]) },
-    { name:'Trust feed',         status:'operational', uptime:'99.999%', dots: series('c') },
-    { name:'Receipt aggregator', status:'operational', uptime:'99.987%', dots: series('d', [11], []) },
-    { name:'JWKS (gateway-v1)',  status:'operational', uptime:'100.000%', dots: series('e') },
-    { name:'aps.dev (portal)',   status:'operational', uptime:'99.961%', dots: series('f', [], [3, 28]) },
-    { name:'docs.aeoess.com',    status:'operational', uptime:'99.984%', dots: series('g', [], [55]) },
-    { name:'Vocabulary registry',status:'operational', uptime:'99.999%', dots: series('h') },
+    { name:'Gateway · us-east',  status:'operational', uptime:'not published', dots: series('a') },
+    { name:'Gateway · eu-west',  status:'operational', uptime:'not published', dots: series('b', [], [42]) },
+    { name:'Trust feed',         status:'operational', uptime:'not published', dots: series('c') },
+    { name:'Receipt aggregator', status:'operational', uptime:'not published', dots: series('d', [11], []) },
+    { name:'JWKS (gateway-v1)',  status:'operational', uptime:'not published', dots: series('e') },
+    { name:'aps.dev (portal)',   status:'operational', uptime:'not published', dots: series('f', [], [3, 28]) },
+    { name:'docs.aeoess.com',    status:'operational', uptime:'not published', dots: series('g', [], [55]) },
+    { name:'Vocabulary registry',status:'operational', uptime:'not published', dots: series('h') },
   ];
 
   const INCIDENTS = [

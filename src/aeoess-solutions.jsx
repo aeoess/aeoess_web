@@ -313,7 +313,7 @@ function AeoessPayments({ palette }) {
           selfBody="Wire identity, write a delegation, send a transaction through the four gates. Every primitive is on npm."
           selfCmd="npm install agent-passport-system"
           mgdLead="Managed deployment."
-          mgdBody="Hosted gateway, multi-region enforcement, fleet-scale revocation. Pricing on request."
+          mgdBody="Hosted gateway, fleet-scale revocation. Pricing on request."
         />
       </Section>
 
@@ -733,7 +733,7 @@ function AeoessEnterprise({ palette }) {
           selfBody="Pick an identity adapter, write a charter, point your gateway at the policy module. Self-host or hosted."
           selfCmd="npm install agent-passport-system"
           mgdLead="Managed gateway deployment."
-          mgdBody="Hosted enforcement edge, multi-region, fleet-scale revocation. Pricing on request."
+          mgdBody="Hosted enforcement edge, fleet-scale revocation. Pricing on request."
         />
       </Section>
 

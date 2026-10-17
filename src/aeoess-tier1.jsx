@@ -397,7 +397,7 @@ function AeoessGatewayDash({ palette }) {
   };
 
   const ENV = [
-    { k:'gateway.aeoess.com', v:'us-east, eu-west', s:'green' },
+    { k:'gateway.aeoess.com', v:'reference deployment', s:'green' },
     { k:'JWKS', v:'kid: gateway-v1', s:'green' },
     { k:'Policy bundle', v:'sha256:9f2a…b71c · v0.62', s:'green' },
     { k:'Trust feed', v:'42 issuers · 14 crosswalks live', s:'green' },

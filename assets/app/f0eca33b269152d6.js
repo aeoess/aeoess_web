@@ -9,9 +9,9 @@ function ContactPage({ onNavigate }) {
 
   const TOPICS = [
     { id: 'eng',     label: 'Engineering',  desc: 'Implementation, integration, protocol questions.',  team: 'signal@aeoess.com' },
-    { id: 'sales',   label: 'Sales',        desc: 'Enterprise, custom volumes, SLAs.',         team: 'signal@aeoess.com' },
+    { id: 'sales',   label: 'Sales',        desc: 'Enterprise and pilot questions.',         team: 'signal@aeoess.com' },
     { id: 'press',   label: 'Press',        desc: 'Inquiries, interviews, the working group.',           team: 'signal@aeoess.com' },
-    { id: 'security',label: 'Security',     desc: 'Disclosures, bug bounty, threat model questions.',   team: 'signal@aeoess.com' },
+    { id: 'security',label: 'Security',     desc: 'Vulnerability reports and threat model questions.',   team: 'security@aeoess.com' },
   ];
   const active = TOPICS.find(t => t.id === topic);
 

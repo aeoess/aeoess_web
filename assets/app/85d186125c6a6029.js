@@ -417,7 +417,7 @@ function GLEnterprise() {
             <div style={{ fontFamily: PX.sansDisplay, fontSize: 22, fontWeight: 500, color: PX.ink, marginTop: 4, letterSpacing: '0.01em' }}>Built for what regulators are about to ask for.</div>
           </div>
           <div style={{ display: 'flex', gap: 10 }}>
-            {['SOC 2 II', 'ISO 27001', 'GDPR', 'HIPAA', 'EU AI Act', 'NIST AI RMF'].map(t => (
+            {['EU AI Act', 'NIST AI RMF'].map(t => (
               <span key={t} style={{ padding: '7px 14px', background: PX.white, border: `1px solid ${PX.border}`, borderRadius: 999, fontFamily: PX.sans, fontSize: 12, fontWeight: 500, color: PX.ink }}>{t}</span>
             ))}
           </div>
@@ -500,7 +500,7 @@ function GLFooter() {
   const cols = [
     ['Protocol', ['Specification', 'Passport schema', 'Verifier API', 'Issuer registry', 'Release notes']],
     ['Product', ['Pilot', 'For enterprise', 'For developers', 'Status', 'Security']],
-    ['Network', ['Partners', 'Standards', 'Roadmap', 'Bug bounty', 'Compliance']],
+    ['Network', ['Partners', 'Standards', 'Roadmap', 'Threat model', 'Compliance']],
     ['Company', ['About', 'Manifesto', 'Press', 'Careers', 'Contact']],
   ];
   return (
@@ -513,7 +513,7 @@ function GLFooter() {
           <p style={{ fontFamily: PX.sans, fontSize: 14, lineHeight: 1.55, color: PX.inkSoft, marginTop: 20, maxWidth: 280 }}>
             Governance infrastructure for the agentic economy. Verifiable, portable, revocable.
           </p>
-          <div style={{ fontFamily: PX.mono, fontSize: 10, color: PX.inkFaint, letterSpacing: '0.18em', marginTop: 28 }}>© 2026 · AEOESS</div>
+          <div style={{ fontFamily: PX.mono, fontSize: 10, color: PX.inkFaint, letterSpacing: '0.18em', marginTop: 28 }}>© 2026 · TYMOFII PIDLISNYI (AGENT PASSPORT SYSTEM)</div>
         </div>
         {cols.map(([h, items]) => (
           <div key={h}>
@@ -525,7 +525,7 @@ function GLFooter() {
         ))}
       </div>
       <div data-kya-footer-bottom style={{ marginTop: 56, paddingTop: 24, borderTop: `1px solid ${PX.border}`, display: 'flex', justifyContent: 'space-between', fontFamily: PX.mono, fontSize: 10, color: PX.inkFaint, letterSpacing: '0.18em' }}>
-        <span>v1.0 · OPERATIONAL · 99.998% UPTIME · 90D</span>
+        <span>OPEN SOURCE · APACHE 2.0</span>
         <span>SHA 8F22A9B71C · BUILD 2026.05.26</span>
       </div>
     </div>

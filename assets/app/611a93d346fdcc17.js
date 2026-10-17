@@ -81,7 +81,7 @@ function DocsPage({ onNavigate }) {
         eyebrow="DOCS · DEVELOPERS"
         title="Build with the protocol."
         titleAccent="Five lines or fifty."
-        lede="From npm install to a multi-region production deployment. Quickstart, SDK reference, gateway config, and recipes for the patterns we see most."
+        lede="From npm install to a running gateway. Quickstart, SDK reference, gateway config, and recipes for the patterns we see most."
         ctas={['Open the quickstart →', 'Browse SDK reference']}
       />
 

@@ -20,7 +20,7 @@ open. The Know Your Agent app lives at /kya/.
 
 aeoess.com hosts enforcement infrastructure for the Agent Passport System (APS), an Apache 2.0 open protocol for cryptographic identity, scoped delegation, gateway enforcement, and signed receipts for autonomous agents. APS is built and maintained by Tymofii Pidlisnyi.
 
-This site (aeoess.com) is the company front and the managed gateway. The canonical protocol specification, RFCs, SDKs, and conformance suite live at agent-passport.org. Source code is at github.com/aeoess.
+This site (aeoess.com) hosts the gateway pages and the Model Citizen pilot. The canonical protocol specification, RFCs, SDKs, and conformance suite live at agent-passport.org. Source code is at github.com/aeoess.
 
 ---
 
@@ -125,7 +125,6 @@ Regulatory mapping:
 - NIST AI RMF 1.0 — GOVERN, MAP, MEASURE, MANAGE functions mapped
 - ISO 42001 — clauses 6.1, 7.5, 8.2, 9.1 mapped
 - SR 11-7 — model risk, validation, audit mapped
-- SOC 2 Type II — in progress, expected Q3 2026
 
 Audit-ready log: The APS audit log is a Merkle-rooted, ed25519-signed, JCS-canonicalized stream of every decision. Export to Parquet, S3, or a SIEM. Auditors verify byte-for-byte against the published key set — no trust in the vendor required.
 
@@ -181,7 +180,7 @@ Compatibility is permanent. Self-host today, join a pilot later, or never; proto
 
 URL: https://aeoess.com/docs.html
 
-Build with the protocol — five lines or fifty. From npm install to a multi-region production deployment. Quickstart, SDK reference, gateway config, and recipes for the patterns we see most.
+Build with the protocol — five lines or fifty. From npm install to a running gateway. Quickstart, SDK reference, gateway config, and recipes for the patterns we see most.
 
 Four entry points:
 - Quickstart — issue a passport, delegate, gate a call. End-to-end in under ten minutes.
@@ -231,7 +230,6 @@ Pricing & open source:
 Compliance:
 - APS maps to EU AI Act (Art. 9–15), NIST AI RMF 1.0, ISO 42001, and SR 11-7 for model risk.
 - No PII is required for a passport — an agent is identified by a cryptographic key, not a person.
-- SOC 2 Type II in progress, expected Q3 2026. ISO 27001 follows.
 
 ---
 
@@ -239,7 +237,7 @@ Compliance:
 
 URL: https://aeoess.com/blog.html
 
-Engineering notes, governance work, and standards progress from the AEOESS team. Recent posts:
+Engineering notes, governance work, and standards progress from Tymofii Pidlisnyi (Agent Passport System). Recent posts:
 - Stream A: shipping a Rust verifier with 191 tests (2026-05-15, engineering) — the Rust verifier is the third independent implementation of the APS receipt format
 - PR-MERGE-PROTOCOL v0.3: how AEOESS reviews protocol changes (2026-05-10, governance) — Track A artifacts go to maintainer call, Track B definition changes need Consilium pass plus signoff
 - draft-pidlisnyi-aps: submitting an Internet-Draft to the IETF (2026-04-28, standards) — six months of design notes, one idnits-clean draft
@@ -263,9 +261,7 @@ Shipped:
 - Apache 2.0 open-source release of the protocol stack
 
 Building (current quarter):
-- SOC 2 Type II audit window
 - Go and Rust SDKs against the same conformance suite, byte-parity receipts
-- HSM / KMS integration: AWS KMS, GCP KMS, YubiHSM, on-prem PKCS#11
 - EU AI Act mapping pack: pre-mapped controls for Articles 9–15, exportable evidence bundles
 
 Next (research and design phase):

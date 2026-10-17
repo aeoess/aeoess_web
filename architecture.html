@@ -8731,7 +8731,7 @@ function AeoessPayments(_ref8) {
     selfBody: "Wire identity, write a delegation, send a transaction through the four gates. Every primitive is on npm.",
     selfCmd: "npm install agent-passport-system",
     mgdLead: "Managed deployment.",
-    mgdBody: "Hosted gateway, multi-region enforcement, fleet-scale revocation. Available through the pilot."
+    mgdBody: "Hosted gateway, fleet-scale revocation. Available through the pilot."
   })), /*#__PURE__*/React.createElement(Footer, {
     palette: P,
     pad: pad
@@ -9635,7 +9635,7 @@ function AeoessEnterprise(_ref1) {
     selfBody: "Pick an identity adapter, write a charter, point your gateway at the policy module. Self-host or hosted.",
     selfCmd: "npm install agent-passport-system",
     mgdLead: "Managed gateway deployment.",
-    mgdBody: "Hosted enforcement edge, multi-region, fleet-scale revocation. Available through the pilot."
+    mgdBody: "Hosted enforcement edge, fleet-scale revocation. Available through the pilot."
   })), /*#__PURE__*/React.createElement(Footer, {
     palette: P,
     pad: pad
@@ -10649,7 +10649,7 @@ function AeoessGatewayDash(_ref5) {
   };
   var ENV = [{
     k: 'gateway.aeoess.com',
-    v: 'us-east, eu-west',
+    v: 'reference deployment',
     s: 'green'
   }, {
     k: 'JWKS',
@@ -12560,42 +12560,42 @@ function AeoessStatus(_ref3) {
   var SERVICES = [{
     name: 'Gateway · us-east',
     status: 'operational',
-    uptime: '99.998%',
+    uptime: 'not published',
     dots: series('a')
   }, {
     name: 'Gateway · eu-west',
     status: 'operational',
-    uptime: '99.992%',
+    uptime: 'not published',
     dots: series('b', [], [42])
   }, {
     name: 'Trust feed',
     status: 'operational',
-    uptime: '99.999%',
+    uptime: 'not published',
     dots: series('c')
   }, {
     name: 'Receipt aggregator',
     status: 'operational',
-    uptime: '99.987%',
+    uptime: 'not published',
     dots: series('d', [11], [])
   }, {
     name: 'JWKS (gateway-v1)',
     status: 'operational',
-    uptime: '100.000%',
+    uptime: 'not published',
     dots: series('e')
   }, {
     name: 'aps.dev (portal)',
     status: 'operational',
-    uptime: '99.961%',
+    uptime: 'not published',
     dots: series('f', [], [3, 28])
   }, {
     name: 'docs.aeoess.com',
     status: 'operational',
-    uptime: '99.984%',
+    uptime: 'not published',
     dots: series('g', [], [55])
   }, {
     name: 'Vocabulary registry',
     status: 'operational',
-    uptime: '99.999%',
+    uptime: 'not published',
     dots: series('h')
   }];
   var INCIDENTS = [{
@@ -14594,4 +14594,4 @@ footer a:hover {
   <script src="shim.js" defer></script>
   <!-- aps-agent-footnote-v1 -->
   <div style="font-size: 11px; color: rgb(90, 90, 94); padding: 16px 18px; text-align: center; border-top: 1px solid rgb(46, 46, 50);">For AI agents: <a href="/llms-full.txt" style="color: rgb(124, 172, 222);">llms-full.txt</a> · <a href="/.well-known/mcp.json" style="color: rgb(124, 172, 222);">MCP descriptor</a></div>
-  <footer style="padding: 60px 40px 36px; border-top: 1px solid rgb(46, 46, 50); background: rgb(36, 36, 38); color: rgb(138, 138, 142); font-size: 13px;"><div style="max-width: 1200px; margin: 0px auto; display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 32px;"><div><div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;"><a href="/" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" style="height:20px;width:auto;display:block;"></a></div><p style="margin: 0px; font-size: 12.5px; color: rgb(138, 138, 142); max-width: 280px; line-height: 1.5;">Enforcement infrastructure for AI agents. Built on the open Agent Passport System protocol.</p></div><div><div style="font-size: 11.5px; color: rgb(176, 176, 176); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px;">Solutions</div><ul style="margin: 0px; padding: 0px; list-style: none; display: flex; flex-direction: column; gap: 8px;"><li><a href="/payments.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Payments</a></li><li><a href="/content.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Content</a></li><li><a href="/compliance.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Compliance</a></li><li><a href="/enterprise.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Enterprise</a></li></ul></div><div><div style="font-size: 11.5px; color: rgb(176, 176, 176); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px;">Open Source</div><ul style="margin: 0px; padding: 0px; list-style: none; display: flex; flex-direction: column; gap: 8px;"><li><a href="https://aeoess.com/protocol.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Agent Passport System</a></li><li><a href="https://www.npmjs.com/package/agent-passport-system" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">SDK · MCP · Python</a></li><li><a href="https://agent-passport.org/passport.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Spec</a></li><li><a href="https://agent-passport.org/working-group.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Working group</a></li><li><a href="https://github.com/aeoess" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">GitHub</a></li></ul></div><div><div style="font-size: 11.5px; color: rgb(176, 176, 176); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px;">Resources</div><ul style="margin: 0px; padding: 0px; list-style: none; display: flex; flex-direction: column; gap: 8px;"><li><a href="/blog.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Blog</a></li><li><a href="https://agent-passport.org/roadmap.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Roadmap</a></li><li><a href="/faq.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">FAQ</a></li><li><a href="/compare.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Compare</a></li><li><a href="/docs.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Docs</a></li><li><a href="/media.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Media</a></li></ul></div><div><div style="font-size: 11.5px; color: rgb(176, 176, 176); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px;">Company</div><ul style="margin: 0px; padding: 0px; list-style: none; display: flex; flex-direction: column; gap: 8px;"><li><a href="/portal.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Portal</a></li><li><a href="/model-citizen/" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Pilot</a></li><li><a href="https://agent-passport.org/research.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Research</a></li><li><a href="/contact.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Contact</a></li><li><a href="https://agent-passport.org/threat-model.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Threat model</a></li></ul></div></div><div style="max-width: 1200px; margin: 48px auto 0px; padding-top: 18px; border-top: 1px solid rgb(46, 46, 50); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 12px; color: rgb(90, 90, 94);"><span>© 2026 AEOESS, Inc. All rights reserved. Built on Agent Passport System, an open-source protocol.</span><span><a href="mailto:signal@aeoess.com" style="color: inherit; text-decoration: none;">signal@aeoess.com</a> · <a href="/terms.html" style="color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px;">Terms</a> · <a href="/privacy.html" style="color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px;">Privacy</a> · <a href="/sitemap.html" style="color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px;">Sitemap</a></span></div></footer></body></html></body></html>
+  <footer style="padding: 60px 40px 36px; border-top: 1px solid rgb(46, 46, 50); background: rgb(36, 36, 38); color: rgb(138, 138, 142); font-size: 13px;"><div style="max-width: 1200px; margin: 0px auto; display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 32px;"><div><div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;"><a href="/" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;"><img src="/assets/images/aeoess_logo-05.png" alt="AEOESS" style="height:20px;width:auto;display:block;"></a></div><p style="margin: 0px; font-size: 12.5px; color: rgb(138, 138, 142); max-width: 280px; line-height: 1.5;">Enforcement infrastructure for AI agents. Built on the open Agent Passport System protocol.</p></div><div><div style="font-size: 11.5px; color: rgb(176, 176, 176); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px;">Solutions</div><ul style="margin: 0px; padding: 0px; list-style: none; display: flex; flex-direction: column; gap: 8px;"><li><a href="/payments.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Payments</a></li><li><a href="/content.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Content</a></li><li><a href="/compliance.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Compliance</a></li><li><a href="/enterprise.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Enterprise</a></li></ul></div><div><div style="font-size: 11.5px; color: rgb(176, 176, 176); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px;">Open Source</div><ul style="margin: 0px; padding: 0px; list-style: none; display: flex; flex-direction: column; gap: 8px;"><li><a href="https://aeoess.com/protocol.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Agent Passport System</a></li><li><a href="https://www.npmjs.com/package/agent-passport-system" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">SDK · MCP · Python</a></li><li><a href="https://agent-passport.org/passport.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Spec</a></li><li><a href="https://agent-passport.org/working-group.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Working group</a></li><li><a href="https://github.com/aeoess" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">GitHub</a></li></ul></div><div><div style="font-size: 11.5px; color: rgb(176, 176, 176); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px;">Resources</div><ul style="margin: 0px; padding: 0px; list-style: none; display: flex; flex-direction: column; gap: 8px;"><li><a href="/blog.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Blog</a></li><li><a href="https://agent-passport.org/roadmap.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Roadmap</a></li><li><a href="/faq.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">FAQ</a></li><li><a href="/compare.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Compare</a></li><li><a href="/docs.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Docs</a></li><li><a href="/media.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Media</a></li></ul></div><div><div style="font-size: 11.5px; color: rgb(176, 176, 176); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px;">Company</div><ul style="margin: 0px; padding: 0px; list-style: none; display: flex; flex-direction: column; gap: 8px;"><li><a href="/portal.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Portal</a></li><li><a href="/model-citizen/" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Pilot</a></li><li><a href="https://agent-passport.org/research.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Research</a></li><li><a href="/contact.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Contact</a></li><li><a href="https://agent-passport.org/threat-model.html" style="color: rgb(138, 138, 142); text-decoration: none; font-size: 13px;">Threat model</a></li></ul></div></div><div style="max-width: 1200px; margin: 48px auto 0px; padding-top: 18px; border-top: 1px solid rgb(46, 46, 50); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 12px; color: rgb(90, 90, 94);"><span>© 2026 Tymofii Pidlisnyi (Agent Passport System). Built on Agent Passport System, an open-source protocol.</span><span><a href="mailto:signal@aeoess.com" style="color: inherit; text-decoration: none;">signal@aeoess.com</a> · <a href="/terms.html" style="color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px;">Terms</a> · <a href="/privacy.html" style="color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px;">Privacy</a> · <a href="/sitemap.html" style="color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px;">Sitemap</a></span></div></footer></body></html></body></html>

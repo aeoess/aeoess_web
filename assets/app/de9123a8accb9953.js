@@ -152,7 +152,6 @@ function CompliancePage({ onNavigate }) {
               ['NIST AI RMF', '1.0 · GOVERN · MAP · MEASURE · MANAGE', 'mapped'],
               ['ISO 42001', '6.1, 7.5, 8.2, 9.1', 'mapped'],
               ['SR 11-7', 'model risk · validation · audit', 'mapped'],
-              ['SOC 2 Type II', 'in progress · Q3 2026', 'soon'],
             ].map(([s, sub, st]) => (
               <div key={s} style={{ display: 'grid', gridTemplateColumns: '110px 1fr auto', gap: 12, padding: '12px 0', borderBottom: `1px dotted ${PX.borderSoft}`, alignItems: 'center' }}>
                 <span style={{ fontFamily: PX.sansDisplay, fontSize: 14, fontWeight: 600, color: PX.ink, letterSpacing: '0.02em' }}>{s}</span>
@@ -302,7 +301,7 @@ function EnterprisePage({ onNavigate }) {
           {[
             ['SELF-HOST', '— managed by you', 'docker · helm · binary'],
             ['EDGE', '— under 5ms anywhere', 'workers · lambda · vercel'],
-            ['MANAGED', '— gateway.aeoess.com', 'multi-region · 99.998%'],
+            ['MANAGED', '— gateway.aeoess.com', 'pilot access, by application'],
             ['ON-DEVICE', '— offline-friendly', 'wasm · embedded · cli'],
           ].map(([k, sub, e]) => (
             <PXTranslucentCard key={k} hue="cyan" style={{ padding: 22 }}>

@@ -225,13 +225,11 @@ function SiteFooter({ onNavigate }) {
         ))}
       </div>
       <div data-kya-footer-bottom style={{ marginTop: 56, paddingTop: 24, borderTop: `1px solid ${PX.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: PX.mono, fontSize: 10, color: PX.inkFaint, letterSpacing: '0.18em' }}>
-        <span>© 2026 · AEOESS · BUILT ON AGENT PASSPORT SYSTEM (APS)</span>
+        <span>© 2026 · TYMOFII PIDLISNYI (AGENT PASSPORT SYSTEM)</span>
         <div style={{ display: 'flex', gap: 18, alignItems: 'center' }}>
           <a href={href('terms')} onClick={(e) => { e.preventDefault(); onNavigate('terms'); }} style={{ color: 'inherit', textDecoration: 'none' }}>TERMS</a>
           <a href={href('privacy')} onClick={(e) => { e.preventDefault(); onNavigate('privacy'); }} style={{ color: 'inherit', textDecoration: 'none' }}>PRIVACY</a>
           <a href={href('sitemap')} onClick={(e) => { e.preventDefault(); onNavigate('sitemap'); }} style={{ color: 'inherit', textDecoration: 'none' }}>SITEMAP</a>
-          <span style={{ color: PX.inkFaint }}>·</span>
-          <span>v1.0 · OPERATIONAL · 99.998%</span>
         </div>
       </div>
     </div>
